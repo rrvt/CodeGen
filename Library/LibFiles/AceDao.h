@@ -52,7 +52,7 @@ DatabaseP  db;
 public:
 
   AceDao();
- ~AceDao();
+ ~AceDao() {close();}
 
   bool    open(TCchar* path);             // Database
   void    close();                        // Close Database

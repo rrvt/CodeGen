@@ -45,7 +45,7 @@ public:
 private:
 
   void testTestMap();
-  void dspRecords(MapTable* tbl);
+  void dspRecords(String& name);
 
 // Generated message map functions
 

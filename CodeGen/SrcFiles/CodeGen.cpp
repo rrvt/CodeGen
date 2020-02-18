@@ -79,7 +79,7 @@ BOOL CodeGen::InitInstance() {
 
   notePad.open();
 
-  maps.initializeMaps(DBFileKey, dbPath);
+  maps.initializeMaps(DBFileKey, dbPath, true);
 
   // Initialize OLE libraries
 
@@ -141,7 +141,7 @@ String ext;
 
   openOneDB(DBFileKey, dbExtensions, dbPath);
 
-  maps.initializeMaps(DBFileKey, dbPath);
+  maps.initializeMaps(DBFileKey, dbPath, true);
 
   view->dspInitialEntry();
 

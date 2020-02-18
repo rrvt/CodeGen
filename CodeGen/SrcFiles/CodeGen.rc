@@ -107,13 +107,13 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "Open DataBase",               ID_DoOpenDB
-        MENUITEM "Create Table Modules",        ID_TableOps
-        MENUITEM "Create Map Data Module",      ID_MapData
-        MENUITEM "Display Table Records (3 fields)", ID_DisplayDB
+        MENUITEM "Open DataBase",                      ID_DoOpenDB
+        MENUITEM "Create Table Modules",               ID_TableOps
+        MENUITEM "Create Map Data Module",             ID_MapData
+        MENUITEM "Display RecordsFields",              ID_DisplayDB
         MENUITEM "Create License File (Experimental)", ID_CreateLicense
         MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "E&xit",                               ID_APP_EXIT
     END
     POPUP "&View"
     BEGIN
@@ -296,7 +296,7 @@ BEGIN
     ID_DoOpenDB             "Open DataBase\nOpen DataBase\n"
     ID_TableOps             "Create Table Modules\nCreate Table Modules\n"
     ID_TableExtension       "Create Table Template Extensions\nCreate Table Template Extensions\n"
-    ID_DisplayDB            "Display Table Records (3 fields)\nDisplay Table Records (3 fields)\n"
+    ID_DisplayDB            "Display Record Fields\nDisplay Record Fields\n"
 END
 
 STRINGTABLE

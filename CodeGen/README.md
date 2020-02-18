@@ -11,8 +11,8 @@ reading the list of tables for the db and allowing the user to pick which tables
   - Create Table Template Extension Module -- A customizable file for a specific table (choose table(s)
     in dialog box).
   - Create Map Data Module -- Creates a cpp module that pulls all the tables together.
-  - Display Table Records -- Provides a list of tables and then will display in the window the first three
-    fields of each record.
+  - Display Record Fields -- Provides a list of tables and then will display the fields in a record
+    of the table.
   - Create a License Module -- This is an experimental (and reacently untested feature) to allow
     encrypting a passowrd to use as a license.
 
@@ -48,14 +48,20 @@ All the code is contained in the two directories.
 
 ### Installing
 
-run the "msi" installer file.
+Run the "msi" installer file.
 
 ## Running the tests
 
-There are only two menu items of interest:
+There are only several menu items of interest:
   - Open Access database
-  - Select Table for code is to be generated.  Be prepared to specify each output file.  Names will be
+  - Select Table for which code is to be generated.  Be prepared to specify each output file.  Names will be
     suggested but may be changed.
+  - If a table template class module is needed (early days only) select the "Create Table Template
+    Extension Module"
+  - Finally select the "Create Map Data Module" which generates 4 files.  Don't change the file names of
+    the files unless you wish to change a bunch of other files.
+
+Read through the History and Some Explanation section and construct a simple test case.
 
 ## History and Some Explanation
 

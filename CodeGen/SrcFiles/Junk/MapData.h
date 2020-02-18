@@ -1,12 +1,11 @@
 // A little class to control the order of initialization of the Table classes
-// MapData Map logic, Version 1.5.3.0
+// MapData Map logic, Version 1.4.1
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 
 #pragma once
 #include "MapsT.h"
 #include "Maps.h"
-
 
 extern TCchar* FileSection;
 extern TCchar* DBFileKey;
@@ -27,7 +26,7 @@ String databasePath;
 
   bool    openDB(String& path);
 
-  void    initializeMaps(Maps* mps, bool zeroDescrTbl = false);
+  void    initializeMaps(Maps* mps);
 
   bool    openRcdSet( TCchar* name, DaoOptions option, AceRecordSet& rcdSet);
   bool    openFldDscs(TCchar* name, AceFieldNames& fldDscs);

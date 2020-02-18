@@ -11,8 +11,8 @@ reading the list of tables for the db and allowing the user to pick which tables
   - Create Table Template Extension Module -- A customizable file for a specific table (choose table(s)
     in dialog box).
   - Create Map Data Module -- Creates a cpp module that pulls all the tables together.
-  - Display Table Records -- Provides a list of tables and then will display in the window the first three
-    fields of each record.
+  - Display Record Fields -- Provides a list of tables and then will display the fields in a record
+    of the table.
   - Create a License Module -- This is an experimental (and reacently untested feature) to allow
     encrypting a passowrd to use as a license.
 

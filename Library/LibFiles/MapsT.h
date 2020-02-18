@@ -19,7 +19,7 @@ MapData data;
 
 //void initialize() {data.initialize();}
 
-  bool initializeMaps( TCchar* key,   String& path);
+  bool initializeMaps( TCchar* key,   String& path, bool zeroDescrTbl = false);
 
   void dspPath(        TCchar* title, String& path);
 
@@ -39,11 +39,11 @@ typedef MapsT<MapData> Maps;
 
 
 template <class MapData>
-bool MapsT<MapData>::initializeMaps(TCchar* key, String& path) {
+bool MapsT<MapData>::initializeMaps(TCchar* key, String& path, bool zeroDescrTbl) {
 
   if (!data.openDB(path)) return false;
 
-  data.initializeMaps(this);
+  data.initializeMaps(this, zeroDescrTbl);
 
   dspPath(key, path);   loadAllMaps();   return true;
   }

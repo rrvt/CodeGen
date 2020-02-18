@@ -242,20 +242,57 @@ static TCchar* dbExtensions =  _T("*.accdb;*.mdb");
 
 void CodeGenDoc::OnDisplayDB() {
 MapDataDlg dlg;
+int        i;
 TableDsc*  p;
 
-  dlg.title = _T("Display Three Fields from Records in Table Selected");
+  notePad.close();
+
+  dlg.title = _T("Display Record Fields");
 
   if (dlg.DoModal() == IDOK)
-    for (p = tableDscrs.startLoop(); p; p = tableDscrs.nextEntry())
-                                                               if (p->selected) dspRecords(p->mapTable);
+    for (p = tableDscrs.startLoop(), i = 0; p; p = tableDscrs.nextEntry(), i++) {
+      if (i) notePad << nCrlf;
+      if (p->selected) dspRecords(p->name);
+      }
   }
 
 
+void CodeGenDoc::dspRecords(String& name) {
+DescTable  descTbl;
+FieldDesc* dsc;
+int        maxLng = 0;
+
+  descTbl.load(maps, name);
+
+  for (dsc = descTbl.startLoop(); dsc; dsc = descTbl.nextDesc())
+                                                              if (dsc->lng > maxLng) maxLng = dsc->lng;
+
+  notePad << name << _T(" Table") << nCrlf;
+
+  notePad << nSetRTab(3) << nSetTab(5) << nSetTab(8+maxLng) << nSetRTab(maxLng+26);
+
+  notePad << nTab << _T("No") << nTab << _T("Name")  << nTab << _T("Type");
+  notePad << nTab << _T("Is Index") << nCrlf;
+
+  for (dsc = descTbl.startLoop(); dsc; dsc = descTbl.nextDesc()) {
+
+    notePad << nTab << dsc->fieldIndex;
+    notePad << nTab << dsc->name;
+    notePad << nTab << getDbCppType(dsc->x);
+    notePad << nTab << dsc->isIndex;
+    notePad << nCrlf;
+    }
+
+  invalidateView();
+  }
+
+#if 0
 void CodeGenDoc::dspRecords(MapTable* tbl) {
 MapRecord* rcd;
 int        max = 0;
 int        lng;
+
+  if (!tbl) return;
 
   notePad.close();
 
@@ -275,6 +312,7 @@ int        lng;
 
   invalidateView();
   }
+#endif
 
 
 

@@ -1,5 +1,5 @@
 // A little class to control the order of initialization of the Table classes
-// MapData Map logic, Version 1.5.3.0
+// MapData Map logic, Version 1.4.1
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 
@@ -18,25 +18,19 @@ TCchar* GenFilePathKey = _T("GenFilePath");
 Maps maps;
 
 
-void MapData::initializeMaps(Maps* mps, bool zeroDescrTbl) {
+void MapData::initializeMaps(Maps* mps) {
 AceTables aceTables(dao);
-//TableDesc* dsc;
+TableDesc* dsc;
 
-  if (!zeroDescrTbl) {
-    tableDscrs.add(addressTable, mps);
-    tableDscrs.add(assgnPrefTable, mps);
-    tableDscrs.add(cityStateTable, mps);
-    tableDscrs.add(entityTable, mps);
-    tableDscrs.add(locationPrefTable, mps);
-    tableDscrs.add(memberTable, mps);
-    tableDscrs.add(statusTable, mps);
-    }
+  tableDscrs.add(addressTable, mps);
+  tableDscrs.add(assgnPrefTable, mps);
+  tableDscrs.add(cityStateTable, mps);
+  tableDscrs.add(entityTable, mps);
+  tableDscrs.add(locationPrefTable, mps);
+  tableDscrs.add(memberTable, mps);
+  tableDscrs.add(statusTable, mps);
 
-  for (TableDesc* dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable())
-                                                                      tableDscrs.add(dsc->name, 0, mps);
-
-  for (TableDsc* tblDsc = tableDscrs.startLoop(); tblDsc; tblDsc = tableDscrs.nextEntry())
-                                                    if (tblDsc->mapTable) tblDsc->mapTable->initialize();
+  for (dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable()) tableDscrs.add(dsc->name, 0, mps);
   }
 
 
