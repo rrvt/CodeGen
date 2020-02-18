@@ -3,6 +3,7 @@
 
 #pragma once
 
+void   toRight(String& s);
 
 void   addPadding(int n);    // Add n spaces of padding to notepad output
 

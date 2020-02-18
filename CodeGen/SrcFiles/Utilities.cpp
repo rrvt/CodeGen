@@ -6,6 +6,12 @@
 #include "NotePad.h"
 
 
+void toRight(String& s) {
+int lng = s.length();
+  notePad << nClrTabs << nSetTab(105 - lng);
+  notePad << nTab << s << nClrTabs << nCrlf;
+  }
+
 
 
 void addPadding(int n) {

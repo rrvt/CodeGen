@@ -1,5 +1,5 @@
 // A little class to control the order of initialization of the Table classes
-// MapData Map logic, Version 1.4.1
+// MapData Map logic, Version 1.5.4.0
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 
@@ -20,17 +20,12 @@ Maps maps;
 
 void MapData::initializeMaps(Maps* mps) {
 AceTables aceTables(dao);
-TableDesc* dsc;
 
-  tableDscrs.add(addressTable, mps);
-  tableDscrs.add(assgnPrefTable, mps);
-  tableDscrs.add(cityStateTable, mps);
-  tableDscrs.add(entityTable, mps);
-  tableDscrs.add(locationPrefTable, mps);
-  tableDscrs.add(memberTable, mps);
-  tableDscrs.add(statusTable, mps);
+  tableDscrs.add(booksTable, mps);
+  tableDscrs.add(personTable, mps);
 
-  for (dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable()) tableDscrs.add(dsc->name, 0, mps);
+  for (TableDsc* tblDsc = tableDscrs.startLoop(); tblDsc; tblDsc = tableDscrs.nextEntry())
+                                                    if (tblDsc->mapTable) tblDsc->mapTable->initialize();
   }
 
 

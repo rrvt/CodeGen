@@ -11,7 +11,7 @@
 void MapCode::createMapDataCpp() {
 TableDsc* tbl;
 String    s;
-int       lng;
+bool      selected;
 
   notePad << _T("// A little class to control the order of initialization of the Table classes");
   notePad << nCrlf;
@@ -31,22 +31,30 @@ int       lng;
 
   notePad << _T("void MapData::initializeMaps(Maps* mps) {") << nCrlf;
   notePad << _T("AceTables aceTables(dao);") << nCrlf;
-  notePad << _T("TableDesc* dsc;") << nCrlf << nCrlf;
+
+  selected = false;
 
   for (tbl = tableDscrs.startLoop(); tbl; tbl = tableDscrs.nextEntry())
-    if (tbl->selected)
-                 notePad << _T("  tableDscrs.add(") << objName(tbl->name) << _T("Table, mps);") << nCrlf;
+    if (tbl->selected) {
+      notePad << nCrlf << _T("  tableDscrs.add(") << objName(tbl->name) << _T("Table, mps);");
+      selected = true;
+      }
 
-  notePad << nCrlf;
+  if (selected) {
+    notePad << nCrlf << nCrlf;
 
-  notePad << _T("  for (TableDsc* tblDsc = tableDscrs.startLoop(); tblDsc; ");
-  notePad << _T("tblDsc = tableDscrs.nextEntry())") << nCrlf;
-  s =  _T("    if (tblDsc->mapTable) tblDsc->mapTable->initialize();");
-  lng = s.length();   notePad << nSetTab(105 - lng);
-  notePad << nTab << s << nCrlf << nCrlf;
+    notePad << _T("  for (TableDsc* tblDsc = tableDscrs.startLoop(); tblDsc; ");
+    notePad << _T("tblDsc = tableDscrs.nextEntry())") << nCrlf;
+    s =  _T("if (tblDsc->mapTable) tblDsc->mapTable->initialize();");  toRight(s);
+    }
 
-  notePad << _T("  for (dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable())");
-  notePad << _T(" tableDscrs.add(dsc->name, 0, mps);") << nCrlf;
+  else {
+    notePad << nCrlf;
+    notePad << _T("  for (TableDesc* dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable())");
+    notePad << nCrlf;
+    s = _T("tableDscrs.add(dsc->name, 0, mps);");   toRight(s);
+    }
+
   notePad << _T("  }") << nCrlf << nCrlf << nCrlf;
 
 

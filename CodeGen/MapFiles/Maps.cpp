@@ -5,4 +5,6 @@
 #include "Maps.h"
 
 
+BooksTbl  booksTable;
+PersonTbl personTable;
 

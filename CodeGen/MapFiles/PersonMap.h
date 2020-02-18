@@ -1,4 +1,4 @@
-// LocationPref Map logic, Version 1.5.3.0
+// Person Map logic, Version 1.5.4.0
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 #pragma once
@@ -6,34 +6,35 @@
 #include "MapTable.h"
 
 
-struct LocationPrefRecord : public MapRecord {
-long   LocationPrefID;
-String Key;
-String Txt;
+struct PersonRecord : public MapRecord {
+long   ID;
+String FirstName;
+String LastName;
+bool   Author;
 
-  LocationPrefRecord() : LocationPrefID(0), Key(), Txt() {}
-  LocationPrefRecord(const LocationPrefRecord& r) : MapRecord(r), LocationPrefID(r.LocationPrefID),
-           Key(r.Key), Txt(r.Txt) {}
- ~LocationPrefRecord() {}
+  PersonRecord() : ID(0), FirstName(), LastName(), Author() {}
+  PersonRecord(const PersonRecord& r) : MapRecord(r), ID(r.ID),
+           FirstName(r.FirstName), LastName(r.LastName), Author(r.Author) {}
+ ~PersonRecord() {}
 
-  LocationPrefRecord operator= (LocationPrefRecord& r) {
-    copy(r, *this); LocationPrefID = r.LocationPrefID; Key = r.Key;
-    Txt = r.Txt;
+  PersonRecord operator= (PersonRecord& r) {
+    copy(r, *this); ID = r.ID; FirstName = r.FirstName;
+    LastName = r.LastName; Author = r.Author;
     }
 
   String getFldVal(int i);
   };
 
 
-class LocationPrefTable;
+class PersonTable;
 
 
-class LocationPrefDB {
+class PersonDB {
 AceRecordSet rcdSet;
 public:
 
-  LocationPrefDB() : rcdSet() {}
- ~LocationPrefDB() {}
+  PersonDB() : rcdSet() {}
+ ~PersonDB() {}
 
   // toTable copies all records from a database table into a map container in memory.  It is
   // called from MapsT<MapData>::loadRecords(TableDsc* tableDsc) which is in turn
@@ -41,24 +42,24 @@ public:
   // with all the database tables and all the tables are copied into a corresponding map table.
   // The tables are implemented as trees for fast access and other properties (see std::map)
 
-  bool toTable(AceRecordSet& records, LocationPrefTable& myTable);
+  bool toTable(AceRecordSet& records, PersonTable& myTable);
 
   // After all changes have been made in the map, call toDatabase to copy the changes
   // back to the database.
 
-  bool toDatabase(LocationPrefTable& myTable);
+  bool toDatabase(PersonTable& myTable);
 
 private:
 
-  bool wrt(LocationPrefRecord& src);
+  bool wrt(PersonRecord& src);
   bool erase(long key);
   };
 
 
-class LocationPrefTable : public MapTable {
+class PersonTable : public MapTable {
 public:
 
-typedef map<const long, LocationPrefRecord> MyMap;
+typedef map<const long, PersonRecord> MyMap;
 typedef MyMap::iterator  Iter;
 typedef pair<Iter, bool> Rslt;
 
@@ -69,27 +70,27 @@ static MyMap myMap;
 Iter it;
 bool increment;
 long maxKey;
-LocationPrefDB myDB;
+PersonDB myDB;
 
 public:
 
-  LocationPrefTable() {initialize();}
+  PersonTable() {initialize();}
 
   void initialize() {
     it = myMap.end(); increment = true; maxKey = 0;   if (!myMap.empty()) myMap.clear();
-    MapTable::initialize(_T("LocationPref"));
+    MapTable::initialize(_T("Person"));
     }
 
-  bool add(LocationPrefRecord& rcd);
+  bool add(PersonRecord& rcd);
   void erase() {it = myMap.erase(it); increment = false;}
 
-  LocationPrefRecord* find(const long key) {it = myMap.find(key); return curRcd();}
-  LocationPrefRecord* startLoop()  {it = myMap.begin();  return curRcd();}
-  LocationPrefRecord* nextRecord() {return it == myMap.end() ? 0 : increment ? bmp() : curRcd();}
-  LocationPrefRecord* curRcd()     {increment = true; return it != myMap.end() ? &it->second : 0;}
+  PersonRecord* find(const long key) {it = myMap.find(key); return curRcd();}
+  PersonRecord* startLoop()  {it = myMap.begin();  return curRcd();}
+  PersonRecord* nextRecord() {return it == myMap.end() ? 0 : increment ? bmp() : curRcd();}
+  PersonRecord* curRcd()     {increment = true; return it != myMap.end() ? &it->second : 0;}
 
-  LocationPrefRecord* startRLoop() {it = myMap.end(); return prevRecord();}
-  LocationPrefRecord* prevRecord() {return it == myMap.begin() ? 0 : &(--it)->second;}
+  PersonRecord* startRLoop() {it = myMap.end(); return prevRecord();}
+  PersonRecord* prevRecord() {return it == myMap.begin() ? 0 : &(--it)->second;}
 
   int  curSize() {return (int) myMap.size();}
   long curKey() {return it != myMap.end() ?  it->first  : -1;}
@@ -110,6 +111,6 @@ public:
 
 private:
 
-  LocationPrefRecord* bmp() {return ++it != myMap.end() ? &it->second : 0;}
+  PersonRecord* bmp() {return ++it != myMap.end() ? &it->second : 0;}
   };
 

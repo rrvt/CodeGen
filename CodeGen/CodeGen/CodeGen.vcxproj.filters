@@ -66,34 +66,13 @@
     <ClCompile Include="..\SrcFiles\MapBody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SrcFiles\AddressMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SrcFiles\TestMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\SrcFiles\Maps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\SrcFiles\AssgnPrefMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SrcFiles\CityStateMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SrcFiles\EntityMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SrcFiles\LocationPrefMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SrcFiles\MemberMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SrcFiles\Schedule.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\SrcFiles\StatusMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Library\AboutFiles\About.cpp">
@@ -158,34 +137,13 @@
     <ClInclude Include="..\SrcFiles\MapBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SrcFiles\AddressMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SrcFiles\TestMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\SrcFiles\Maps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\SrcFiles\AssgnPrefMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SrcFiles\CityStateMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SrcFiles\EntityMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SrcFiles\LocationPrefMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SrcFiles\MemberMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SrcFiles\Schedule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\SrcFiles\StatusMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Library\AboutFiles\About.h">

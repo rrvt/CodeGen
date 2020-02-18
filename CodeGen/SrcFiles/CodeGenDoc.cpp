@@ -12,7 +12,6 @@
 #include "LicenseDlg.h"
 #include "MapCode.h"
 #include "MapDataDlg.h"
-#include "Maps.h"
 #include "NotePad.h"
 #include "TableOp.h"
 #include "TestMap.h"

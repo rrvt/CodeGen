@@ -6,8 +6,10 @@ reading the list of tables for the db and allowing the user to pick which tables
 ## What Will It Do?
 
   - Open Database -- Opens the database file and shows the names of the tables in the window
-  - Create Table Map Modules -- Provides a list of tables, select one and the program will produce a header
-    and body (cpp) file that will allow reading and writing to that table in the database.
+  - Create Table Map Modules -- Provides a list of tables, select one and the program will produce a
+    header and body (cpp) file that will allow reading and writing to that table in the database.  Note:
+    The four files Maps.(h/cpp) and MapData.(h/cpp) are contained in CodeGen but have not references
+    to any database tables.  This is done by not selecting any table names in the dialog box.
   - Create Table Template Extension Module -- A customizable file for a specific table (choose table(s)
     in dialog box).
   - Create Map Data Module -- Creates a cpp module that pulls all the tables together.
