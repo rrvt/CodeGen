@@ -1,0 +1,44 @@
+[DefaultPath]
+BackupIndex=6
+Icon=D:\Sources\AccessIntfcCodeGen\SrcFiles\res\
+Component=D:\Sources\AccessIntfcCodeGen\Release\
+[SolutionInfo]
+Path=D:\Sources\AccessIntfcCodeGen\AccessIntfcCodeGen\
+Name=AccessIntfcCodeGen
+[Product]
+WixName=AccessIntfcCodeGen
+WixVersion=1.3.0
+Company=Bob - K6RWY
+ProductName=DB Code Gen
+UpgradeGUID=3FD6BE24-5183-4279-951B-03D5134445F4
+SaveVerAllowed=1
+LicenseRequired=0
+LicensePath=
+IconID=UICodeGen
+IconPath=D:\Sources\AccessIntfcCodeGen\SrcFiles\res\UICodeGen.ico
+[FeatureList]
+CurSel=Code Gen
+NoFeatures=1
+Feature00=Code Gen
+[Code Gen.grp]
+CurSel=DB Code Generator
+NoComponents=1
+Component00=DB Code Generator
+[DB Code Generator.cmp]
+ID=DB Code Generator
+Path=D:\Sources\AccessIntfcCodeGen\Release\CodeGen.exe
+Guid=553908F2-937A-4A78-827F-EE5317034EBA
+Description=Will produce .h and .cpp files for each table in an Access Database
+IconID=CodeGen
+IconPath=D:\Sources\AccessIntfcCodeGen\SrcFiles\res\CodeGen.ico
+IsStartMenu=1
+IsDeskTop=1
+IsVersionAvail=1
+IsOnPath=0
+IsWin7=0
+IsWinXP=0
+IsWin2K=0
+ProgramParent=
+ProgramChild=DBCodeGen
+StartParent=
+StartChild=DB Code Gen

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+<Product Id="*" UpgradeCode="3FD6BE24-5183-4279-951B-03D5134445F4" Language="1033"
+         Manufacturer="Bob - K6RWY" Name="DB Code Gen"
+         Version="!(bind.fileVersion.DBCodeGenerator.cmp)"
+         >
+
+  <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
+           Manufacturer="Bob - K6RWY" Description="Installs DB Code Gen"
+           Comments="Copyright (c) Bob - K6RWY"
+           />
+
+  <MajorUpgrade Schedule="afterInstallInitialize"
+                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="yes"
+                DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+  <MediaTemplate EmbedCab="yes" />
+
+  <UI Id="My_InstallDir.ui">
+    <UIRef Id="WixUI_InstallDir" />
+    <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">
+      NOT Installed
+    </Publish>
+    <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">
+      1
+    </Publish>
+  </UI>
+
+  <WixVariable Id="WixUIDialogBmp" Value="C:\Program Files (x86)\WixApp\dialog.bmp"/>
+  <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
+
+  <Icon     Id="UICodeGen.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\UICodeGen.ico"/>
+  <Icon     Id="CodeGen.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\CodeGen.ico"/>
+  <Property Id="ARPPRODUCTICON"  Value="UICodeGen.ico" />
+
+  <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
+    <ComponentGroupRef Id="CodeGen.ftr"/>
+    <ComponentGroupRef Id="UninstallDBCodeGenerator.ftr"/>
+  </Feature>
+</Product>
+
+<Fragment>
+<ComponentGroup Id="CodeGen.ftr">
+  <ComponentRef Id="DBCodeGenerator.cmp"/>
+</ComponentGroup>
+<ComponentGroup Id="UninstallDBCodeGenerator.ftr">
+  <ComponentRef Id="UninstallDBCodeGenerator.cmp"/>
+</ComponentGroup>
+</Fragment>
+
+<!--Directory structure-->
+<Fragment>
+  <Directory Id="TARGETDIR" Name="SourceDir">
+    <Directory Id="ProgramFilesFolder">
+      <Directory Id="DBCodeGen.pff" Name="DBCodeGen"/>
+    </Directory>
+
+    <Directory Id="ProgramMenuFolder" Name="StartMenu">
+      <Directory Id="DBCodeGen.pmf" Name="DB Code Gen"/>
+    </Directory>
+
+    <Directory Id="DesktopFolder" Name="Desktop" />
+  </Directory>
+
+  <Property Id="ApplicationFolderName" Value="DBCodeGen" />
+  <Property Id="WIXUI_INSTALLDIR"      Value="DBCodeGen.pff"/>
+  <Property Id="WixAppFolder"          Value="WixPerMachineFolder" />
+</Fragment>
+
+<Fragment>
+
+  <Component Id="DBCodeGenerator.cmp"  Guid="553908F2-937A-4A78-827F-EE5317034EBA"
+                                                                            Directory="DBCodeGen.pff">
+    <File Id="DBCodeGenerator.cmp" Source="$(var.SolutionDir)..\Release\CodeGen.exe" KeyPath="yes"/>
+
+    <Shortcut Id               = "DBCodeGenerator.shc"
+              Name             = "DB Code Generator"
+              Description      = "Will produce .h and .cpp files for each table in an Access Database"
+              Advertise        = "yes"
+              Directory        = "DBCodeGen.pmf"
+              WorkingDirectory = "DBCodeGen.pff"
+              Icon             = "CodeGen.ico"
+              />
+
+    <Shortcut Id               = "DBCodeGenerator.dsk"
+              Name             = "DB Code Generator"
+              Description      = "Will produce .h and .cpp files for each table in an Access Database"
+              Advertise        = "yes"
+              Directory        = "DesktopFolder"
+              WorkingDirectory = "DBCodeGen.pff"
+              Icon             = "CodeGen.ico"
+              />
+  </Component>
+
+</Fragment>
+
+<Fragment>
+
+  <Component Id="UninstallDBCodeGenerator.cmp" 
+                                Guid="99EC95BB-0BA0-4936-925D-483DC8317C4A" Directory="DBCodeGen.pmf">
+
+    <Shortcut Id               = "UninstallDBCodeGenerator.shc"
+              Name             = "Uninstall DB Code Generator"
+              Description      = "Uninstalls DB Code Generator"
+              Target           = "[System64Folder]msiexec.exe"
+              Arguments        = "/x [ProductCode]"
+              Icon             = "UICodeGen.ico"
+              />
+    <RemoveFolder Id="DBCodeGen.uni" Directory="DBCodeGen.pmf" On="uninstall"/>
+    <RegistryValue Root="HKCU" Key="Software\UninstallDBCodeGenerator.cmp" Name="installed"
+                   Type="integer" Value="1" KeyPath="yes"/>
+  </Component>
+
+</Fragment>
+
+</Wix>
