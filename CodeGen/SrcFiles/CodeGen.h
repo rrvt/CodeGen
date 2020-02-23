@@ -22,6 +22,7 @@ class CodeGenView;
 
 class CodeGen : public CWinApp {
 
+CFrameWnd*   mainFrame;
 CodeGenDoc*  doc;
 CodeGenView* view;
 
@@ -45,8 +46,12 @@ String mapPath;
 public:
   virtual BOOL InitInstance();
 
+          void setTitle(TCchar* title) {mainFrame->SetWindowText(title);}
+
 // Implementation
+
   afx_msg void OnAppAbout();
+
   DECLARE_MESSAGE_MAP()
 
   friend void        invalidateView();

@@ -7,14 +7,14 @@
 #define IDD_ABOUTBOX                     130
 #define IDD_TableOpsDLG                  131
 #define IDD_LicenseDLG                   132
-#define IDD_DIALOG1                      133
+#define IDD_Selection                    133
 #define IDC_TblNamesCB                  1000
 #define IDC_MakeCode                    1001
 #define IDC_Cancel                      1002
 #define IDC_TblNameEB                   1003
 #define IDC_LicenseEB                   1004
 #define IDC_LIST2                       1005
-#define IDC_LIST3                       1006
+#define IDC_List                        1006
 #define IDC_NameVer                     1007
 #define IDC_Copyright                   1008
 #define IDC_CompanyName                 1009

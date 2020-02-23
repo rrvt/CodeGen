@@ -112,6 +112,22 @@ of the files with "Tbl" in their name.  They implement the table class that is m
 leaving the "Map" class untouched by human hands (just in case there is an improvement that must be made
 in the "Map" module sometime in the future).
 
+## Example
+
+In the database directory there is a simple two table database.  The program TestApp.exe can access the
+database throught the following files that were prepared with CodeGen:
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+
+
 ## Authors
 
 Robert R. Van Tuyl, K6RWY

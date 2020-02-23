@@ -1,4 +1,4 @@
-// Books Map logic, Version 1.5.4.0
+// Book Map logic, Version 1.5.4.0
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 #pragma once
@@ -6,18 +6,18 @@
 #include "MapTable.h"
 
 
-struct BooksRecord : public MapRecord {
+struct BookRecord : public MapRecord {
 long   ID;
 String Title;
 long   AuthorID;
 long   ProtagID;
 
-  BooksRecord() : ID(0), Title(), AuthorID(0), ProtagID(0) {}
-  BooksRecord(const BooksRecord& r) : MapRecord(r), ID(r.ID),
+  BookRecord() : ID(0), Title(), AuthorID(0), ProtagID(0) {}
+  BookRecord(const BookRecord& r) : MapRecord(r), ID(r.ID),
            Title(r.Title), AuthorID(r.AuthorID), ProtagID(r.ProtagID) {}
- ~BooksRecord() {}
+ ~BookRecord() {}
 
-  BooksRecord operator= (BooksRecord& r) {
+  BookRecord operator= (BookRecord& r) {
     copy(r, *this); ID = r.ID; Title = r.Title;
     AuthorID = r.AuthorID; ProtagID = r.ProtagID;
     }
@@ -26,15 +26,15 @@ long   ProtagID;
   };
 
 
-class BooksTable;
+class BookTable;
 
 
-class BooksDB {
+class BookDB {
 AceRecordSet rcdSet;
 public:
 
-  BooksDB() : rcdSet() {}
- ~BooksDB() {}
+  BookDB() : rcdSet() {}
+ ~BookDB() {}
 
   // toTable copies all records from a database table into a map container in memory.  It is
   // called from MapsT<MapData>::loadRecords(TableDsc* tableDsc) which is in turn
@@ -42,24 +42,24 @@ public:
   // with all the database tables and all the tables are copied into a corresponding map table.
   // The tables are implemented as trees for fast access and other properties (see std::map)
 
-  bool toTable(AceRecordSet& records, BooksTable& myTable);
+  bool toTable(AceRecordSet& records, BookTable& myTable);
 
   // After all changes have been made in the map, call toDatabase to copy the changes
   // back to the database.
 
-  bool toDatabase(BooksTable& myTable);
+  bool toDatabase(BookTable& myTable);
 
 private:
 
-  bool wrt(BooksRecord& src);
+  bool wrt(BookRecord& src);
   bool erase(long key);
   };
 
 
-class BooksTable : public MapTable {
+class BookTable : public MapTable {
 public:
 
-typedef map<const long, BooksRecord> MyMap;
+typedef map<const long, BookRecord> MyMap;
 typedef MyMap::iterator  Iter;
 typedef pair<Iter, bool> Rslt;
 
@@ -70,27 +70,27 @@ static MyMap myMap;
 Iter it;
 bool increment;
 long maxKey;
-BooksDB myDB;
+BookDB myDB;
 
 public:
 
-  BooksTable() {initialize();}
+  BookTable() {initialize();}
 
   void initialize() {
     it = myMap.end(); increment = true; maxKey = 0;   if (!myMap.empty()) myMap.clear();
-    MapTable::initialize(_T("Books"));
+    MapTable::initialize(_T("Book"));
     }
 
-  bool add(BooksRecord& rcd);
+  bool add(BookRecord& rcd);
   void erase() {it = myMap.erase(it); increment = false;}
 
-  BooksRecord* find(const long key) {it = myMap.find(key); return curRcd();}
-  BooksRecord* startLoop()  {it = myMap.begin();  return curRcd();}
-  BooksRecord* nextRecord() {return it == myMap.end() ? 0 : increment ? bmp() : curRcd();}
-  BooksRecord* curRcd()     {increment = true; return it != myMap.end() ? &it->second : 0;}
+  BookRecord* find(const long key) {it = myMap.find(key); return curRcd();}
+  BookRecord* startLoop()  {it = myMap.begin();  return curRcd();}
+  BookRecord* nextRecord() {return it == myMap.end() ? 0 : increment ? bmp() : curRcd();}
+  BookRecord* curRcd()     {increment = true; return it != myMap.end() ? &it->second : 0;}
 
-  BooksRecord* startRLoop() {it = myMap.end(); return prevRecord();}
-  BooksRecord* prevRecord() {return it == myMap.begin() ? 0 : &(--it)->second;}
+  BookRecord* startRLoop() {it = myMap.end(); return prevRecord();}
+  BookRecord* prevRecord() {return it == myMap.begin() ? 0 : &(--it)->second;}
 
   int  curSize() {return (int) myMap.size();}
   long curKey() {return it != myMap.end() ?  it->first  : -1;}
@@ -111,6 +111,6 @@ public:
 
 private:
 
-  BooksRecord* bmp() {return ++it != myMap.end() ? &it->second : 0;}
+  BookRecord* bmp() {return ++it != myMap.end() ? &it->second : 0;}
   };
 

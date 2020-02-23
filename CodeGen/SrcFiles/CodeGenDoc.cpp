@@ -10,6 +10,7 @@
 #include "Crypt.h"
 #include "GetPathDlg.h"
 #include "LicenseDlg.h"
+#include "MainFrm.h"
 #include "MapCode.h"
 #include "MapDataDlg.h"
 #include "NotePad.h"
@@ -46,7 +47,7 @@ END_MESSAGE_MAP()
 CodeGenDoc::CodeGenDoc() {
   notePad.open();
 
-  SetTitle(_T("Code Gen -- RR Van Tuyl"));
+//  SetTitle(_T("Code Gen -- RR Van Tuyl"));
   }
 
 

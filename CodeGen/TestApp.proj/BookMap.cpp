@@ -1,4 +1,4 @@
-// Books Map logic, Version 1.5.4.0
+// Book Map logic, Version 1.5.4.0
 // Copyright Bob -- K6RWY, 2019.  All rights reserved.
 
 #include "stdafx.h"
@@ -6,10 +6,10 @@
 #include "NotePad.h"
 
 
-BooksTable::MyMap BooksTable::myMap;
+BookTable::MyMap BookTable::myMap;
 
 
-bool BooksTable::add(BooksRecord& rcd) {
+bool BookTable::add(BookRecord& rcd) {
 Rslt rslt;
 
   if (!rcd.ID) rcd.ID = maxKey + 1;
@@ -24,13 +24,13 @@ Rslt rslt;
   }
 
 
-bool BooksDB::toTable(AceRecordSet& records, BooksTable& myTable) {
+bool BookDB::toTable(AceRecordSet& records, BookTable& myTable) {
 AceFields   fields(records);
 AceFieldDsc fld;
 bool        rslt;
 int         i;
 variant_t   v;
-BooksRecord rcd;
+BookRecord  rcd;
 
   for (rslt = fields.startLoop(fld), i = 0; rslt; rslt = fields.nextField(fld), i++) {
     v = fld.value;
@@ -47,10 +47,10 @@ BooksRecord rcd;
   }
 
 
-bool BooksDB::toDatabase(BooksTable& myTable) {
-BooksRecord* r;
+bool BookDB::toDatabase(BookTable& myTable) {
+BookRecord* r;
 
-  if (!maps.openRcdSet(_T("Books"), DaoDenyWrite, rcdSet)) return false;
+  if (!maps.openRcdSet(_T("Book"), DaoDenyWrite, rcdSet)) return false;
 
   for (r = myTable.startLoop(); r; r = myTable.nextRecord()) {
 
@@ -63,12 +63,12 @@ BooksRecord* r;
   }
 
 
-bool BooksDB::erase(long key) {
+bool BookDB::erase(long key) {
   return rcdSet.findRecord(key) && rcdSet.deleteCurrentRecord();
   }
 
 
-bool BooksDB::wrt(BooksRecord& rcd) {
+bool BookDB::wrt(BookRecord& rcd) {
 AceFields   fields(rcdSet);
 AceFieldDsc fld;
 int         i;
@@ -94,7 +94,7 @@ bool        rslt;
   }
 
 
-String BooksRecord::getFldVal(int i) {
+String BookRecord::getFldVal(int i) {
   switch (i) {
     case  0 :{String s; s.format(_T("%i"), ID); return s;}
     case  1 :return Title;

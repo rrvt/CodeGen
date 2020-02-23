@@ -126,6 +126,10 @@ BOOL CodeGen::InitInstance() {
 
   if (!ProcessShellCommand(cmdInfo)) return FALSE;
 
+  mainFrame = (MainFrame*) m_pMainWnd;
+
+  setTitle(_T("CodeGen -- Generate Code for an Interface to an Access Database"));
+
   // The one and only window has been initialized, so show and update it
 
   m_pMainWnd->ShowWindow(SW_SHOW); m_pMainWnd->UpdateWindow(); return TRUE;
@@ -142,8 +146,6 @@ String ext;
   openOneDB(DBFileKey, dbExtensions, dbPath);
 
   maps.initializeMaps(DBFileKey, dbPath);
-
-  view->dspInitialEntry();
 
   invalidateView();
   }

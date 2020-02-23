@@ -14,6 +14,7 @@ protected: // create from serialization only
 // Attributes
 
 DisplayView dspView;
+DisplayView prtView;
 
 public:
   CodeGenDoc* GetDocument() const;
@@ -23,8 +24,6 @@ public:
   virtual void OnDraw(CDC* pDC);  // overridden to draw this view
   virtual void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* sb);
   virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-
-          void dspInitialEntry();
 
 protected:
 
@@ -40,7 +39,7 @@ protected:
           void printFooter();
 
 private:
-          void setScrollSize();
+          void setScrollSize(DisplayView& dv);
 
 // Implementation
 public:

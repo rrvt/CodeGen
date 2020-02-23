@@ -27,41 +27,23 @@ END_MESSAGE_MAP()
 
 // CodeGenView construction/destruction
 
-CodeGenView::CodeGenView()
-{
-  // TODO: add construction code here
+CodeGenView::CodeGenView() { }
 
-}
-
-CodeGenView::~CodeGenView()
-{
-}
-
-BOOL CodeGenView::PreCreateWindow(CREATESTRUCT& cs)
-{
-  // TODO: Modify the Window class or styles here by modifying
-  //  the CREATESTRUCT cs
-
-  return CScrollView::PreCreateWindow(cs);
-}
+CodeGenView::~CodeGenView() { }
 
 
-void CodeGenView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* sb) {
+BOOL CodeGenView::PreCreateWindow(CREATESTRUCT& cs) {return CScrollView::PreCreateWindow(cs);}
 
-  CScrollView::OnVScroll(nSBCode, nPos, sb);
-  }
+
+void CodeGenView::OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* sb)
+                                                            {CScrollView::OnVScroll(nSBCode, nPos, sb);}
 
 
 void CodeGenView::OnInitialUpdate() {CScrollView::OnInitialUpdate();}
 
 
-
-void CodeGenView::dspInitialEntry() {}
-
-
-
 void CodeGenView::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
-                                          {setScrollSize(); CScrollView::OnUpdate(pSender, lHint, pHint);}
+                                  {setScrollSize(dspView); CScrollView::OnUpdate(pSender, lHint, pHint);}
 
 
 /* The following functions are called for printing a page in the order given with one exception:
@@ -79,51 +61,47 @@ void OnEndPrinting(  CDC* pDC, CPrintInfo* pInfo);  -- last
 BOOL CodeGenView::OnPreparePrinting(CPrintInfo* pInfo) {
 BOOL rslt;
 
-  dspView.OnPreparePrinting(pInfo);
+  pInfo->m_nNumPreviewPages = 0;
 
-  rslt = DoPreparePrinting(pInfo);      // Get printer dialog box
+  prtView.OnPreparePrinting(pInfo);
 
-  dspView.OnPreparePrinting(pInfo);
+  rslt = DoPreparePrinting(pInfo);                  // Get printer dialog box
 
   return rslt;
   }
 
 
-void CodeGenView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
-Date d;
-
-  d.getToday();
-
-  dspView.OnBeginPrinting(pDC, pInfo, String("SDE"), d);
-  }
+void CodeGenView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo)
+                       {Date d;   d.getToday();  prtView.OnBeginPrinting(pDC, pInfo, String("SDE"), d);}
 
 
 void CodeGenView::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo) {
+DisplayView* dv = pInfo ? &prtView : &dspView;
 
-  dspView.OnPreparePrinting(pInfo);
+  dv->OnPreparePrinting(pInfo);
 
   CScrollView::OnPrepareDC(pDC, pInfo);
 
-  dspView.OnPrepareDC(_T("Arial"), 120, pDC, pInfo);
+  dv->OnPrepareDC(_T("Arial"), 120, pDC, pInfo);
   }
 
 
-void CodeGenView::OnPrint(CDC* pDC, CPrintInfo* pInfo) {dspView.OnPrint(pInfo);}
+void CodeGenView::OnPrint(CDC* pDC, CPrintInfo* pInfo) {prtView.OnPrint(pInfo);}
 
 
 void CodeGenView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {if (!pInfo->m_bPreview) invalidateView();}
 
 
-void CodeGenView::OnDraw(CDC* pDC) {dspView.OnDraw(); setScrollSize();}
+void CodeGenView::OnDraw(CDC* pDC) {dspView.OnDraw(); setScrollSize(dspView);}
 
 
-void CodeGenView::setScrollSize() {
+void CodeGenView::setScrollSize(DisplayView& dv) {
 RECT  winSize;
 CSize s;
 CSize pageSize;
 CSize scrollSize;
 
-  GetClientRect(&winSize); dspView.getScrollSize(winSize, s, pageSize, scrollSize);
+  GetClientRect(&winSize); dv.getScrollSize(winSize, s, pageSize, scrollSize);
 
   SetScrollSizes(MM_TEXT, s, pageSize, scrollSize);
   }

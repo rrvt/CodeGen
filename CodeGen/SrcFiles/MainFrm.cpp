@@ -34,28 +34,23 @@ static UINT indicators[] =
 
 // MainFrame construction/destruction
 
-MainFrame::MainFrame()
-{
+MainFrame::MainFrame() {
   // TODO: add member initialization code here
-}
+  }
 
-MainFrame::~MainFrame()
-{
-}
+MainFrame::~MainFrame() { }
 
 
-int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
-{
-  if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
-    return -1;
+int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
-  if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP
-    | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-    !m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-  {
+  if (CFrameWnd::OnCreate(lpCreateStruct) == -1) return -1;
+
+  if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT,
+    WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
+    !m_wndToolBar.LoadToolBar(IDR_MAINFRAME)) {
     TRACE0("Failed to create toolbar\n");
     return -1;      // fail to create
-  }
+    }
 
   if (!m_wndStatusBar.Create(this) ||
     !m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT)))
@@ -69,7 +64,7 @@ int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
   EnableDocking(CBRS_ALIGN_ANY);
   DockControlBar(&m_wndToolBar);
 
-  SetTitle(_T("Entry Report"));
+//  SetTitle(_T("CodeGen -- Generate Code for an interface to an Access Database"));
   return 0;
 }
 

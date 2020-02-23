@@ -181,14 +181,14 @@ BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,237,47,50,14
 END
 
-IDD_DIALOG1 DIALOGEX 0, 0, 255, 327
+IDD_Selection DIALOGEX 0, 0, 255, 327
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 10, "Arial", 400, 0, 0x0
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,7,306,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,198,306,50,14
-    CONTROL         "",IDC_LIST3,"SysListView32",LVS_LIST | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,241,292
+    CONTROL         "",IDC_List,"SysListView32",LVS_LIST | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,241,292
 END
 
 
@@ -198,8 +198,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,4,0
- PRODUCTVERSION 1,5,4,0
+ FILEVERSION 1,5,5,0
+ PRODUCTVERSION 1,5,5,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -216,12 +216,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Bob -- K6RWY"
             VALUE "FileDescription", "Generate c++ Classes that allows access to MS Access Tables"
-            VALUE "FileVersion", "1.5.4"
+            VALUE "FileVersion", "1.5.5"
             VALUE "InternalName", "CodeGen"
             VALUE "LegalCopyright", "(c).  All rights reserved."
             VALUE "OriginalFilename", "CodeGen"
             VALUE "ProductName", "Access Code Generator"
-            VALUE "ProductVersion", "1.5.4"
+            VALUE "ProductVersion", "1.5.5"
         END
     END
     BLOCK "VarFileInfo"
@@ -255,7 +255,7 @@ BEGIN
         BOTTOMMARGIN, 61
     END
 
-    IDD_DIALOG1, DIALOG
+    IDD_Selection, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 248
@@ -273,9 +273,8 @@ END
 /////////////////////////////////////////////////////////////////////////////
 //
 // AFX_DIALOG_LAYOUT
-//
 
-IDD_DIALOG1 AFX_DIALOG_LAYOUT
+IDD_Selection AFX_DIALOG_LAYOUT
 BEGIN
     0
 END

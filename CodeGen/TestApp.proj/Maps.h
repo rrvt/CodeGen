@@ -2,9 +2,9 @@
 
 
 #pragma once
-#include "BooksTbl.h"
+#include "BookTbl.h"
 #include "PersonTbl.h"
 
 
-extern BooksTbl  booksTable;
+extern BookTbl   bookTable;
 extern PersonTbl personTable;

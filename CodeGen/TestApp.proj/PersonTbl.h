@@ -11,11 +11,11 @@ public:
 
   PersonTbl() : PersonTable() { }
 
-  PersonRecord* get(String& firstName, String& lastName);
+  PersonRecord* get(String& firstName, String& lastName, bool isAuthor);
 
   PersonRecord* find(const long key) {return PersonTable::find(key);}
 
 private:
 
-  PersonRecord* find(String& firstName, String& lastName);
+  PersonRecord* find(String& firstName, String& lastName, bool isAuthor);
   };

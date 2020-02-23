@@ -21,7 +21,7 @@ Maps maps;
 void MapData::initializeMaps(Maps* mps) {
 AceTables aceTables(dao);
 
-  tableDscrs.add(booksTable, mps);
+  tableDscrs.add(bookTable, mps);
   tableDscrs.add(personTable, mps);
 
   for (TableDsc* tblDsc = tableDscrs.startLoop(); tblDsc; tblDsc = tableDscrs.nextEntry())
