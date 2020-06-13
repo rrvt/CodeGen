@@ -54,7 +54,7 @@ public:
 
   DECLARE_MESSAGE_MAP()
 
-  friend void        invalidateView();
+  friend void        invalidate();
   friend CodeGenDoc* doc();
   };
 
@@ -62,6 +62,6 @@ public:
 extern CodeGen theApp;
 
 
-inline void invalidateView() {theApp.invalidate();}
+inline void invalidate() {theApp.invalidate();}
 inline CodeGenDoc* doc() {return theApp.getDocument() ? theApp.doc : 0;}
 

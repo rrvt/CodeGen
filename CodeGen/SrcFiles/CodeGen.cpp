@@ -13,10 +13,6 @@
 #include "NotePad.h"
 #include "Resources.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
 
 TCchar* HeaderExt = _T("*.h");
 TCchar* CppExt    = _T("*.cpp");
@@ -77,7 +73,7 @@ BOOL CodeGen::InitInstance() {
   if (mapPath.empty())
                   {mapPath = getPath(dbPath); iniFile.writeString(FileSection, GenFilePathKey, mapPath);}
 
-  notePad.open();
+  notePad.clear();
 
   maps.initializeMaps(DBFileKey, dbPath);
 
@@ -126,6 +122,8 @@ BOOL CodeGen::InitInstance() {
 
   if (!ProcessShellCommand(cmdInfo)) return FALSE;
 
+  if (getView()) {view->setAuthor(_T("Code Gen")); view->setFont(_T("Courier New"));}
+
   mainFrame = (MainFrame*) m_pMainWnd;
 
   setTitle(_T("CodeGen -- Generate Code for an Interface to an Access Database"));
@@ -141,13 +139,13 @@ void CodeGen::doOpenDB() {
 String title;
 String ext;
 
-  notePad.close();
+  notePad.clear();
 
   openOneDB(DBFileKey, dbExtensions, dbPath);
 
   maps.initializeMaps(DBFileKey, dbPath);
 
-  invalidateView();
+  invalidate();
   }
 
 

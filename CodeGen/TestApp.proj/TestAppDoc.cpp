@@ -14,9 +14,6 @@
 #include "TestApp.h"
 #include <propkey.h>
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
 
 // TestAppDoc
 
@@ -42,7 +39,7 @@ MapDataDlg dlg;
 int        i;
 TableDsc*  p;
 
-  notePad.close();
+  notePad.clear();
 
   dlg.title = _T("Display Records in Selected Table");
 
@@ -112,7 +109,7 @@ MapDataDlg dlg;
 int        i;
 TableDsc*  p;
 
-  notePad.close();
+  notePad.clear();
 
   dlg.title = _T("Add Record To Selected Table");
 
@@ -183,7 +180,7 @@ void TestAppDoc::OnErase() {
 MapDataDlg dlg;
 TableDsc*  p;
 
-  notePad.close();
+  notePad.clear();
 
   dlg.title = _T("Erase Record From Selected Table");
 
@@ -208,7 +205,7 @@ void TestAppDoc::eraseBook(BookTbl* books) {
 EraseBookDlg dlg;
 BookRecord*  rcd;
 
-  notePad.close();
+  notePad.clear();
 
   if (dlg.DoModal() == IDOK) {
     String title = dlg.title;

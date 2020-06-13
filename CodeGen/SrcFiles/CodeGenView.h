@@ -3,47 +3,25 @@
 
 
 #pragma once
-#include "DisplayView.h"
+#include "CScrView.h"
 
 
-class CodeGenView : public CScrollView {
+class CodeGenDoc;
+
+
+class CodeGenView : public CScrView {
 protected: // create from serialization only
-  CodeGenView();
+
+  CodeGenView() { }
   DECLARE_DYNCREATE(CodeGenView)
 
-// Attributes
-
-DisplayView dspView;
-DisplayView prtView;
-
 public:
+
+  virtual ~CodeGenView() { }
+
   CodeGenDoc* GetDocument() const;
 
-// Overrides
-public:
-  virtual void OnDraw(CDC* pDC);  // overridden to draw this view
-  virtual void OnVScroll(UINT nSBCode, UINT nPos, CScrollBar* sb);
-  virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-protected:
-
-  virtual void OnInitialUpdate(); // called first time after construct
-  virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);
-
-  virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
-  virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
-  virtual void OnPrepareDC(    CDC* pDC, CPrintInfo* pInfo = NULL);
-  virtual void OnPrint(        CDC* pDC, CPrintInfo* pInfo);
-  virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
-
-          void printFooter();
-
-private:
-          void setScrollSize(DisplayView& dv);
-
-// Implementation
-public:
-  virtual ~CodeGenView();
 #ifdef _DEBUG
   virtual void AssertValid() const;
   virtual void Dump(CDumpContext& dc) const;
@@ -53,8 +31,10 @@ protected:
 
 // Generated message map functions
 protected:
+
   DECLARE_MESSAGE_MAP()
-};
+  };
+
 
 #ifndef _DEBUG  // debug version in CodeGenView.cpp
 inline CodeGenDoc* CodeGenView::GetDocument() const

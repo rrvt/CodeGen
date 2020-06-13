@@ -75,7 +75,8 @@
         Name="Debug"
         MenuCaption="&amp;Debug"
         SaveOption="SaveAll"
-        RunFromDir="%rw">
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
         <Exec
           CmdLine="vcproj_visual_studio_debug"
           Type="Slick-C"/>
@@ -88,15 +89,6 @@
         RunFromDir="%rw"
         ClearProcessBuffer="1">
         <Exec CmdLine='devenv "%w"'/>
-      </Target>
-      <Target
-        Name="DebugWinDbg"
-        MenuCaption="Debug - WinDbg"
-        SaveOption="SaveAll"
-        RunFromDir="%rw">
-        <Exec
-          CmdLine="vcproj_windbg_debug"
-          Type="Slick-C"/>
       </Target>
       <Target
         Name="Execute"
@@ -178,7 +170,8 @@
         Name="Debug"
         MenuCaption="&amp;Debug"
         SaveOption="SaveAll"
-        RunFromDir="%rw">
+        RunFromDir="%rw"
+        ClearProcessBuffer="1">
         <Exec
           CmdLine="vcproj_visual_studio_debug"
           Type="Slick-C"/>
@@ -191,15 +184,6 @@
         RunFromDir="%rw"
         ClearProcessBuffer="1">
         <Exec CmdLine='devenv "%w"'/>
-      </Target>
-      <Target
-        Name="DebugWinDbg"
-        MenuCaption="Debug - WinDbg"
-        SaveOption="SaveAll"
-        RunFromDir="%rw">
-        <Exec
-          CmdLine="vcproj_windbg_debug"
-          Type="Slick-C"/>
       </Target>
       <Target
         Name="Execute"

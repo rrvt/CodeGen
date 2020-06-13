@@ -115,18 +115,19 @@ in the "Map" module sometime in the future).
 ## Example
 
 In the database directory there is a simple two table database.  The program TestApp.exe can access the
-database throught the following files that were prepared with CodeGen:
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+database through the following Modules (.h and .cpp files) that were prepared with CodeGen:
+  - BookMap
+  - BookTbl
+  - MapData
+  - Maps
+  - PersonMap
+  - PersonTbl
 
+A person may be an author or a protagonist (books main character).  There are three commands that are
+related to the database:
+  - Display one or both tables
+  - Add a Book (Title, author and protagonist) or Add a person
+  - erase a book or person (note, simple erase only erases in the table selected)
 
 ## Authors
 

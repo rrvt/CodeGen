@@ -2,12 +2,9 @@
 
 
 #include "stdafx.h"
-#include "CodeGen.h"
 #include "MapCode.h"
-//#include "MapData.h"
 #include "NotePad.h"
-#include "TableOp.h"
-#include "Utilities.h"
+#include "TableExtension.h"
 
 
 void VarDeclarations::output() {
@@ -23,5 +20,15 @@ int i;
     if (var.assign.length()) notePad << _T(" = ") << var.assign;
     notePad << _T(";") << nCrlf;
     }
+  }
+
+
+
+void MapCode::createTableExtensions() {
+TableDsc*      tbl;
+TableExtension tableExt;
+
+  for (tbl = tableDscrs.startLoop(); tbl; tbl = tableDscrs.nextEntry())
+                                                            if (tbl->selected && !tableExt(*tbl)) break;
   }
 

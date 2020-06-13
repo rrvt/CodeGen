@@ -29,6 +29,7 @@ bool      selected;
 
   notePad << _T("Maps maps;") << nCrlf << nCrlf << nCrlf;
 
+
   notePad << _T("void MapData::initializeMaps(Maps* mps) {") << nCrlf;
   notePad << _T("AceTables aceTables(dao);") << nCrlf;
 
@@ -48,14 +49,14 @@ bool      selected;
     s =  _T("if (tblDsc->mapTable) tblDsc->mapTable->initialize();");  toRight(s);
     }
 
-  else {
-    notePad << nCrlf;
-    notePad << _T("  for (TableDesc* dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable())");
-    notePad << nCrlf;
-    s = _T("tableDscrs.add(dsc->name, 0, mps);");   toRight(s);
-    }
+  notePad << nCrlf;
+  notePad << _T("  for (TableDesc* dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable())");
+  notePad << nCrlf;
+  s = _T("tableDscrs.add(dsc->name, 0, mps);");   toRight(s);
 
   notePad << _T("  }") << nCrlf << nCrlf << nCrlf;
+
+//  for (dsc = aceTables.startLoop(); dsc; dsc = aceTables.nextTable()) tableDscrs.add(dsc->name, 0, mps);
 
 
   notePad << _T("bool MapData::openDB(String& path) {return dao.open(path);}") << nCrlf << nCrlf << nCrlf;

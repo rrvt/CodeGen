@@ -88,6 +88,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Library\AboutFiles\About.cpp" />
     <ClCompile Include="..\SrcFiles\CodeGen.cpp" />
     <ClCompile Include="..\SrcFiles\CodeGenDoc.cpp" />
     <ClCompile Include="..\SrcFiles\CodeGenView.cpp" />
@@ -103,16 +104,17 @@
     <ClCompile Include="..\SrcFiles\MapHeader.cpp" />
     <ClCompile Include="..\SrcFiles\Maps.cpp" />
     <ClCompile Include="..\SrcFiles\Schedule.cpp" />
+    <ClCompile Include="..\SrcFiles\SelectFldDlg.cpp" />
     <ClCompile Include="..\SrcFiles\stdafx.cpp" />
+    <ClCompile Include="..\..\Library\TableDescriptors\TableDscrs.cpp" />
     <ClCompile Include="..\SrcFiles\TableExtension.cpp" />
     <ClCompile Include="..\SrcFiles\TableOp.cpp" />
     <ClCompile Include="..\SrcFiles\TabStops.cpp" />
     <ClCompile Include="..\SrcFiles\TestMap.cpp" />
     <ClCompile Include="..\SrcFiles\Utilities.cpp" />
-    <ClCompile Include="..\..\Library\AboutFiles\About.cpp" />
-    <ClCompile Include="..\..\Library\TableDescriptors\TableDscrs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Library\AboutFiles\About.h" />
     <ClInclude Include="..\SrcFiles\CodeGen.h" />
     <ClInclude Include="..\SrcFiles\CodeGenDoc.h" />
     <ClInclude Include="..\SrcFiles\CodeGenView.h" />
@@ -127,14 +129,15 @@
     <ClInclude Include="..\SrcFiles\Maps.h" />
     <ClInclude Include="..\SrcFiles\resource.h" />
     <ClInclude Include="..\SrcFiles\Schedule.h" />
+    <ClInclude Include="..\SrcFiles\SelectFldDlg.h" />
     <ClInclude Include="..\SrcFiles\stdafx.h" />
+    <ClInclude Include="..\..\Library\TableDescriptors\TableDscrs.h" />
+    <ClInclude Include="..\SrcFiles\TableExtension.h" />
     <ClInclude Include="..\SrcFiles\TableOp.h" />
     <ClInclude Include="..\SrcFiles\TabStops.h" />
     <ClInclude Include="..\SrcFiles\targetver.h" />
     <ClInclude Include="..\SrcFiles\TestMap.h" />
     <ClInclude Include="..\SrcFiles\Utilities.h" />
-    <ClInclude Include="..\..\Library\AboutFiles\About.h" />
-    <ClInclude Include="..\..\Library\TableDescriptors\TableDscrs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -145,20 +148,20 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
+    <ResourceCompile Include="..\SrcFiles\CodeGen.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Library\AboutFiles\About.rc2" />
     <None Include="..\Debug\CodeGen\acedao.tlh" />
     <None Include="..\Debug\CodeGen\acedao.tli" />
-    <None Include="..\SrcFiles\res\CodeGen.rc2" />
-    <None Include="..\SrcFiles\res\Toolbar24.bmp" />
     <None Include="C:\Users\rrvt\AppData\Roaming\CodeGen\CodeGen.ini" />
-    <None Include="..\..\Library\AboutFiles\About.rc2" />
+    <None Include="..\SrcFiles\res\CodeGen.rc2" />
     <None Include="..\README.md" />
+    <None Include="..\SrcFiles\res\Toolbar24.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\SrcFiles\res\CodeGen.ico" />
     <Image Include="..\SrcFiles\res\Toolbar30.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\SrcFiles\CodeGen.rc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Library\LibUni7\LibUni7.vcxproj">

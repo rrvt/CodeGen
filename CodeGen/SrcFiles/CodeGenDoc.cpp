@@ -22,11 +22,6 @@ enum {col2 = 10, col3 = 35, col4 = 58, col5 = 81};
 
 
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
 // CodeGenDoc
 
 IMPLEMENT_DYNCREATE(CodeGenDoc, CDocument)
@@ -45,7 +40,7 @@ END_MESSAGE_MAP()
 // CodeGenDoc construction/destruction
 
 CodeGenDoc::CodeGenDoc() {
-  notePad.open();
+  notePad.clear();
 
 //  SetTitle(_T("Code Gen -- RR Van Tuyl"));
   }
@@ -70,7 +65,7 @@ Date       today;
 DWORD      i;
 String     date;
 
-  notePad.close();
+  notePad.clear();
 
   if (license.DoModal() == IDOK) {
 
@@ -121,7 +116,7 @@ String     date;
     }
 
   saveFile(_T("License File"), _T("License.cpp"), _T(".cpp"), _T("Save File|*.cpp|All Files|*.*||"));
-  invalidateView();
+  invalidate();
   }
 
 
@@ -138,7 +133,7 @@ String  name;
 
     createCode(accTableName, name);
 
-    invalidateView();
+    invalidate();
     }
   }
 
@@ -152,10 +147,10 @@ int     noDesc;
 
   Table table(accTableName, name, mapCode.getKeyDesc());
 
-  notePad.close();   mapCode.createHeader(table);  invalidateView();
+  notePad.clear();   mapCode.createHeader(table);  invalidate();
   saveFile(_T("Header File"), table.fileName, _T("h"), HeaderExt);
 
-  notePad.close();   mapCode.createCpp(table);     invalidateView();
+  notePad.clear();   mapCode.createCpp(table);     invalidate();
   saveFile(_T("Body File"), table.fileName, _T("cpp"), CppExt);
   }
 
@@ -181,16 +176,16 @@ MapCode    mapCode;
 
   if (dlg.DoModal() == IDOK) {
 
-    notePad.close();   mapCode.createMapDataHdr(); invalidateView();
+    notePad.clear();   mapCode.createMapDataHdr(); invalidate();
     saveFile(_T("Header File"), _T("MapData"), _T(".h"), HeaderExt);
 
-    notePad.close();   mapCode.createMapDataCpp(); invalidateView();
+    notePad.clear();   mapCode.createMapDataCpp(); invalidate();
     saveFile(_T("Body File"), _T("MapData"), _T(".cpp"), CppExt);
 
-    notePad.close();   mapCode.createMapsHdr();  invalidateView();
+    notePad.clear();   mapCode.createMapsHdr();  invalidate();
     saveFile(_T("Header File"), _T("Maps"), _T(".h"), HeaderExt);
 
-    notePad.close();   mapCode.createMapsCpp();  invalidateView();
+    notePad.clear();   mapCode.createMapsCpp();  invalidate();
     saveFile(_T("Body File"), _T("Maps"), _T(".cpp"), CppExt);
     }
   }
@@ -245,7 +240,7 @@ MapDataDlg dlg;
 int        i;
 TableDsc*  p;
 
-  notePad.close();
+  notePad.clear();
 
   dlg.title = _T("Display Record Fields");
 
@@ -283,7 +278,7 @@ int        maxLng = 0;
     notePad << nCrlf;
     }
 
-  invalidateView();
+  invalidate();
   }
 
 #if 0
@@ -294,7 +289,7 @@ int        lng;
 
   if (!tbl) return;
 
-  notePad.close();
+  notePad.clear();
 
   notePad << tbl->name << _T(" Table Size = ") << tbl->curSize() << nCrlf << nCrlf;
 
@@ -310,7 +305,7 @@ int        lng;
     notePad << rcd->getFldVal(0) << nTab << rcd->getFldVal(1) << nTab << rcd->getFldVal(2) << nCrlf;
     }
 
-  invalidateView();
+  invalidate();
   }
 #endif
 

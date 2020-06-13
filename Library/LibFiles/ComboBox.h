@@ -34,10 +34,12 @@
 #include "ToolBar.h"
 
 class ComboBox : public CComboBox {
+int i;
+int n;
 
 public:
 
-  ComboBox() {}
+  ComboBox() : i(0), n(0) {}
 
   bool create(ToolBar& toolBar, int toolBarItemID, int itemID,
                           int width = 150, int dropHeight = 100, ulong style = CBS_DROPDOWN | CBS_SORT);
@@ -45,9 +47,17 @@ public:
   void clear();
   bool getWindowText(String& s);
   bool getCurSel(String& s);
-  bool getText(int i, String& s);
   bool setCurSel(String& s);
+  void setFocus() {SetFocus();}
   void del(String& s);
   void add(String& s);
   int  find(String& s);
+
+  bool startLoop(String& s) {i = -1; n = GetCount(); return nextItem(s);}
+  bool nextItem(String&  s) {i++; return i < n ? getText(i, s) : false;}
+
+private:
+
+  bool getText(int i, String& s);
   };
+

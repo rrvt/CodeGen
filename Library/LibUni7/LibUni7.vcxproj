@@ -78,7 +78,8 @@
     <Lib>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>Version.lib;Setupapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Version.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4006,4221</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,37 +106,32 @@
     <Lib>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>Version.lib;Setupapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>Setupapi.lib;Version.lib</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4006,4221</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="..\LibFiles\AceDao.h" />
-    <ClInclude Include="..\LibFiles\AppAvail.h" />
-    <ClInclude Include="..\LibFiles\AppDoc.h" />
     <ClInclude Include="..\LibFiles\Archive.h" />
-    <ClInclude Include="..\LibFiles\ArchiveIO.h" />
     <ClInclude Include="..\LibFiles\Button.h" />
     <ClInclude Include="..\LibFiles\CDoc.h" />
     <ClInclude Include="..\LibFiles\ComboBox.h" />
     <ClInclude Include="..\LibFiles\comdef.h" />
     <ClInclude Include="..\LibFiles\CopyFile.h" />
     <ClInclude Include="..\LibFiles\Crypt.h" />
+    <ClInclude Include="..\LibFiles\CScrView.h" />
     <ClInclude Include="..\LibFiles\Csv.h" />
-    <ClInclude Include="..\LibFiles\CSVrecord.h" />
-    <ClInclude Include="..\LibFiles\CSVrecords.h" />
     <ClInclude Include="..\LibFiles\Currency.h" />
-    <ClInclude Include="..\LibFiles\DataFile.h" />
     <ClInclude Include="..\LibFiles\Date.h" />
     <ClInclude Include="..\LibFiles\Debug.h" />
     <ClInclude Include="..\LibFiles\Display.h" />
-    <ClInclude Include="..\LibFiles\DisplayFns.h" />
-    <ClInclude Include="..\LibFiles\DisplayView.h" />
+    <ClInclude Include="..\LibFiles\DisplayDev.h" />
+    <ClInclude Include="..\LibFiles\EditBox.h" />
     <ClInclude Include="..\LibFiles\EditBoxes.h" />
     <ClInclude Include="..\LibFiles\Expandable.h" />
     <ClInclude Include="..\LibFiles\FileIO.h" />
     <ClInclude Include="..\LibFiles\filename.h" />
+    <ClInclude Include="..\LibFiles\FilePaths.h" />
     <ClInclude Include="..\LibFiles\filesrch.h" />
     <ClInclude Include="..\LibFiles\FontMgr.h" />
     <ClInclude Include="..\LibFiles\GetPathDlg.h" />
@@ -146,20 +142,26 @@
     <ClInclude Include="..\LibFiles\LexT.h" />
     <ClInclude Include="..\LibFiles\LexTOut.h" />
     <ClInclude Include="..\LibFiles\LoadScratchPad.h" />
+    <ClInclude Include="..\LibFiles\ManipT.h" />
     <ClInclude Include="..\LibFiles\MapsT.h" />
     <ClInclude Include="..\LibFiles\MapTable.h" />
     <ClInclude Include="..\LibFiles\match.h" />
     <ClInclude Include="..\LibFiles\MessageBox.h" />
+    <ClInclude Include="..\LibFiles\NewAllocator.h" />
     <ClInclude Include="..\LibFiles\Node.h" />
     <ClInclude Include="..\LibFiles\Note.h" />
     <ClInclude Include="..\LibFiles\NotePad.h" />
     <ClInclude Include="..\LibFiles\qsort.h" />
+    <ClInclude Include="..\LibFiles\Random.h" />
     <ClInclude Include="..\LibFiles\Resources.h" />
     <ClInclude Include="..\LibFiles\SrchFile.h" />
     <ClInclude Include="..\LibFiles\std.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="..\LibFiles\StringInput.h" />
     <ClInclude Include="..\LibFiles\Strings.h" />
     <ClInclude Include="..\LibFiles\TabStops.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\tchar.h" />
     <ClInclude Include="..\LibFiles\TextPosition.h" />
     <ClInclude Include="..\LibFiles\Token.h" />
     <ClInclude Include="..\LibFiles\ToolBar.h" />
@@ -169,32 +171,30 @@
     <ClInclude Include="..\LibFiles\WindowData.h" />
     <ClInclude Include="..\LibFiles\WindowPos.h" />
     <ClInclude Include="..\LibFiles\XTerm.h" />
-    <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\tchar.h" />
-    <ClInclude Include="..\LibFiles\FilePaths.h" />
-    <ClInclude Include="..\LibFiles\Random.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
     <ClCompile Include="..\LibFiles\AceDao.cpp" />
-    <ClCompile Include="..\LibFiles\AppAvail.cpp" />
+    <ClCompile Include="..\LibFiles\Archive.cpp" />
     <ClCompile Include="..\LibFiles\Button.cpp" />
     <ClCompile Include="..\LibFiles\ComboBox.cpp" />
     <ClCompile Include="..\LibFiles\CopyFile.cpp" />
     <ClCompile Include="..\LibFiles\CryptDe.cpp" />
     <ClCompile Include="..\LibFiles\CryptEn.cpp" />
     <ClCompile Include="..\LibFiles\CryptInit.cpp" />
-    <ClCompile Include="..\LibFiles\CSVrecords.cpp" />
+    <ClCompile Include="..\LibFiles\CScrView.cpp" />
     <ClCompile Include="..\LibFiles\Currency.cpp" />
-    <ClCompile Include="..\LibFiles\DataFile.cpp" />
     <ClCompile Include="..\LibFiles\Date.cpp" />
     <ClCompile Include="..\LibFiles\Debug.cpp" />
     <ClCompile Include="..\LibFiles\Display.cpp" />
-    <ClCompile Include="..\LibFiles\DisplayFns.cpp" />
+    <ClCompile Include="..\LibFiles\DisplayDev.cpp" />
+    <ClCompile Include="..\LibFiles\EditBox.cpp" />
     <ClCompile Include="..\LibFiles\EditBoxes.cpp" />
     <ClCompile Include="..\LibFiles\FileIO.cpp" />
     <ClCompile Include="..\LibFiles\filename.cpp" />
+    <ClCompile Include="..\LibFiles\FilePaths.cpp" />
     <ClCompile Include="..\LibFiles\filesrch.cpp" />
     <ClCompile Include="..\LibFiles\FontMgr.cpp" />
     <ClCompile Include="..\LibFiles\GetPathDlg.cpp" />
@@ -209,6 +209,7 @@
     <ClCompile Include="..\LibFiles\Node.cpp" />
     <ClCompile Include="..\LibFiles\Note.cpp" />
     <ClCompile Include="..\LibFiles\NotePad.cpp" />
+    <ClCompile Include="..\LibFiles\Random.cpp" />
     <ClCompile Include="..\LibFiles\Resources.cpp" />
     <ClCompile Include="..\LibFiles\SrchFile.cpp" />
     <ClCompile Include="..\LibFiles\Strings.cpp" />
@@ -220,7 +221,5 @@
     <ClCompile Include="..\LibFiles\WindowData.cpp" />
     <ClCompile Include="..\LibFiles\WindowPos.cpp" />
     <ClCompile Include="..\LibFiles\XTerm.cpp" />
-    <ClCompile Include="..\LibFiles\FilePaths.cpp" />
-    <ClCompile Include="..\LibFiles\Random.cpp" />
   </ItemGroup>
 </Project>

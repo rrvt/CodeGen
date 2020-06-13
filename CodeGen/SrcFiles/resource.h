@@ -4,10 +4,13 @@
 //
 #define IDP_OLE_INIT_FAILED              100
 #define IDR_MAINFRAME                    101
+
 #define IDD_ABOUTBOX                     130
 #define IDD_TableOpsDLG                  131
 #define IDD_LicenseDLG                   132
 #define IDD_Selection                    133
+#define IDD_SelectField                  134
+
 #define IDC_TblNamesCB                  1000
 #define IDC_MakeCode                    1001
 #define IDC_Cancel                      1002
@@ -18,6 +21,7 @@
 #define IDC_NameVer                     1007
 #define IDC_Copyright                   1008
 #define IDC_CompanyName                 1009
+
 #define ID_DoOpenDB                      300
 #define ID_TableOps                      301
 #define ID_TableExtension                302

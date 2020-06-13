@@ -2,64 +2,156 @@
 
 
 #include "stdafx.h"
-#include "MapCode.h"
+#include "TableExtension.h"
 #include "codeGen.h"
 #include "NotePad.h"
-#include "Utilities.h"
+#include "SelectFldDlg.h"
+#include "TableDscrs.h"
 
 
-class Name {
-public:
-String field;
-String object;
+bool TableExtension::operator() (TableDsc& tbl) {
+String       s = tbl.name + _T("Tbl");
+SelectFldDlg dlg(col);
 
-  Name() { }
-  void set(String& name) {field = name; object = objName(name);}
-  };
+  load(tbl.name);   col.initialize(descTbl);
 
+  dlg.title = col.tableName;
 
-class Collection {
-String              s;
-public:
+  if (dlg.DoModal() != IDOK) return false;
 
-String              name;
-String              tblName;
-String              tableName;
-String              recordName;         // DB Field Name
-String              rcdName;            // object Name
-Expandable<Name, 4> names;
+  notePad.clear();   createTblExtHdr(); invalidate();
+  doc()->saveFile(_T("Header File"), s, _T(".h"), HeaderExt);
 
-  Collection(DescTable& descTbl);
-  String& getAll(bool args);            // Get as Arguments when args is true, otherwise as call
-  };
+  notePad.clear();   createTblExtCpp(); invalidate();
+  doc()->saveFile(_T("Body File"), s, _T(".cpp"), CppExt);
 
-
-
-
-void MapCode::createTableExtensions() {
-TableDsc* tbl;
-
-  for (tbl = tableDscrs.startLoop(); tbl; tbl = tableDscrs.nextEntry())
-    if (tbl->selected) {
-
-      String s = tbl->name + _T("Tbl");
-
-      load(tbl->name);
-      Collection collection(descTbl);
-
-      notePad.close();   createTblExtHdr(collection); invalidateView();
-      doc()->saveFile(_T("Header File"), s, _T(".h"), HeaderExt);
-
-      notePad.close();   createTblExtCpp(collection); invalidateView();
-      doc()->saveFile(_T("Body File"), s, _T(".cpp"), CppExt);
-      }
+  return true;
   }
 
 
-Collection::Collection(DescTable& descTbl) {
+
+void TableExtension::createTblExtHdr() {
+String s;
+
+  notePad << _T("// ") << col.name << _T(" Table Extension Template") << nCrlf << nCrlf << nCrlf;
+
+  notePad << _T("#pragma once") << nCrlf;
+
+  notePad << _T("#include \"") << col.name << _T("Map.h\"") << nCrlf << nCrlf << nCrlf;
+
+  notePad << _T("class ") << col.tblName << _T(" : public ") << col.tableName << _T(" {") << nCrlf << nCrlf;
+
+  notePad << _T("public:") << nCrlf << nCrlf;
+
+  notePad << _T("  ") << col.tblName << _T("() : ") << col.tableName << _T("() { }") << nCrlf << nCrlf;
+
+  notePad << _T("  ") << col.recordName << _T("* get(") << col.getArgs() << _T(");") << nCrlf << nCrlf;
+
+  notePad << _T("  ") << col.recordName << _T("* find(const long key) {return ");
+  notePad << col.tableName << _T("::find(key);}") << nCrlf << nCrlf;
+
+  notePad << _T("private:") << nCrlf << nCrlf;
+
+  notePad << _T("  ") << col.recordName << _T("* find(") << col.getArgs() << _T(");") << nCrlf;
+
+  notePad << _T("  };") << nCrlf;
+  }
+
+
+void TableExtension::createTblExtCpp() {
+int    i;
+int    j;
+String s;
+
+  notePad << _T("// ") << col.name << _T(" Table Extension Template") << nCrlf << nCrlf << nCrlf;
+
+  notePad << _T("#include \"stdafx.h\"") << nCrlf;
+  notePad << _T("#include \"") << col.tblName << _T(".h\"") << nCrlf;
+  if (col.noStringsSel > 1) notePad << _T("#include \"Utilities.h\"") << nCrlf;
+  notePad<< nCrlf << nCrlf;
+
+  notePad << col.recordName << _T("* ") << col.tblName << _T("::get(");
+  notePad << col.getArgs() << _T(") {") << nCrlf;
+  notePad << col.recordName << _T("* r = find(") << col.getCallArgs() << _T(");   if (r) return r;");
+  notePad << nCrlf;
+  notePad << col.recordName << _T("  rcd;") << nCrlf << nCrlf;
+
+  if (col.noStringsSel) notePad << _T("  ");
+
+  for (i = 0, j = 0; i < col.fields.end(); i++) {
+    FldDsc& fd = col.fields[i];
+
+    if (fd.selected) {
+      if (j) notePad << _T(" ");
+
+      notePad << _T("rcd.") << fd.name << _T(" = ") << fd.object << _T(";");   j++;
+      }
+    }
+
+  if (j > 2) notePad << nCrlf;
+
+  notePad << _T("  rcd.mark();  ") << col.tableName << _T("::add(rcd);") << nCrlf << nCrlf;
+
+  notePad << _T("  toDatabase();   return find(") << col.getCallArgs() << _T(");") << nCrlf;
+
+  notePad << _T("  }") << nCrlf << nCrlf << nCrlf;
+
+  notePad << col.recordName <<  _T("* ") << col.tblName << _T("::find(") << col.getArgs();
+  notePad << _T(") {") << nCrlf;
+  notePad << col.recordName << _T("* rcd;") << nCrlf << nCrlf;
+
+  testArgsEmpty();   notePad << nCrlf;
+
+  notePad << _T("  for (rcd = startLoop(); rcd; rcd = nextRecord())") << nCrlf;
+
+  notePad << _T("    if (");
+
+  for (i = 0, j = 0; i < col.fields.end(); i++) {
+    FldDsc fd = col.fields[i];
+
+    if (fd.selected) {
+      if (j) notePad << _T(" && ");
+
+      notePad <<  _T("rcd->") << fd.name << _T(" == ") << fd.object;   j++;
+      }
+    }
+  notePad << _T(") return rcd;") << nCrlf << nCrlf;
+
+
+  notePad << _T("  return 0;") << nCrlf;
+  notePad << _T("  }") << nCrlf << nCrlf;
+  }
+
+
+void TableExtension::testArgsEmpty() {
+int  n = col.fields.end();
+int  i;
+int  j;
+
+  for (i = 0, j = 0; i < n; i++) {
+    FldDsc& fd = col.fields[i];
+    if (fd.selected && fd.typ == _T("String")) {
+      if (col.noStringsSel > 1) {
+        if (!j) notePad << _T("  if (isEmpty(");
+        if (j)  notePad << _T(", ");
+
+        notePad << _T('&') << fd.object;
+        }
+      else notePad << _T("  if (") << fd.object << _T(".isEmpty()");
+
+      j++;
+      }
+    }
+
+  if (j) {
+    if (col.noStringsSel > 1) notePad << _T(", 0)");
+    notePad << _T(") return 0;") << nCrlf;
+    }
+  }
+
+
+void Collection::initialize(DescTable& descTbl) {
 FieldDesc* fldDesc;
-int        i;
-int        n;
 
   name       = descTbl.getName();
   tblName    = name + _T("Tbl");
@@ -67,128 +159,55 @@ int        n;
   recordName = name + _T("Record");
   rcdName    = objName(recordName);
 
-  for (fldDesc = descTbl.startLoop(), n = i = 0; fldDesc; fldDesc = descTbl.nextDesc(), i++) {
-    if (!i) continue;
+  for (fldDesc = descTbl.startLoop(); fldDesc; fldDesc = descTbl.nextDesc()) {
 
-    if (fldDesc->x == dbText || fldDesc->x == dbMemo) {
+    if (fldDesc->isIndex) continue;
 
-      names[names.end()].set(fldDesc->name);
+    FldDsc& fd = fields[fields.end()];
 
-      n++;    if (n >= 3) break;
-      }
+    fd.typ = getDbCppType(fldDesc->x);
+
+    fd.set(fldDesc->name);
     }
   }
-
-
-
-void MapCode::createTblExtHdr(Collection& c) {
-String s;
-
-  notePad << _T("// ") << c.name << _T(" Table Extension Template") << nCrlf << nCrlf << nCrlf;
-
-  notePad << _T("#pragma once") << nCrlf;
-
-  notePad << _T("#include \"") << c.name << _T("Map.h\"") << nCrlf << nCrlf << nCrlf;
-
-  notePad << _T("class ") << c.tblName << _T(" : public ") << c.tableName << _T(" {") << nCrlf << nCrlf;
-
-  notePad << _T("public:") << nCrlf << nCrlf;
-
-  notePad << _T("  ") << c.tblName << _T("() : ") << c.tableName << _T("() { }") << nCrlf << nCrlf;
-
-  notePad << _T("  ") << c.recordName << _T("* get(") << c.getAll(true) << _T(");") << nCrlf << nCrlf;
-
-  notePad << _T("  ") << c.recordName << _T("* find(const long key) {return ");
-  notePad << c.tableName << _T("::find(key);}") << nCrlf << nCrlf;
-
-  notePad << _T("private:") << nCrlf << nCrlf;
-
-  notePad << _T("  ") << c.recordName << _T("* find(") << c.getAll(true) << _T(");") << nCrlf;
-
-  notePad << _T("  };") << nCrlf;
-  }
-
-
-void MapCode::createTblExtCpp(Collection& c) {
-int    i;
-int    lng;
-String s;
-
-  notePad << _T("// ") << c.name << _T(" Table Extension Template") << nCrlf << nCrlf << nCrlf;
-
-  notePad << _T("#include \"stdafx.h\"") << nCrlf;
-  notePad << _T("#include \"") << c.tblName << _T(".h\"") << nCrlf;
-  notePad << _T("#include \"Utilities.h\"") << nCrlf << nCrlf << nCrlf;
-
-  notePad << c.recordName << _T("* ") << c.tblName << _T("::get(") << c.getAll(true) << _T(") {") << nCrlf;
-  notePad << c.recordName << _T("* r = find(") << c.getAll(false) << _T(");   if (r) return r;") << nCrlf;
-  notePad << c.recordName << _T("  rcd;") << nCrlf << nCrlf;
-
-  for (i = 0; i < c.names.end(); i++) {
-    Name& name = c.names[i];
-
-    if (i) notePad << _T("  ");
-
-    notePad << _T("  rcd.") << name.field << _T(" = ") << name.object << _T(";");
-    }
-
-  notePad << _T("    rcd.mark();  ") << c.tableName << _T("::add(rcd);") << nCrlf << nCrlf;
-
-  // toDatabase();   return find(addr1, addr2);
-
-  notePad << _T("  toDatabase();   return find(") << c.getAll(false) << _T(");") << nCrlf;
-
-  notePad << _T("  }") << nCrlf << nCrlf << nCrlf;
-
-  notePad << c.recordName <<  _T("* ") << c.tblName << _T("::find(") << c.getAll(true);
-  notePad << _T(") {") << nCrlf;
-  notePad << c.recordName << _T("* rcd;") << nCrlf << nCrlf;
-
-  notePad << _T("  if (isEmpty(");
-  for (i = 0; i < c.names.end(); i++) {
-    Name& name = c.names[i];
-    if (i) notePad << _T(" ");
-    notePad << _T("&") << name.object << _T(",");
-    }
-  notePad << _T(" 0)) return 0;") << nCrlf << nCrlf;
-
-  s = _T("  for (rcd = startLoop(); rcd; rcd = nextRecord())");   notePad << s;
-  lng = s.length();
-
-  s = _T("if (");
-  for (i = 0; i < c.names.end(); i++) {
-    Name name = c.names[i];
-
-    if (i) s += _T(" && ");
-
-    s += _T("rcd->") + name.field + _T(" == ") + name.object;
-    }
-  s += _T(") return rcd;");
-
-  lng += s.length();
-
-  if (lng < 104)                                notePad << _T(" ") << s << nCrlf;
-  else {notePad << nSetTab(105 - s.length());   notePad << nCrlf << nTab << s << nCrlf;}
-
-  notePad << _T("  return 0;") << nCrlf;
-  notePad << _T("  }") << nCrlf << nCrlf;
-  }
-
-
 
 // Get as Arguments when args is true, otherwise as call
 
-String& Collection::getAll(bool args) {
-int i;
+String& Collection::getArgs() {
+int    n = fields.end();
+int    i;
+int    j;
+String t;
 
   s.clear();
 
-  for (i = 0; i < names.end(); i++) {
-    if (i) s += _T(", ");
+  for (i = 0, j = 0; i < n; i++) {
+    FldDsc& fd = fields[i];
 
-    if (args) s += _T("String& ");
+    if (fd.selected) {
+      if (j) s += _T(", ");
 
-    s += names[i].object;
+      t = fd.typ == _T("String") ? _T("String&") : fd.typ;
+
+      s += t + _T(' ') + fd.object;   j++;
+      }
+    }
+
+  return s;
+  }
+
+
+String& Collection::getCallArgs() {
+int n = fields.end();
+int i;
+int j;
+
+  s.clear();
+
+  for (i = 0, j = 0; i < n; i++) {
+    FldDsc& fd = fields[i];
+
+    if (fd.selected) {if (j) s += _T(", ");   s += fd.object;   j++;}
     }
 
   return s;

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-<Product Id="*" UpgradeCode="3FD6BE24-5183-4279-951B-03D5134445F4" Language="1033"
-         Manufacturer="Bob - K6RWY" Name="DB Code Gen"
-         Version="!(bind.fileVersion.DBCodeGenerator.cmp)"
+<Product Id="*" UpgradeCode="1C9976B4-E672-4722-A90A-DE63BCF99E0A" Language="1033"
+         Manufacturer="Bob -- K6RWY" Name="CodeGen"
+         Version="!(bind.fileVersion.CodeGen.cmp)"
          >
 
   <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
-           Manufacturer="Bob - K6RWY" Description="Installs DB Code Gen"
-           Comments="Copyright (c) Bob - K6RWY"
+           Manufacturer="Bob -- K6RWY" Description="Installs CodeGen"
+           Comments="Copyright (c) Bob -- K6RWY"
            />
 
   <MajorUpgrade Schedule="afterInstallInitialize"
-                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="yes"
+                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
                 DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 
   <MediaTemplate EmbedCab="yes" />
@@ -30,22 +30,22 @@
   <WixVariable Id="WixUIDialogBmp" Value="C:\Program Files (x86)\WixApp\dialog.bmp"/>
   <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
 
-  <Icon     Id="UICodeGen.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\UICodeGen.ico"/>
-  <Icon     Id="CodeGen.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\CodeGen.ico"/>
-  <Property Id="ARPPRODUCTICON"  Value="UICodeGen.ico" />
+  <Icon     Id="UICodeGenIcon.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\UICodeGen.ico"/>
+  <Icon     Id="CodeGenIcon.ico" SourceFile="$(var.SolutionDir)..\SrcFiles\res\CodeGen.ico"/>
+  <Property Id="ARPPRODUCTICON"  Value="UICodeGenIcon.ico" />
 
   <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
     <ComponentGroupRef Id="CodeGen.ftr"/>
-    <ComponentGroupRef Id="UninstallDBCodeGenerator.ftr"/>
+    <ComponentGroupRef Id="UninstallCodeGen.ftr"/>
   </Feature>
 </Product>
 
 <Fragment>
 <ComponentGroup Id="CodeGen.ftr">
-  <ComponentRef Id="DBCodeGenerator.cmp"/>
+  <ComponentRef Id="CodeGen.cmp"/>
 </ComponentGroup>
-<ComponentGroup Id="UninstallDBCodeGenerator.ftr">
-  <ComponentRef Id="UninstallDBCodeGenerator.cmp"/>
+<ComponentGroup Id="UninstallCodeGen.ftr">
+  <ComponentRef Id="UninstallCodeGen.cmp"/>
 </ComponentGroup>
 </Fragment>
 
@@ -53,11 +53,11 @@
 <Fragment>
   <Directory Id="TARGETDIR" Name="SourceDir">
     <Directory Id="ProgramFilesFolder">
-      <Directory Id="DBCodeGen.pff" Name="DBCodeGen"/>
+      <Directory Id="DBCodeGen.pff" Name="DBCodeGen" />
     </Directory>
 
     <Directory Id="ProgramMenuFolder" Name="StartMenu">
-      <Directory Id="DBCodeGen.pmf" Name="DB Code Gen"/>
+      <Directory Id="DBCodeGen.pmf" Name="DBCodeGen" />
     </Directory>
 
     <Directory Id="DesktopFolder" Name="Desktop" />
@@ -70,26 +70,25 @@
 
 <Fragment>
 
-  <Component Id="DBCodeGenerator.cmp"  Guid="553908F2-937A-4A78-827F-EE5317034EBA"
-                                                                            Directory="DBCodeGen.pff">
-    <File Id="DBCodeGenerator.cmp" Source="$(var.SolutionDir)..\Release\CodeGen.exe" KeyPath="yes"/>
+  <Component Id="CodeGen.cmp"  Guid="98E53F2E-CDC9-40CF-B89B-E20927CB7BBF" Directory="DBCodeGen.pff">
+    <File Id="CodeGen.cmp" Source="$(var.SolutionDir)..\Release\CodeGen.exe" KeyPath="yes"/>
 
-    <Shortcut Id               = "DBCodeGenerator.shc"
-              Name             = "DB Code Generator"
+    <Shortcut Id               = "CodeGen.shc"
+              Name             = "CodeGen"
               Description      = "Will produce .h and .cpp files for each table in an Access Database"
               Advertise        = "yes"
               Directory        = "DBCodeGen.pmf"
               WorkingDirectory = "DBCodeGen.pff"
-              Icon             = "CodeGen.ico"
+              Icon             = "CodeGenIcon.ico"
               />
 
-    <Shortcut Id               = "DBCodeGenerator.dsk"
-              Name             = "DB Code Generator"
+    <Shortcut Id               = "CodeGen.dsk"
+              Name             = "CodeGen"
               Description      = "Will produce .h and .cpp files for each table in an Access Database"
               Advertise        = "yes"
               Directory        = "DesktopFolder"
               WorkingDirectory = "DBCodeGen.pff"
-              Icon             = "CodeGen.ico"
+              Icon             = "CodeGenIcon.ico"
               />
   </Component>
 
@@ -97,18 +96,18 @@
 
 <Fragment>
 
-  <Component Id="UninstallDBCodeGenerator.cmp" 
-                                Guid="99EC95BB-0BA0-4936-925D-483DC8317C4A" Directory="DBCodeGen.pmf">
+  <Component Id="UninstallCodeGen.cmp" 
+                                Guid="5F0F9FBD-C5DB-4DC0-84AD-AC537CC380E2" Directory="DBCodeGen.pmf">
 
-    <Shortcut Id               = "UninstallDBCodeGenerator.shc"
-              Name             = "Uninstall DB Code Generator"
-              Description      = "Uninstalls DB Code Generator"
+    <Shortcut Id               = "UninstallCodeGen.shc"
+              Name             = "Uninstall CodeGen"
+              Description      = "Uninstalls CodeGen"
               Target           = "[System64Folder]msiexec.exe"
               Arguments        = "/x [ProductCode]"
-              Icon             = "UICodeGen.ico"
+              Icon             = "UICodeGenIcon.ico"
               />
     <RemoveFolder Id="DBCodeGen.uni" Directory="DBCodeGen.pmf" On="uninstall"/>
-    <RegistryValue Root="HKCU" Key="Software\UninstallDBCodeGenerator.cmp" Name="installed"
+    <RegistryValue Root="HKCU" Key="Software\UninstallCodeGen.cmp" Name="installed"
                    Type="integer" Value="1" KeyPath="yes"/>
   </Component>
 

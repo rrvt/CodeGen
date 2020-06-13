@@ -81,6 +81,9 @@
     <ClCompile Include="..\..\Library\TableDescriptors\TableDscrs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\SrcFiles\SelectFldDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\SrcFiles\TableExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,6 +153,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Library\TableDescriptors\TableDscrs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SrcFiles\SelectFldDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SrcFiles\TableExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

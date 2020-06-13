@@ -107,13 +107,13 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "Open DataBase",                      ID_DoOpenDB
-        MENUITEM "Create Table Modules",               ID_TableOps
-        MENUITEM "Create Map Data Module",             ID_MapData
-        MENUITEM "Display RecordsFields",              ID_DisplayDB
+        MENUITEM "Open DataBase",               ID_DoOpenDB
+        MENUITEM "Create Table Modules",        ID_TableOps
+        MENUITEM "Create Map Data Module",      ID_MapData
+        MENUITEM "Display RecordsFields",       ID_DisplayDB
         MENUITEM "Create License File (Experimental)", ID_CreateLicense
         MENUITEM SEPARATOR
-        MENUITEM "E&xit",                               ID_APP_EXIT
+        MENUITEM "E&xit",                       ID_APP_EXIT
     END
     POPUP "&View"
     BEGIN
@@ -184,11 +184,23 @@ END
 IDD_Selection DIALOGEX 0, 0, 255, 327
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
-FONT 10, "Arial", 400, 0, 0x0
+FONT 12, "Arial", 400, 0, 0x0
 BEGIN
+    CONTROL         "",IDC_List,"SysListView32",
+                        LVS_LIST | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,241,292
     DEFPUSHBUTTON   "OK",IDOK,7,306,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,198,306,50,14
-    CONTROL         "",IDC_List,"SysListView32",LVS_LIST | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,241,292
+END
+
+IDD_SelectField DIALOGEX 0, 0, 255, 327
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 12, "Arial", 400, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_List,"SysListView32",
+                        LVS_LIST | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,241,292
+    DEFPUSHBUTTON   "OK",IDOK,7,306,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,198,306,50,14
 END
 
 
@@ -198,8 +210,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,5,5,0
- PRODUCTVERSION 1,5,5,0
+ FILEVERSION 1,5,6,0
+ PRODUCTVERSION 1,5,6,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -216,12 +228,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Bob -- K6RWY"
             VALUE "FileDescription", "Generate c++ Classes that allows access to MS Access Tables"
-            VALUE "FileVersion", "1.5.5"
+            VALUE "FileVersion", "1.5.6"
             VALUE "InternalName", "CodeGen"
             VALUE "LegalCopyright", "(c).  All rights reserved."
             VALUE "OriginalFilename", "CodeGen"
             VALUE "ProductName", "Access Code Generator"
-            VALUE "ProductVersion", "1.5.5"
+            VALUE "ProductVersion", "1.5.6"
         END
     END
     BLOCK "VarFileInfo"
@@ -263,7 +275,7 @@ BEGIN
         BOTTOMMARGIN, 320
     END
 
-    IDD_Dialog2, DIALOG
+    IDD_SelectField, DIALOG
     BEGIN
     END
 END
@@ -273,6 +285,7 @@ END
 /////////////////////////////////////////////////////////////////////////////
 //
 // AFX_DIALOG_LAYOUT
+//
 
 IDD_Selection AFX_DIALOG_LAYOUT
 BEGIN
@@ -393,7 +406,7 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-#include "res\CodeGen.rc2"   // non-Microsoft Visual C++ edited resources
+#include "res\CodeGen.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // Standard components
 #include "afxprint.rc"       // printing/print preview resources
 #endif

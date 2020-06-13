@@ -9,13 +9,10 @@
 #include "IniFile.h"
 #include "MainFrm.h"
 #include "MapData.h"
+#include "MessageBox.h"
 #include "Resources.h"
 #include "TestAppDoc.h"
 #include "TestAppView.h"
-
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
 
 
 TestApp theApp;                       // The one and only TestApp object
@@ -51,7 +48,7 @@ BOOL TestApp::InitInstance() {
 
   iniFile.setAppDataPath(m_pszHelpFilePath, *this);
 
-  notePad.open();
+  notePad.clear();
 
   SetRegistryKey(appID);
 
@@ -100,7 +97,7 @@ String path;
 
   if (!getPathDlg(_T("Test App"), _T("*.txt"), _T("txt"), _T("txt"), path)) return;
 
-  notePad.close();
+  notePad.clear();
 
   if (doc->OnOpenDocument(path)) messageBox(_T("Loaded!"));
   }
@@ -111,7 +108,7 @@ void TestApp::OnOpendatabase() {
 String title;
 String ext;
 
-  notePad.close();
+  notePad.clear();
 
   if (getPathDlg(_T("Database"), 0, _T("accdb"), _T("*.accdb"), databasePath))
                                             iniFile.writeString(FileSection, DBFileKey, databasePath);

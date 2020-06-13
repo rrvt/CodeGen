@@ -19,8 +19,10 @@
 // turns off MFC's hiding of some common and often safely ignored warning messages
 #define _AFX_ALL_WARNINGS
 
+#include <afx.h>
 #include <afxwin.h>         // MFC core and standard components
 #include <afxext.h>         // MFC extensions
+
 
 #include <afxdisp.h>        // MFC Automation classes
 
@@ -29,10 +31,10 @@
 #endif
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>                     // MFC support for Windows Common Controls
-#endif // _AFX_NO_AFXCMN_SUPPORT
+#endif
 
+#include <afxcontrolbars.h>                 // MFC support for ribbons and control bars
 #include <afxdialogex.h>
-#include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 #include <comutil.h>
 #include <string>
@@ -48,9 +50,7 @@ typedef basic_string<Tchar> tstring;
 
 #include "Strings.h"
 #include "Variant.h"
-#include <afxcontrolbars.h>
-#include <afxcontrolbars.h>
-#include <afxcontrolbars.h>
+#include "NewAllocator.h"
 
 
 

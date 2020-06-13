@@ -8,14 +8,42 @@
 
 static const int WriteMode = CFile::modeWrite | CFile::modeReadWrite;
 
+// First Characters of file determine encoding of file
+// UTF-8 EF BB BF
+// UTF-16 FE FF    Big Endian Unicode as best as I can determine at this time
+// UTF-16 FF FE    Little Endian Unicode as best as I can determine at this time
+// Other cases not used herein
+// None of the above means UTF-8 (i.e. Ansi encoding)
 
-FileIO::FileIO() : openParms(0), pos(0), pbuf(buf), ebuf(buf), rtnSeen(false),
-                                                                        tabSize(2), col(0) {buf[0] = 0;}
+static char EF = (char) 0xef;
+static char BB = (char) 0xbb;
+static char BF = (char) 0xbf;
+static char FF = (char) 0xff;
+static char FE = (char) 0xfe;
 
 
-bool FileIO::open(String& filePath, OpenParms parms) {
+FileIO::FileIO() : encoding(NilEncode), encdState(0), openParms(0), pos(0), pbuf(buf), ebuf(buf), 
+																						rtnSeen(false), tabSize(2), col(0), lastOP(0) {buf[0] = 0;}
+
+
+bool FileIO::open(String& filePath, int parms) {
 
   if (isOpen()) return true;
+
+  setMode(parms);
+
+//  if ((openParms & 3) == CFile::modeRead) pbuf = ebuf = buf;
+//  else                                   {pbuf = buf; ebuf = buf + noElements(buf);}
+
+  pbuf = ebuf = buf;  path = filePath;
+
+  if (cfile.Open(path, openParms, &err) != 0) return true;
+
+  return false;
+  }
+
+
+void FileIO::setMode(int parms) {
 
   openParms = 0;
 
@@ -26,11 +54,6 @@ bool FileIO::open(String& filePath, OpenParms parms) {
   openParms |= (openParms & 3) == CFile::modeWrite ? CFile::modeCreate : CFile::modeNoTruncate;
 
   openParms |= CFile::typeBinary | CFile::shareDenyNone;
-
-  if ((openParms & 3) == CFile::modeRead) pbuf = ebuf = buf;
-  else                                   {pbuf = buf; ebuf = buf + noElements(buf);}
-
-  path = filePath;   return cfile.Open(path, openParms, &err) != 0;
   }
 
 
@@ -38,9 +61,16 @@ bool FileIO::reOpen() {
 
   if (isOpen()) return true;   if (path.isEmpty()) return false;
 
-  if (cfile.Open(path, openParms, &err) != 0) {cfile.Seek(pos, 0);   return true;}
+  if (cfile.Open(path, openParms, &err) != 0) {cfile.Seek(pos, 0); pbuf = ebuf = buf; return true;}
 
   return false;
+  }
+
+
+void FileIO::seekEnd() {
+  if ((lastOP & Write) && (openParms & WriteMode)) flush();
+
+  pos = cfile.SeekToEnd(); pbuf = ebuf = buf;
   }
 
 
@@ -61,7 +91,6 @@ CFileStatus status;
 
   time = status.m_mtime; return true;
   }
-
 
 
 bool FileIO::write(TCchar* s) {
@@ -99,17 +128,31 @@ int i;
   }
 
 
-bool FileIO::write(Tchar ch) {
+bool FileIO::write(Tchar c) {
 
-  if (ch == _T('\n') && !rtnSeen) write(_T('\r'));
+  if (encoding == NilEncode) {
+    switch (encdState) {
+      case 0: if (c == 0xef)   {encdState = 1;      break;}
+              if (c == 0xfeff) {encoding = Utf16le; break;}
+              if (c == 0xfffe) {encoding = Utf16;   break;}
+                                encoding = Utf8;    break;
 
-  if (pbuf >= ebuf) flush();
+      case 1: if (c == 0xbb)    encdState = 2;      break;
+      case 2: if (c == 0xbf)    encoding = Utf8;    break;
+      }
+    }
 
-  *pbuf++ = (char) ch;   rtnSeen = false;
+  if (c == _T('\n') && !rtnSeen) write(_T('\r'));
 
-  if (ch == _T('\r')) rtnSeen = true;
+  sendChar((char) c);
 
-  col = ch == _T('\n') ? 0 : col+1;
+  if (encoding == Utf16le) sendChar((char) (c >> 8));
+
+  rtnSeen = false;
+
+  if (c == _T('\r')) rtnSeen = true;
+
+  col = c == _T('\n') ? 0 : col+1;
 
   return err.m_cause == CFileException::none;
   }
@@ -121,9 +164,9 @@ char* p = (char*) blk;
 
   for (i = 0; i < nBytes; i++) {
 
-    if (pbuf >= ebuf) flush();
+//    if (pbuf >= ebuf) flush();   *pbuf++ =
 
-    *pbuf++ = *p++;
+    sendChar(*p++);
     }
 
   return err.m_cause == CFileException::none;
@@ -133,12 +176,17 @@ char* p = (char*) blk;
 // Writes one byte without interpretation of /n or /r
 
 bool FileIO::write(Byte v) {
-  if (pbuf >= ebuf) flush();
 
-  *pbuf++ = v;
+//  if (pbuf >= ebuf) flush();   *pbuf++ =
+
+  sendChar(v);
 
   return err.m_cause == CFileException::none;
   }
+
+
+
+void FileIO::sendChar(char ch) {if (pbuf >= ebuf) flush();   *pbuf++ = ch;  lastOP = Write;}
 
 
 void FileIO::flush() {
@@ -146,7 +194,7 @@ uint noBytes = (uint) (pbuf - buf);
 
   if (noBytes) try {cfile.Write(buf, noBytes);} catch (CFileException* e) {saveExcp(e); return;}
 
-  pbuf = buf;
+  pbuf = buf;   ebuf = buf + noElements(buf);
   }
 
 
@@ -180,10 +228,13 @@ Tchar ch;
 
 
 bool FileIO::read(Tchar& c) {
+char ch;
 
-  if (pbuf >= ebuf && !fillBuf()) return false;
+  if (!getChar(ch)) return false;
 
-  c = *pbuf++;   c &= 0xff;
+  c = ch;  c &= 0xff;
+
+  if (encoding == Utf16le && getChar(ch)) c |= ch << 8;
 
   return c == _T('\r') ? read(c) : true;
   }
@@ -194,11 +245,12 @@ bool FileIO::read(Tchar& c) {
 bool FileIO::read(void* blk, int n) {
 int   i;
 char* p = (char*) blk;
+char  ch;
 
   for (i = 0; i < n; i++) {
-    if (pbuf >= ebuf && !fillBuf()) return false;
+    if (!getChar(ch)) return false;
 
-    *p++ = *pbuf++;
+    *p++ = ch;
     }
 
   return true;
@@ -208,9 +260,20 @@ char* p = (char*) blk;
 // Reads one byte without interpretation of /n or /r
 
 bool FileIO::read(Byte& v) {
+char ch;
+
+  if (!getChar(ch)) return false;
+
+  v = (Byte) ch;  return true;
+  }
+
+
+
+bool FileIO::getChar(char& ch) {
+
   if (pbuf >= ebuf && !fillBuf()) return false;
 
-  v = (Byte) *pbuf++;  return true;
+  ch = *pbuf++;   lastOP = Read;   return true;
   }
 
 
@@ -224,7 +287,17 @@ uint noBytes;
 
   if (noBytes == 0) return false;
 
-  ebuf = (pbuf = buf) + noBytes;   return true;
+  ebuf = (pbuf = buf) + noBytes;
+
+  if (encoding == NilEncode) {
+
+    if (     buf[0] == EF && buf[1] == BB && buf[2] == BF)  encoding = Utf8;
+    else if (buf[0] == FF && buf[1] == FE)                  encoding = Utf16le;
+    else if (buf[0] == FE && buf[1] == FF)                  encoding = Utf16;
+    else                                                    encoding = Utf8;
+    }
+
+  return true;
   }
 
 
