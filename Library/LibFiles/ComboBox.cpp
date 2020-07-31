@@ -50,6 +50,15 @@ CString t;
   }
 
 
+String* ComboBox::getDatum(int i, String& s) {
+CString t;
+
+  if (0 <= i && i < nData()) {GetLBText(i, t);   s = t;   return &s;}
+
+  return 0;
+  }
+
+
 void ComboBox::del(String& s)
                       {int i;   if (!s.empty()) {i = find(s);   if (i >= 0) DeleteString(i);}   return;}
 
