@@ -5,7 +5,7 @@
 #include "Archive.h"
 #include "Date.h"
 #include "Display.h"
-#include "Expandable.h"
+#include "ExpandableP.h"
 #include "IterT.h"
 #include "Wrap.h"
 
@@ -39,9 +39,14 @@ public:
   int     display();
 
   Data&   operator= (Data& d) {s = d.s; return *this;}    // Copy operator: a = b;
+
+  bool    operator== (Data& data) {return s == data.s;}
+  bool    operator>  (Data& data) {return s >  data.s;}
+  bool    operator<= (Data& data) {return s <= data.s;}
   };
 
 
+ #if 0
 // This facilitates the expansion of the Expandable array in the DataStore.  Essentially The pointers are
 // moved from the old version of the array to a new version that is larger.
 // Since we are moving the pointers we cannot delete the allocated Data entity from this class.
@@ -56,7 +61,7 @@ Data* p;
 
   DataP& operator= (DataP& dataP) {p = dataP.p; return *this;}
 
-  void add(String& s);
+//  void add(String& s);
 
   // Requires the following operations for node N* p, N* q, N* s
   //  *p == *q
@@ -68,11 +73,13 @@ Data* p;
   bool operator>  (DataP& dataP) {return p->get() >  dataP.p->get();}
   bool operator<= (DataP& dataP) {return p->get() <= dataP.p->get();}
   };
+#endif
 
 
 
 // Define the iterator used to look at the data in the datastore.  It is here so that it can be friended
 
+typedef RcdPtrT<Data> DataP;
 class DataStore;
 typedef IterT<DataStore, Data> DSIter;                        // Iterator for the DataStore
 
@@ -88,7 +95,7 @@ typedef IterT<DataStore, Data> DSIter;                        // Iterator for th
 
 class DataStore {
 
-Expandable<DataP, 4> data;
+ExpandableP<Data, DataP,  4> data;
 
 public:
 

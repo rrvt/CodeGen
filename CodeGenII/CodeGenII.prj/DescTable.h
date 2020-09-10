@@ -40,9 +40,9 @@ public:
   DescTable(TCchar* tableName) {load(maps, tableName);}
  ~DescTable() {}
 
-  void       clear() {desc.clr();}
+  void       clear() {desc.clear();}
   int        load(Maps& maps, TCchar* tableName);
-  FieldDesc* Add() {return &desc[desc.end()];}
+  FieldDesc* Add() {return &desc.nextData();}
 
   String&    getName() {return name;}
   FieldDesc* getKeyDesc();

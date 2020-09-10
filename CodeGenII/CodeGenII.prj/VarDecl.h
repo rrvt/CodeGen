@@ -41,7 +41,7 @@ public:
 
   VarDeclarations() : nDecl(0) {max = 0;}
 
-  void clear() {nDecl = max = 0; decl.clr();}
+  void clear() {nDecl = max = 0; decl.clear();}
 
   void add(TCchar* typ, TCchar* name, TCchar* asgn = 0) {decl[nDecl++].init(typ, name, asgn);}
   int  getMaxTypeLng() {return max;}

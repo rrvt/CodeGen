@@ -166,13 +166,13 @@ void Collection::initialize(DescTable& descTbl) {
 DTIter     iter(descTbl);
 FieldDesc* fldDesc;
 
-  fields.clr();
+  fields.clear();
 
   for (fldDesc = iter(); fldDesc; fldDesc = iter++) {
 
     if (fldDesc->isIndex) continue;
 
-    FldDsc& fd = fields[fields.end()];
+    FldDsc& fd = fields.nextData();
 
     fd.typ = getDbCppType(fldDesc->x);
 

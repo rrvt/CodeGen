@@ -51,11 +51,11 @@ void DataStore::store(Archive& ar) {
   }
 
 
-void DataStore::add(String& s) {data[data.end()].add(s);}
+void DataStore::add(String& s) {data.nextData().add(s);}
 
 
 
-void DataP::add(String& s) {p = new Data;   p->add(s);}
+//void DataP::add(String& s) {p = new Data;   p->add(s);}
 
 
 // Parse the data into the record

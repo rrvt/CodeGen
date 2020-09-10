@@ -8,9 +8,23 @@
 
 BOOL CDoc::OnOpenDocument(LPCTSTR lpszPathName) {
 
+  if (!lpszPathName) return false;
+
   path = lpszPathName;
 
   Archive ar(path, FileIO::Read);   if (!ar.isOpen()) return false;
+
+  serialize(ar); return true;
+  }
+
+
+bool CDoc::OnOpenIncDocument(LPCTSTR lpszPathName) {
+
+  if (!lpszPathName) return false;
+
+  path = lpszPathName;
+
+  Archive ar(path, FileIO::Read | FileIO::Write);   if (!ar.isOpen()) return false;
 
   serialize(ar); return true;
   }

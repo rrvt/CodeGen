@@ -101,7 +101,7 @@
 <Fragment>
 
   <Component Id="UninstallCodeGen.cmp" 
-                                Guid="6BEEA937-E380-4ACB-B02D-B6042054BABD" Directory="DBCodeGen.pmf">
+                                Guid="128AB65F-3A12-4FF5-B7E4-2D6CBF80C05F" Directory="DBCodeGen.pmf">
 
     <Shortcut Id               = "UninstallCodeGen.shc"
               Name             = "Uninstall CodeGen"
