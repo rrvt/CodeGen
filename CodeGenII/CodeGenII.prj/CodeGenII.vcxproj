@@ -125,11 +125,11 @@
     <ClInclude Include="MapsCode.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="OptionsDlg.h" />
-    <ClInclude Include="Report.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectFldDlg.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="..\..\Library\TableDescriptors\TableDscrs.h" />
+    <ClInclude Include="TableDscRpt.h" />
     <ClInclude Include="TableExtension.h" />
     <ClInclude Include="TableNames.h" />
     <ClInclude Include="TableOpDlg.h" />
@@ -153,10 +153,10 @@
     <ClCompile Include="MapsCode.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="OptionsDlg.cpp" />
-    <ClCompile Include="Report.cpp" />
     <ClCompile Include="SelectFldDlg.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="..\..\Library\TableDescriptors\TableDscrs.cpp" />
+    <ClCompile Include="TableDscRpt.cpp" />
     <ClCompile Include="TableExtension.cpp" />
     <ClCompile Include="TableNames.cpp" />
     <ClCompile Include="TableOpDlg.cpp" />

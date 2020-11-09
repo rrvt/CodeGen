@@ -6,6 +6,7 @@
 
 class CodeGenIIDoc;
 class CodeGenIIView;
+class MainFrame;
 
 
 // CodeGenII:
@@ -15,18 +16,15 @@ class CodeGenII : public CApp {
 
 public:
 
-String dbPath;
-String mapPath;
-
                  CodeGenII() noexcept { }
   virtual BOOL   InitInstance();
 
-          void   doOpenDB();
-          void   openOneDB(TCchar* title, TCchar* ext, String& path);
 
   CodeGenIIDoc*  doc()  {return (CodeGenIIDoc*)  CApp::getDoc();}
   CodeGenIIView* view() {return (CodeGenIIView*) CApp::getView();}
+  MainFrame*     mainFrm() {return (MainFrame*) m_pMainWnd;}
 
+  afx_msg void   OnFilePrintSetup();
   afx_msg void   OnAppAbout();
   afx_msg void   OnHelp();
 

@@ -6,14 +6,19 @@
 #include "CDoc.h"
 
 
+enum DataSource {NoteSource, DataBaseSource};
+
+
 class CodeGenIIDoc : public CDoc {
 
-String saveAsTitle;                                            // Save As Parameters, examples:
-String defFileName;                                            // _T("mumble.txt")
-String defExt;                                                 // _T("txt")
-String defFilePat;                                             // _T("*.txt")
+PathDesc    pathDsc;
 
-String filePath;
+DataSource  dataSource;
+
+String      filePath;
+
+String      dbPath;
+String      mapPath;
 
 protected: // create from serialization only
 
@@ -24,12 +29,11 @@ public:
 
   virtual ~CodeGenIIDoc();
 
-  virtual BOOL OnNewDocument();
+    DataSource dataSrc() {return dataSource;}
+    void       display(DataSource ds);
 
           void listTables(AceDao& db);
 
-          void createTableCode();
-          void onTableExtension();
           void createLicense();
 
           void createCode(String& tableName, String& abbr);
@@ -44,6 +48,7 @@ public:
 
 private:
 
+  bool openOneDB(TCchar* title, TCchar* pattern);
   void testTestMap();
   void dspRecords(String& name);
 
@@ -53,10 +58,10 @@ protected:
   DECLARE_MESSAGE_MAP()
 
 public:
-  afx_msg void OnDisplayDB();
+  afx_msg void OnOpenDB();
+  afx_msg void OnCreateTableCode();
+  afx_msg void OnTableExtension();
   afx_msg void OnMapData();
-  afx_msg void OnTest();
-  afx_msg void OnFileOpen();
-  afx_msg void OnFileSave();
+  afx_msg void OnDisplayDB();
   afx_msg void OnOptions();
   };

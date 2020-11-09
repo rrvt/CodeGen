@@ -9,13 +9,9 @@
 #include "GetPathDlg.h"
 #include "IniFile.h"
 #include "MainFrame.h"
-#include "MapData.h"
 #include "NotePad.h"
 #include "Options.h"
 #include "Resources.h"
-
-
-static TCchar* dbExtensions = _T("*.accdb;*.mdb");
 
 
 CodeGenII theApp;                       // The one and only CodeGenII object
@@ -25,10 +21,9 @@ IniFile   iniFile;
 // CodeGenII
 
 BEGIN_MESSAGE_MAP(CodeGenII, CWinAppEx)
-  ON_COMMAND(ID_DoOpenDB,         &CodeGenII::doOpenDB)
   ON_COMMAND(ID_APP_ABOUT,        &CodeGenII::OnAppAbout)
   ON_COMMAND(ID_FILE_NEW,         &CWinAppEx::OnFileNew)
-  ON_COMMAND(ID_FILE_PRINT_SETUP, &CWinAppEx::OnFilePrintSetup)
+  ON_COMMAND(ID_FILE_PRINT_SETUP, &CodeGenII::OnFilePrintSetup)
   ON_COMMAND(ID_Help,             &CodeGenII::OnHelp)
 END_MESSAGE_MAP()
 
@@ -73,37 +68,16 @@ BOOL CodeGenII::InitInstance() {
 
   setAppName(_T("Code Gen II")); setTitle(_T("Create C++ Code to Read/Write to Access Database"));
 
-  view()->setFont(_T("Arial"), 120);
+  view()->setFont(_T("Courier New"), 120);
 
-  options.load();
+  options.load();    view()->setOrientation(options.orient);
 
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
   }
 
 
 
-void CodeGenII::doOpenDB() {
-String title;
-String ext;
-
-  notePad.clear();
-
-  openOneDB(DBFileKey, dbExtensions, dbPath);
-
-  maps.initializeMaps(DBFileKey, dbPath);
-
-  invalidate();
-  }
-
-
-
-void CodeGenII::openOneDB(TCchar* title, TCchar* ext,  String& path) {
-
-  iniFile.readString(FileSection, DBFileKey, path);
-
-  if (getPathDlg(title, path, _T(".accdb"), ext, path)) iniFile.writeString(FileSection, DBFileKey, path);
-  }
-
+void CodeGenII::OnFilePrintSetup() {view()->setPrntrOrient(getDevMode()); CWinApp::OnFilePrintSetup();}
 
 
 void CodeGenII::OnHelp() {

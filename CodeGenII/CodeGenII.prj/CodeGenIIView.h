@@ -3,25 +3,38 @@
 
 #pragma once
 #include "CScrView.h"
+#include "NoteRpt.h"
+#include "TableDscRpt.h"
 
 
 class CodeGenIIDoc;
 
 
+
 class CodeGenIIView : public CScrView {
+
+NoteRptB    dspNote;
+NoteRptB    prtNote;
+TableDscRpt dspDsc;
+TableDscRpt prtDsc;
 
 protected: // create from serialization only
 
-  CodeGenIIView() noexcept { }
+  CodeGenIIView() noexcept;
   DECLARE_DYNCREATE(CodeGenIIView)
 
 public:
 
   virtual ~CodeGenIIView() { }
 
+  virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
   virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
-  virtual void onPrepareOutput();
+  virtual void onPrepareOutput(bool isNotePad, bool printing);
+
+  virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
   virtual void printFooter(Display& dev, int pageNo);
+  virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
   CodeGenIIDoc* GetDocument() const;
 
@@ -37,6 +50,8 @@ protected:
 //  DECLARE_MESSAGE_MAP()
 public:
   DECLARE_MESSAGE_MAP()
+
+  afx_msg void OnSetFocus(CWnd* pOldWnd);
   };
 
 

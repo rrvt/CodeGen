@@ -12,6 +12,7 @@
 #include "IniFile.h"
 #include "MessageBox.h"
 #include "MapCode.h"
+#include "MapData.h"
 #include "MapDataDlg.h"
 #include "MapsCode.h"
 #include "NotePad.h"
@@ -28,90 +29,62 @@ enum {col2 = 10, col3 = 35, col4 = 58, col5 = 81};
 TCchar* HeaderPat = _T("*.h");
 TCchar* CppPat    = _T("*.cpp");
 
+static TCchar* dbPattern = _T("*.accdb;*.mdb");
+
 
 // CodeGenIIDoc
 
 IMPLEMENT_DYNCREATE(CodeGenIIDoc, CDoc)
 
 BEGIN_MESSAGE_MAP(CodeGenIIDoc, CDoc)
-  ON_COMMAND(ID_TableOps,       &CodeGenIIDoc::createTableCode)
-  ON_COMMAND(ID_TableExtension, &CodeGenIIDoc::onTableExtension)
-  ON_COMMAND(ID_MapData,        &CodeGenIIDoc::OnMapData)
-  ON_COMMAND(ID_DisplayDB,      &CodeGenIIDoc::OnDisplayDB)
-  ON_COMMAND(ID_FILE_OPEN,      &CodeGenIIDoc::OnFileOpen)
-  ON_COMMAND(ID_FILE_SAVE,      &CodeGenIIDoc::OnFileSave)
-  ON_COMMAND(ID_Test,           &CodeGenIIDoc::OnTest)
-  ON_COMMAND(ID_Options,        &CodeGenIIDoc::OnOptions)
+  ON_COMMAND(ID_DoOpenDB,       &OnOpenDB)
+  ON_COMMAND(ID_TableOps,       &OnCreateTableCode)
+  ON_COMMAND(ID_TableExtension, &OnTableExtension)
+  ON_COMMAND(ID_MapData,        &OnMapData)
+  ON_COMMAND(ID_DisplayDB,      &OnDisplayDB)
+  ON_COMMAND(ID_Options,        &OnOptions)
 END_MESSAGE_MAP()
 
 
 // CodeGenIIDoc construction/destruction
 
-CodeGenIIDoc::CodeGenIIDoc() noexcept {
-  saveAsTitle = _T("Code Gen II");   defExt = _T("txt");   defFilePat = _T("*.txt");
-  }
+CodeGenIIDoc::CodeGenIIDoc() noexcept : dataSource(NoteSource)
+                                        {pathDsc = {_T("Code Gen II"), _T(""), _T("accdb"), dbPattern};}
+
 
 CodeGenIIDoc::~CodeGenIIDoc() { }
 
 
-BOOL CodeGenIIDoc::OnNewDocument() {return CDocument::OnNewDocument();}
+void CodeGenIIDoc::OnOpenDB() {
+String title;
+String ext;
 
+  notePad.clear(); dataSource = DataBaseSource;
 
+  if (!openOneDB(DBFileKey, dbPattern)) return;
 
-
-void CodeGenIIDoc::OnDisplayDB() {
-MapDataDlg dlg;
-int        i;
-TDIter    iter(tableDscrs);
-TableDsc* dsc;
-
-  notePad.clear();
-
-  dlg.title = _T("Display Record Fields");
-
-  if (dlg.DoModal() == IDOK)
-    for (dsc = iter(), i = 0; dsc; dsc = iter++, i++) {
-      if (i) notePad << nCrlf;
-      if (dsc->selected) dspRecords(dsc->accName);
-      }
+  dataSource = NoteSource; invalidate();
   }
 
 
-void CodeGenIIDoc::dspRecords(String& name) {
-DescTable  descTbl;
-DTIter     iter(descTbl);
-FieldDesc* dsc;
-int        maxLng = 0;
+bool CodeGenIIDoc::openOneDB(TCchar* title, TCchar* pattern) {
 
-  descTbl.load(maps, name);
+  iniFile.readString(FileSection, DBFileKey, path);   pathDsc.name = path;   pathDsc.pattern  = pattern;
 
-  for (dsc = iter(); dsc; dsc = iter++) if (dsc->lng > maxLng) maxLng = dsc->lng;
+  if (!setPath(pathDsc) || !maps.openDB(path)) return false;
 
-  notePad << name << _T(" Table") << nCrlf;
+  iniFile.writeString(FileSection, DBFileKey, path);
 
-  notePad << nSetRTab(3) << nSetTab(5) << nSetTab(8+maxLng) << nSetRTab(maxLng+26);
-
-  notePad << nTab << _T("No") << nTab << _T("Name")  << nTab << _T("Type");
-  notePad << nTab << _T("Is Index") << nCrlf;
-
-  for (dsc = iter(); dsc; dsc = iter++) {
-
-    notePad << nTab << dsc->fieldIndex;
-    notePad << nTab << dsc->name;
-    notePad << nTab << getDbCppType(dsc->x);
-    notePad << nTab << dsc->isIndex;
-    notePad << nCrlf;
-    }
-
-  invalidate();
+  OnOpenArb(&maps);   notePad << title << _T(":") << nTab << path << nCrlf;   return true;
   }
 
 
-
-void CodeGenIIDoc::createTableCode() {
+void CodeGenIIDoc::OnCreateTableCode() {
 TableOpDlg dlg;
 String     tblName;
 String     abbr;
+
+  dataSource = NoteSource;
 
   if (dlg.DoModal() == IDOK) {
 
@@ -136,8 +109,7 @@ MapCode mapCode(tblName, abbr);
 
 
 
-
-void CodeGenIIDoc::onTableExtension() {
+void CodeGenIIDoc::OnTableExtension() {
 MapDataDlg dlg;
 TDIter     iter(tableDscrs);
 TableDsc*  dsc;
@@ -175,8 +147,6 @@ MapsCode   mapsCode;
   }
 
 
-
-
 void CodeGenIIDoc::saveFile(TCchar* title, TCchar* iniFileName, TCchar* defExt, TCchar* filter) {
 String path;
 
@@ -193,72 +163,77 @@ String path;
   }
 
 
-// CodeGenIIDoc commands
-
-
-void CodeGenIIDoc::OnTest() {
-
-  theApp.setTitle(_T("My Test"));
-
-  notePad.clear();  notePad << _T("Hello World") << nCrlf;
-
-  invalidate();
-  }
-
-
-void CodeGenIIDoc::OnOptions() {
-OptionsDlg dlg;
-
-  dlg.topMargin   = options.topMargin;
-  dlg.leftMargin  = options.leftMargin;
-  dlg.rightMargin = options.rightMargin;
-  dlg.botMargin   = options.botMargin;
-
-  if (dlg.DoModal() == IDOK) {
-    options.topMargin    = dlg.topMargin;
-    options.leftMargin   = dlg.leftMargin;
-    options.rightMargin  = dlg.rightMargin;
-    options.botMargin    = dlg.botMargin;
-
-    options.store();
-    }
-  }
-
-
-
-void CodeGenIIDoc::OnFileOpen() {
-String path;
-
-  saveAsTitle = _T("Code Gen II");   defExt = _T("txt");   defFilePat = _T("*.txt");
-
-  if (!getPathDlg(saveAsTitle, defFileName, defExt, defFilePat, path)) return;
-
-  defFileName = getMainName(path);   view()->rightFooter= defFileName;  view()->date.getToday();
+void CodeGenIIDoc::OnDisplayDB() {
+MapDataDlg dlg;
 
   notePad.clear();
 
-  if (!OnOpenDocument(path)) messageBox(_T(" Not Loaded!"));
+  dlg.title = _T("Display Record Fields");
 
-  dataStore.setName(defFileName);  invalidate();
+  if (dlg.DoModal() == IDOK) display(DataBaseSource);
+  }
+
+#if 0
+void CodeGenIIDoc::dspTables() {
+int       i;
+TDIter    iter(tableDscrs);
+TableDsc* dsc;
+
+  notePad.clear();
+
+  for (dsc = iter(), i = 0; dsc; dsc = iter++)
+                              if (dsc->selected) {if (i++) notePad << nCrlf;   dspRecords(dsc->accName);}
   }
 
 
-void CodeGenIIDoc::OnFileSave() {
-String path;
+void CodeGenIIDoc::dspRecords(String& name) {
+DescTable  descTbl;
+DTIter     iter(descTbl);
+FieldDesc* dsc;
+int        maxLng = 0;
 
-  if (!getSaveAsPathDlg(saveAsTitle, defFileName, defExt, defFilePat, path)) return;
+  descTbl.load(maps, name);
 
-  OnSaveDocument(path);
+  for (dsc = iter(); dsc; dsc = iter++) if (dsc->lng > maxLng) maxLng = dsc->lng;
+
+  notePad << name << _T(" Table") << nCrlf;
+
+  notePad << nSetRTab(3) << nSetTab(5) << nSetTab(8+maxLng) << nSetRTab(maxLng+26);
+
+  notePad << nTab << _T("No") << nTab << _T("Name")  << nTab << _T("Type");
+  notePad << nTab << _T("Is Index") << nCrlf;
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+
+    notePad << nTab << dsc->fieldIndex;
+    notePad << nTab << dsc->name;
+    notePad << nTab << getDbCppType(dsc->x);
+    notePad << nTab << dsc->isIndex;
+    notePad << nCrlf;
+    }
   }
+#endif
+
+
+void CodeGenIIDoc::OnOptions() {options();  view()->setOrientation(options.orient);}
+
+
+void CodeGenIIDoc::display(DataSource ds) {dataSource = ds; invalidate();}
 
 
 // CodeGenIIDoc serialization
 
 void CodeGenIIDoc::serialize(Archive& ar) {
 
-  if (ar.isStoring()) {notePad.archive(ar); return;}
+  if (ar.isStoring()) switch(dataSource) {
+                        case NoteSource : notePad.archive(ar); return;
+                        default         : return;
+                        }
 
-  dataStore.load(ar);
+  switch(dataSource) {
+    case NoteSource     : return;
+    case DataBaseSource : {Maps* m = (Maps*) ar.getObj();  if (m) m->loadMaps(); return;}
+    }
   }
 
 

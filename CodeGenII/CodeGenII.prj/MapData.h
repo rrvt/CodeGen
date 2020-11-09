@@ -25,7 +25,7 @@ String databasePath;
   MapData() {}
  ~MapData() {closeDB();}
 
-  bool    openDB(String& path);
+  bool    openDB(TCchar* path);
 
   void    initializeMaps(Maps* mps);
 

@@ -47,7 +47,7 @@ int       lng;
   notePad << _T("  MapData() {}") << nCrlf;
   notePad << _T(" ~MapData() {closeDB();}") << nCrlf << nCrlf;
 
-  notePad << _T("  bool    openDB(String& path);") << nCrlf << nCrlf;
+  notePad << _T("  bool    openDB(TCchar* path);") << nCrlf << nCrlf;
   notePad << _T("  void    initializeMaps(Maps* mps);") << nCrlf << nCrlf;
   notePad << _T("  bool    openRcdSet( TCchar* name, DaoOptions option, AceRecordSet& rcdSet);") << nCrlf;
   notePad << _T("  bool    openFldDscs(TCchar* name, AceFieldNames& fldDscs);") << nCrlf;
@@ -146,7 +146,7 @@ bool            selected;
 
   notePad << _T("  }") << nCrlf << nCrlf << nCrlf;
 
-  notePad << _T("bool MapData::openDB(String& path) {return dao.open(path);}") << nCrlf << nCrlf << nCrlf;
+  notePad << _T("bool MapData::openDB(TCchar* path) {return dao.open(path);}") << nCrlf << nCrlf << nCrlf;
 
   notePad << _T("void MapData::closeDB() {dao.close();}") << nCrlf << nCrlf << nCrlf;
 

@@ -5,6 +5,10 @@
 #include "Resource.h"
 
 
+extern TCchar* PortraitKey;
+extern TCchar* LandscapeKey;
+
+
 // OptionsDlg dialog
 
 class OptionsDlg : public CDialogEx {
@@ -12,6 +16,9 @@ class OptionsDlg : public CDialogEx {
   DECLARE_DYNAMIC(OptionsDlg)
 
 public:
+CComboBox orientCtrl;
+CString   orient;
+
 CString topMargin;
 CString leftMargin;
 CString rightMargin;
@@ -44,4 +51,6 @@ public:
   afx_msg void OnChangeLeft();
   afx_msg void OnChangeRight();
   afx_msg void OnChangeBot();
+  virtual BOOL CreateEx(DWORD dwExStyle, LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, LPVOID lpParam = NULL);
+  virtual BOOL OnInitDialog();
   };

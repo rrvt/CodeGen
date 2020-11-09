@@ -15,6 +15,21 @@ container.
 This container uses the RcdPtrT template which is contained in the ExpandableP.h file.  The record pointer
 class allows pointers to be housed in the array and manipulated rather than the whole record being in
 the array.  Ultimately this is for efficiency reasons.
+
+Using the CSVRcdsT template is as follows:
+
+  class Datum {               // This is the record that holds one line of CSV data
+    ...
+    };
+
+  typedef RcdPtrT< Datum> CSVRcdP;
+  typedef CSVRcdsT<Datum, CSVRcdP> CSVRcdsB;
+  typedef CSVIterT<Datum, CSVRcdP> CSVIter;
+
+
+  class CSVRcds : public CSVRcdsB {
+    ...       // Additional functionality
+    };
 */
 
 
@@ -45,7 +60,7 @@ public:
 
   void display();                       // display as comman separated fields
 
-private:
+protected:
 
   virtual CSVRcd* add() {return &data.nextData();}
 

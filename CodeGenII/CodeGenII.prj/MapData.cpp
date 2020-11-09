@@ -27,7 +27,7 @@ TableDesc* dsc;
   }
 
 
-bool MapData::openDB(String& path) {return dao.open(path);}
+bool MapData::openDB(TCchar* path) {return dao.open(path);}
 
 
 void MapData::closeDB() {dao.close();}

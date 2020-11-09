@@ -25,6 +25,7 @@
 #define IDC_Name                        214
 #define IDC_EDIT2                       215
 #define IDC_AccTblName                  216
+#define IDC_Orientation                 217
 
 #define ID_Help                         400
 #define ID_Test                         401
@@ -42,7 +43,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        106
 #define _APS_NEXT_COMMAND_VALUE         409
-#define _APS_NEXT_CONTROL_VALUE         217
+#define _APS_NEXT_CONTROL_VALUE         218
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif
