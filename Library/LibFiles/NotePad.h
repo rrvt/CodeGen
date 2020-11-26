@@ -101,6 +101,7 @@ private:
   friend NoteManip1& nFSize(     int val);
 
   friend class NotePadLoop;
+  friend class NtPdIter;
   };
 
 
@@ -145,15 +146,35 @@ public:
   // initialize for scan of list and return first node on the list or zero if at end of list.
 
   virtual Note* start()       {return (Note*) ListLoop::startLoop();}
-  virtual Note* operator() () {return (Note*) ListLoop::startLoop();}
+//  virtual Note* operator() () {return (Note*) ListLoop::startLoop();}
 
   // move to next node on list and return pointer to that node or zero if at end of list
 
   virtual Note* nextNode()       {return (Note*) ListLoop::nextNode();};
-  virtual Note* operator++ (int) {return (Note*) ListLoop::nextNode();};
+//  virtual Note* operator++ (int) {return (Note*) ListLoop::nextNode();};
 
 private:
 
   NotePadLoop() : ListLoop(*(List*)0) { }
+  };
+
+
+class NtPdIter : public ListLoop {
+public:
+
+  NtPdIter(NotePad& np) : ListLoop(np.noteList) {}
+ ~NtPdIter() {}
+
+  // initialize for scan of list and return first node on the list or zero if at end of list.
+
+  virtual Note* operator() () {return (Note*) ListLoop::startLoop();}
+
+  // move to next node on list and return pointer to that node or zero if at end of list
+
+  virtual Note* operator++ (int) {return (Note*) ListLoop::nextNode();};
+
+private:
+
+  NtPdIter() : ListLoop(*(List*)0) { }
   };
 

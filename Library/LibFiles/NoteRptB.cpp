@@ -1,16 +1,16 @@
-// NotePad Report -- Logic to output the NotePad content to the display and/or printer
+// NotePad Report Base -- Logic to output the NotePad content to the display and/or printer
 
 
 #include "stdafx.h"
-#include "NoteRpt.h"
+#include "NoteRptB.h"
 #include "CScrView.h"
 #include "NotePad.h"
 
 
 void NoteRptB::create() {
-NotePadLoop  iter(notePad);
-Note*        note;
-int          i;
+NtPdIter iter(notePad);
+Note*    note;
+int      i;
 
   np.clear();   noLines = BigNmbr;                      // Skip first header
 
@@ -20,26 +20,28 @@ int          i;
 
       if (i) np << nEndPage;
 
-      header();  np << nClrTabs;
+      noLines = header(np, printing);  setTabs(np);
       }
 
     Note& n = *note->alloc();   n = *note;
 
-    if (np.append(&n))
-      noLines += 1;
+    if (np.append(&n)) noLines += 1;
     }
   }
 
 
-void NoteRptB::header() {
+void NoteRptB::setTabs(NotePad& ntpd) {ntpd << nClrTabs;}
+
+
+int NoteRptB::header(NotePad& ntpd, bool printing) {
 Date   dt;
 String s;
 
-  if (!printing) {noLines = 0; return;}
+  if (!printing) return 0;
 
   dt.getToday();   s = dt.getDate() + _T(" ") + dt.getHHMM();
 
-  np << title << nRight << s << nCrlf << nCrlf;   noLines =  2;
+  ntpd << title << nRight << s << nCrlf << nCrlf;   return 2;
   }
 
 
@@ -49,19 +51,4 @@ void NoteRptB::footer(Display& dev, int pageN) {
 
   dev << dCenter << pageN << _T(" of ") << maxPages << dflushFtr;
   }
-
-
-
-#if 0
-void NoteRpt::print(CScrView& vw) {
-
-  maxLines = vw.noLinesPrPg();
-
-  vw.disableWrap();
-
-  detNoPages(vw);
-
-  create();
-  }
-#endif
 

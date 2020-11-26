@@ -57,11 +57,11 @@ FieldDesc* dsc;
 
   descTbl.load(maps, name);   tableName = name;
 
-  header();
+  noLines += header(np, printing);
 
   for (dsc = iter(); dsc; dsc = iter++) {
 
-    if (isNewPage(1)) header();
+    if (isNewPage(1)) noLines += header(np, printing);
 
     np << nTab << dsc->fieldIndex;
     np << nTab << dsc->name;
@@ -83,7 +83,7 @@ bool TableDscRpt::isNewPage(int n) {
 
 
 
-void TableDscRpt::header() {
+int TableDscRpt::header(NotePad& ntpd, bool printing) {
 int tab0 = 3;
 int tab1 = tab0 + 2;
 int tab2 = tab1 + maxLng + 3;
@@ -94,7 +94,7 @@ int tab3 = tab2 + 16;
   np << nClrTabs << nSetRTab(tab0) << nSetTab(tab1) << nSetTab(tab2) << nSetRTab(tab3);
 
   np << nTab << _T("No") << nTab << _T("Name")  << nTab << _T("Type");
-  np << nTab << _T("Is Index") << nCrlf;   noLines += 2;
+  np << nTab << _T("Is Index") << nCrlf;   return 2;
 
   }
 

@@ -4,6 +4,8 @@
 #pragma once
 #include "ReportBase.h"
 
+class NotePad;
+
 
 class TableDscRpt : public ReportBase {
 
@@ -30,6 +32,6 @@ private:
   void dspRecords(String& name);
 
   bool isNewPage(int n);
-  void header();
+  int  header(NotePad& ntpd, bool printing);
   };
 

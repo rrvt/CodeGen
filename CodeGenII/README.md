@@ -131,6 +131,10 @@ related to the database:
 
 ## Updates
 
+### Update 11/25/20
+
+Library Update.
+
 ### Update 11/09/20
 
 Update the print/display logic to avoid the conflict between the two threads.

@@ -4,7 +4,6 @@
 #include "stdafx.h"
 #include "CodeGenIIView.h"
 #include "Options.h"
-//#include "Report.h"
 #include "CodeGenII.h"
 #include "CodeGenIIDoc.h"
 #include "Resources.h"
@@ -70,9 +69,9 @@ DataSource ds = isNotePad ? NoteSource : doc()->dataSrc();
 
 void CodeGenIIView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
-  setOrientation(Portrait);   setPrntrOrient(theApp.getDevMode(), pDC);
+  setOrientation(options.orient);
 
-  CScrView::OnBeginPrinting(pDC, pInfo);
+  setPrntrOrient(theApp.getDevMode(), pDC);   CScrView::OnBeginPrinting(pDC, pInfo);
   }
 
 
@@ -82,8 +81,8 @@ void CodeGenIIView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
 void CodeGenIIView::printFooter(Display& dev, int pageNo) {
   switch (doc()->dataSrc()) {
-    case NoteSource     : dspNote.footer(dev, pageNo); break;
-    case DataBaseSource : dspDsc.footer(dev, pageNo); break;
+    case NoteSource     : prtNote.footer(dev, pageNo); break;
+    case DataBaseSource : prtDsc.footer(dev, pageNo); break;
     }
   }
 

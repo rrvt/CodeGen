@@ -3,7 +3,7 @@
 
 #pragma once
 #include "CScrView.h"
-#include "NoteRpt.h"
+#include "NoteRptB.h"
 #include "TableDscRpt.h"
 
 

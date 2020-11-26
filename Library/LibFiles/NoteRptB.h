@@ -11,8 +11,6 @@ public:
   NoteRptB(NotePad& notePad) : ReportBase(notePad) {title = _T("NotePad");}
  ~NoteRptB() { }
 
-//  void print(CScrView& vw);
-
   virtual void footer(Display& dev, int pageNo);          // Output page Footer to NotePad
 
 private:
@@ -20,5 +18,9 @@ private:
   NoteRptB() : ReportBase(*(NotePad*)0) { }
 
   virtual void create();
-  virtual void header();
+
+protected:
+
+  virtual int  header( NotePad& ntpd, bool printing);
+  virtual void setTabs(NotePad& ntpd);
   };
