@@ -250,10 +250,3 @@ void MapHeader::toDatabaseComment() {
   notePad << _T("  // back to the database.") << nCrlf;
   }
 
-
-
-#if 0
-  notePad << _T("typedef MyMap::iterator  Iter;") << nCrlf;
-  notePad << _T("typedef pair<Iter, bool> Rslt;") << nCrlf << nCrlf;
-  notePad << _T("Iter it;") << nCrlf;
-#endif

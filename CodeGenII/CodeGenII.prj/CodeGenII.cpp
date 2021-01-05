@@ -68,7 +68,7 @@ BOOL CodeGenII::InitInstance() {
 
   setAppName(_T("Code Gen II")); setTitle(_T("Create C++ Code to Read/Write to Access Database"));
 
-  view()->setFont(_T("Courier New"), 120);
+  view()->setFont(_T("Courier New"), 12.0);
 
   options.load();    view()->setOrientation(options.orient);
 

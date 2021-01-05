@@ -99,7 +99,7 @@ int tab3 = tab2 + 16;
   }
 
 
-void TableDscRpt::footer(Display& dev, int pageN) {
+void TableDscRpt::footer(Device& dev, int pageN) {
 
   if (pageN > maxPages) maxPages = pageN;
 

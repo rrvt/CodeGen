@@ -20,7 +20,7 @@ public:
 
 //  void print(CScrView& vw);
 
-  void footer(Display& dev, int pageNo);          // Output page Footer to NotePad
+  void footer(Device& dev, int pageNo);          // Output page Footer to NotePad
 
 private:
 

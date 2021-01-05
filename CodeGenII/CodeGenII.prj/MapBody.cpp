@@ -283,34 +283,3 @@ String s;
   }
 
 
-
-#if 0
-void MapBody::createDBadd() {
-VarDeclarations decl;
-
-  notePad << nCrlf << nCrlf;
-
-  notePad << _T("bool ") << tbl->myDB << _T("::add(") << tbl->rcd << _T("& rcd) {") << nCrlf;
-  decl.add(_T("AceFieldDsc"), _T("fld"));
-  decl.add(_T("int"),         _T("i"));
-  decl.add(_T("variant_t"),   _T("v"));
-  decl.add(_T("bool"),        _T("rslt"));
-
-  decl.output();   notePad << nCrlf;
-
-  notePad << _T("  rcdSet.addNew();") << nCrlf;
-  notePad << _T("  AceFields fields(rcdSet);") << nCrlf << nCrlf;
-
-  notePad << _T("  for (rslt = fields.startLoop(fld), i = 0; rslt; ");
-  notePad << _T("rslt = fields.nextField(fld), i++) {") << nCrlf << nCrlf;
-
-  createSwitch(_T("    "), _T("v"), _T("false"), NewRcdTyp);   notePad << nCrlf;
-
-  notePad << _T("    fld.write(v);") << nCrlf;
-  notePad << _T("    }") << nCrlf << nCrlf;
-
-  notePad << _T("  return rcdSet.update() != 0;") << nCrlf;
-  notePad << _T("  }") << nCrlf;
-  }
-#endif
-

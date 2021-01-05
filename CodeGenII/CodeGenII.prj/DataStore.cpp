@@ -72,12 +72,12 @@ void DataStore::sort() {qsort(&data[0], &data[data.end()-1]);}
 
 
 
-int Data::wrap(Display& dev, CDC* dc) {
+int Data::wrap(Device& dev, CDC* dc) {
 int  chWidth = dev.chWidth();
 
   dev << dCR << dClrTabs << dSetTab(TabVal) << dTab;    // Return to left margin (dCR), clear Tabs and
                                                         // tab to position desired for wrap
-    wrp.initialize(dc, dev.remaining(), false);
+    wrp.initialize(dc, dev.remaining(), dev.maxWidth(), false);
 
   dev<< dCR << dClrTabs;                                // return to left margin and clear tabs
 
@@ -87,16 +87,16 @@ int  chWidth = dev.chWidth();
 
 
 int Data::display() {
-WrapIter iter(wrp);
-String*  p;
-int      i;
+WrapIter  iter(wrp);
+WrapData* wd;
+int       i;
 
   notePad << nClrTabs << nSetTab(TabVal) << nTab;       // The tab is set to the same value as in wrap
 
-  for (p = iter(), i = 0; p; p = iter++, i++) {
+  for (wd = iter(), i = 0; wd; wd = iter++, i++) {
     if (i) notePad << nTab;
 
-    notePad << *p << nCrlf;
+    notePad << wd->line << nCrlf;
     }
 
   return i;

@@ -63,7 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\LibFiles\;$(SolutionDir)..\..\Library\AboutFiles\;$(SolutionDir)..\..\Library\TableDescriptors\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,7 +77,7 @@
     <ResourceCompile>
       <Culture>0x0409</Culture>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(IntDir);$(SolutionDir)..\..\Library\AboutFiles\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IntDir);$(SolutionDir)..\..\Library\Extras\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\LibFiles\;$(SolutionDir)..\..\Library\AboutFiles\;$(SolutionDir)..\..\Library\TableDescriptors\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,16 +106,17 @@
     <ResourceCompile>
       <Culture>0x0409</Culture>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(IntDir);$(SolutionDir)..\..\Library\AboutFiles\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IntDir);$(SolutionDir)..\..\Library\Extras\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Sources\Library\AboutFiles\About.h" />
+    <ClInclude Include="..\..\Library\Extras\About.h" />
     <ClInclude Include="CodeGenII.h" />
     <ClInclude Include="CodeGenIIDoc.h" />
     <ClInclude Include="CodeGenIIView.h" />
     <ClInclude Include="DataStore.h" />
     <ClInclude Include="DescTable.h" />
+    <ClInclude Include="..\..\Library\Extras\ExtraResource.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="MapBody.h" />
     <ClInclude Include="MapCode.h" />
@@ -123,13 +124,12 @@
     <ClInclude Include="MapDataDlg.h" />
     <ClInclude Include="MapHeader.h" />
     <ClInclude Include="MapsCode.h" />
-    <ClInclude Include="Options.h" />
-    <ClInclude Include="OptionsDlg.h" />
+    <ClInclude Include="..\..\Library\Extras\OptionsDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SelectFldDlg.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="..\..\Library\TableDescriptors\TableDscrs.h" />
     <ClInclude Include="TableDscRpt.h" />
+    <ClInclude Include="..\..\Library\Extras\TableDscrs.h" />
     <ClInclude Include="TableExtension.h" />
     <ClInclude Include="TableNames.h" />
     <ClInclude Include="TableOpDlg.h" />
@@ -138,7 +138,7 @@
     <ClInclude Include="VarDecl.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Sources\Library\AboutFiles\About.cpp" />
+    <ClCompile Include="..\..\Library\Extras\About.cpp" />
     <ClCompile Include="CodeGenII.cpp" />
     <ClCompile Include="CodeGenIIDoc.cpp" />
     <ClCompile Include="CodeGenIIView.cpp" />
@@ -151,12 +151,11 @@
     <ClCompile Include="MapDataDlg.cpp" />
     <ClCompile Include="MapHeader.cpp" />
     <ClCompile Include="MapsCode.cpp" />
-    <ClCompile Include="Options.cpp" />
-    <ClCompile Include="OptionsDlg.cpp" />
+    <ClCompile Include="..\..\Library\Extras\OptionsDlg.cpp" />
     <ClCompile Include="SelectFldDlg.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="..\..\Library\TableDescriptors\TableDscrs.cpp" />
     <ClCompile Include="TableDscRpt.cpp" />
+    <ClCompile Include="..\..\Library\Extras\TableDscrs.cpp" />
     <ClCompile Include="TableExtension.cpp" />
     <ClCompile Include="TableNames.cpp" />
     <ClCompile Include="TableOpDlg.cpp" />
@@ -167,18 +166,18 @@
     <ResourceCompile Include="CodeGenII.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Sources\Library\AboutFiles\About.rc2" />
+    <None Include="..\..\Library\Extras\About.rc2" />
     <None Include="res\CodeGenII.rc2" />
+    <None Include="..\..\Library\Extras\Options.rc2" />
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\CodeGenII.ico" />
-    <Image Include="res\Toolbar04.bmp" />
     <Image Include="res\Toolbar07.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\LibUni7\LibUni7.vcxproj">
-      <Project>{F2083129-D771-495F-B137-0F8BBCC3A5C5}</Project>
+    <ProjectReference Include="..\..\Library\Library.prj\Library.vcxproj">
+      <Project>{cf57f3ec-d3db-4469-8519-3f9d73785d9b}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

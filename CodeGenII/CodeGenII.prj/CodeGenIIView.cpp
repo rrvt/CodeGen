@@ -79,7 +79,7 @@ void CodeGenIIView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
 // The output streaming functions are very similar to NotePad's streaming functions so it should not
 // be a great hardship to construct a footer.
 
-void CodeGenIIView::printFooter(Display& dev, int pageNo) {
+void CodeGenIIView::printFooter(Device& dev, int pageNo) {
   switch (doc()->dataSrc()) {
     case NoteSource     : prtNote.footer(dev, pageNo); break;
     case DataBaseSource : prtDsc.footer(dev, pageNo); break;

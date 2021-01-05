@@ -4,7 +4,7 @@
 #pragma once
 #include "Archive.h"
 #include "Date.h"
-#include "Display.h"
+#include "Device.h"
 #include "ExpandableP.h"
 #include "IterT.h"
 #include "Wrap.h"
@@ -33,7 +33,7 @@ public:
 
   void    add(String& stg);                               // Parse the data into the record
 
-  int     wrap(Display& dev, CDC* dc);
+  int     wrap(Device& dev, CDC* dc);
   int     noLines() {return wrp.noLines();}
 
   int     display();
@@ -44,37 +44,6 @@ public:
   bool    operator>  (Data& data) {return s >  data.s;}
   bool    operator<= (Data& data) {return s <= data.s;}
   };
-
-
- #if 0
-// This facilitates the expansion of the Expandable array in the DataStore.  Essentially The pointers are
-// moved from the old version of the array to a new version that is larger.
-// Since we are moving the pointers we cannot delete the allocated Data entity from this class.
-// However, the allocated notes should be "deleted" when the dataStore goes out of scope or is deleted.
-
-struct DataP {
-Data* p;
-
-  DataP()             {p = 0;}
-  DataP(DataP& dataP) {p = dataP.p;}
- ~DataP()             {p = 0;}
-
-  DataP& operator= (DataP& dataP) {p = dataP.p; return *this;}
-
-//  void add(String& s);
-
-  // Requires the following operations for node N* p, N* q, N* s
-  //  *p == *q
-  //  *p >  *q
-  //  *p <= *q
-  //  *s = *p
-
-  bool operator== (DataP& dataP) {return p->get() == dataP.p->get();}
-  bool operator>  (DataP& dataP) {return p->get() >  dataP.p->get();}
-  bool operator<= (DataP& dataP) {return p->get() <= dataP.p->get();}
-  };
-#endif
-
 
 
 // Define the iterator used to look at the data in the datastore.  It is here so that it can be friended

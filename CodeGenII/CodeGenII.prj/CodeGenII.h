@@ -16,7 +16,7 @@ class CodeGenII : public CApp {
 
 public:
 
-                 CodeGenII() noexcept { }
+                 CodeGenII() noexcept : CApp(this) { }
   virtual BOOL   InitInstance();
 
 

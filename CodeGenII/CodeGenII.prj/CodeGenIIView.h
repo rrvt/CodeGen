@@ -33,7 +33,7 @@ public:
   virtual void onPrepareOutput(bool isNotePad, bool printing);
 
   virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
-  virtual void printFooter(Display& dev, int pageNo);
+  virtual void printFooter(Device& dev, int pageNo);
   virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
   CodeGenIIDoc* GetDocument() const;

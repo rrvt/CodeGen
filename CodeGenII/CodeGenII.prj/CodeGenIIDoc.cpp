@@ -173,49 +173,8 @@ MapDataDlg dlg;
   if (dlg.DoModal() == IDOK) display(DataBaseSource);
   }
 
-#if 0
-void CodeGenIIDoc::dspTables() {
-int       i;
-TDIter    iter(tableDscrs);
-TableDsc* dsc;
 
-  notePad.clear();
-
-  for (dsc = iter(), i = 0; dsc; dsc = iter++)
-                              if (dsc->selected) {if (i++) notePad << nCrlf;   dspRecords(dsc->accName);}
-  }
-
-
-void CodeGenIIDoc::dspRecords(String& name) {
-DescTable  descTbl;
-DTIter     iter(descTbl);
-FieldDesc* dsc;
-int        maxLng = 0;
-
-  descTbl.load(maps, name);
-
-  for (dsc = iter(); dsc; dsc = iter++) if (dsc->lng > maxLng) maxLng = dsc->lng;
-
-  notePad << name << _T(" Table") << nCrlf;
-
-  notePad << nSetRTab(3) << nSetTab(5) << nSetTab(8+maxLng) << nSetRTab(maxLng+26);
-
-  notePad << nTab << _T("No") << nTab << _T("Name")  << nTab << _T("Type");
-  notePad << nTab << _T("Is Index") << nCrlf;
-
-  for (dsc = iter(); dsc; dsc = iter++) {
-
-    notePad << nTab << dsc->fieldIndex;
-    notePad << nTab << dsc->name;
-    notePad << nTab << getDbCppType(dsc->x);
-    notePad << nTab << dsc->isIndex;
-    notePad << nCrlf;
-    }
-  }
-#endif
-
-
-void CodeGenIIDoc::OnOptions() {options();  view()->setOrientation(options.orient);}
+void CodeGenIIDoc::OnOptions() {options(view());  view()->setOrientation(options.orient);}
 
 
 void CodeGenIIDoc::display(DataSource ds) {dataSource = ds; invalidate();}
