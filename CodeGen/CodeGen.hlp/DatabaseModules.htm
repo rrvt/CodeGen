@@ -1,0 +1,162 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Database Modules</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Database Modules</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2></h2>
+<p>
+</p>
+<h2>Introduction</h2>
+<p>
+Mimicing an Access database im memory is difficult since every database is different.  CodeGen tries to
+contain the differences in the code it creates but leaves the things that are the same in the Library as
+modules that are used during a c++ application access to the database.  Let's begin by listing the modules
+(i.e. a module is composed of a header file, &#8249;moduleName&#8250;.h, and a body file, 
+&#8249;moduleName&#8250;.cpp and defines zero or more enums, constants, typedefs, functions, classes,
+templates, etc.) in the library that are needed to implement the interface to a database:
+</p>
+<ul>
+<li>AceDao -- Library interface to the Access Database</li>
+<li>
+MapBase -- Provides the virtual base (i.e. MapRecord) of a database record and the virtual base
+(i.e. MapBase) of a database table map (e.g. The database table Address has a corresponding AddressMap
+class).
+</li>
+<li>
+MapsList -- A module separate from the library but housed with in the Library Extras directory that
+provides some machinery for storing a descriptor of each table and scanning the list in a loop.  It must be
+compiled as a module in an application because it includes a module that only appears in an application 
+list of modules.  It is only included in the MapsT module and is used therein.
+</li>
+<li>
+MapsT -- A template that requires a MapData class to exist. It defines the typedef:
+<blockquote>
+typedef MapsT&#8249;MapData&#8250; Maps;
+</blockquote>
+which is then used in MapData module produced by CodeGen to provide some basic database services:
+<ul>
+<li>openDB -- Open the database at the path provided</li>
+<li>
+initiallizeMaps/loadMaps -- two different versions of reading the data vrom the database and storing
+it in in-memory &#8249;map&#8250; tree structures.
+</li>
+<li>
+openRcdSet -- Open a Record Set in the database, used for storing modified data in the in-memory
+storage back in the database file.
+</li>
+<li>
+openFldDscs -- Open a database Field Descriptor, used in CodeGen to determine types and names of each field.
+</li>
+</ul>
+</li>
+<li>Utilities -- The isEmpty function to determine if two or more strings are all empty.</li>
+<li>
+&#8249;map&#8250; -- A C++ Standard Library module which defines the container template classes map and
+multimap and their supporting templates.  It implements a hopefully balanced tree of nodes containing the
+data.
+</li>
+</ul>
+<p>
+CodeGen's job is to provide the code that is specific to the tables in the database.  These modules are
+then integrated into an application's code to provide simple straightforward interfaces to the 
+Access Tables, certainly simpler than what is containded in the collection of modules described here.
+</p>
+<p>
+So given one or more tables in a database, what modules would CodeGen create.  Here is a list with a short
+description of each module, there will be a detailed description later.  For nameing purposes, let me call
+the database table "ATable" where the abbreviation chosen was "ATbl":
+</p>
+<ul>
+<li>
+ATableMap Module defines four classes:
+  <ul>
+<li>ATableRecord -- defines a record for the in-momory storage</li>
+<li>ATableDB -- concerned with moving between the database and the table</li>
+<li>
+ATableMap -- contains the in-memory object and the ATableDB object and is the primary interface to
+the in-memory object.  ATableMap is also a base class for the ATableTable class.
+</li>
+</ul>
+</li>
+<li>ATableTable Module defines two classes.</li>
+<ul>
+<li>
+ATblIter -- An iterator for the in-memory storage.  It is modeled after the IterT template in the
+library and implements forward and reverse scanning of the data, and other functionality.  It is 
+housed in the ATableTable module as it is needed in most applications.
+</li><br/>
+
+<li>
+ATableTable -- The Table module's purpose is to hide as much detail as possible from the c++ code
+in the application.  To this end it implements just five basic functions:
+<ul>
+<li>
+get -- requires enough arguements to uniquely identify a record (this is decided in CodeGen by the user).
+It the returns a pointer to the record found or a new record.
+</li>
+<li>
+find -- Given an integer key value returns a pointer to the corresponding record.  Each database record has
+a unique integer (actually a long in c++ parlance) as its key value.
+</li>
+<li>
+add -- add a record to the table
+</li>
+<li>
+findID -- Two versions if there are two or more fields used to identify a unique record. One
+version relies on just one key string (e.g. Call Sign).  The other version relies on all of the
+identifying strings for a unique result.  Return the integer key of the record (both in the 
+database and in the in-memory storage).
+</li>
+<li>
+toDatabase -- Just sends all modified data to the database and in addition deletes any records 
+marked for deletion.
+</li>
+</ul>
+</li>
+</ul>
+<li>
+Maps -- Just declares an object for each table.
+</li><br/>
+<li>
+MapData -- This is generated because the initializeMaps function installs a description of each
+table in the map list.
+<ul>
+<li>openDB -- Open the database at the path provided</li>
+<li>
+initiallizeMaps/loadMaps -- two different versions of reading the data vrom the database and storing
+it in in-memory &#8249;map&#8250; tree structures.
+</li>
+<li>
+openRcdSet -- Open a Record Set in the database, used for storing modified data in the in-memory
+storage back in the database file.
+</li>
+<li>
+openFldDscs -- Open a database Field Descriptor, used in CodeGen to determine types and names of each field.
+</li>
+</ul>
+</li>
+</ul>
+<p>
+
+</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

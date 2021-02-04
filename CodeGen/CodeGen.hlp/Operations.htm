@@ -1,0 +1,103 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Operations</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Code Gen II Operations</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2>Introduction</h2>
+<p>
+An application needs the results of the following commands to interface with a database in the manner described under
+  <a href="DatabaseOperations.html">Database Operations</a>:
+</p>
+<ul>
+<li>Open Database</li>
+<li>Create Map Modules</li>
+<li>Create Table Code</li>
+<li>Create Map Data Modules</li>
+</ul>
+<p>
+The modules themselves are describe in a bit more detail on the <a href="DatabaseModules.htm">Database Modules</a> page. 
+</p>
+<h2><img src="Images/Access.jpg" width="16" height="15"> Open Database</h2>
+<p>
+Opens a database file and displays the table names in the database.
+</p>
+<h2><img src="Images/Map.jpg" width="16" height="15"> Create Map Modules</h2>
+<p>
+A dialog box is shown that has a combo box.  The combo box has the list of tables in the database.  Select one
+and the Table name table name is specified and the Abbreviation edit box gives an abbreviation which may be 
+changed.  When the OK button is selected two files are created in a directory of the user's choosing.  The following
+classes are created in the Table Module for the "Address" Table:
+</p>
+<ul>
+<li>AddressRecord : public MapRecord -- Contains a decleration for each field in the database table's record</li>
+<li>
+	AddressDB -- The interface between the database and a std::map in the application.  The map is implemented
+  as a tree in memory.
+</li>
+<li>
+AddressMap : public   MapBase   -- The map class -- basically an intermediary between the table object 
+and the database.
+</li>
+</ul>
+<h2><img src="Images/Table.jpg" width="16" height="15"> Create Table Code</h2>
+<p>
+Creates the two classes for each table in the database, one using the abbreviation supplied by the user.  
+Thie module is the primary interface between the
+c++ code and the database tables.  The actual data is stored in a c++ library map structure which implements
+a tree.  The Table class is a subclass of the Map class.
+</p>
+<ul>
+<li>
+AddsIter -- Implements an iterator class.  An iterator object allows
+the user to touch each record in a table.  It is patterned after the IterT template in the Library. 
+</li>
+<li>
+AddressTable : public AddressMap  -- The primary interface between the c++ application code and the 
+in-memory version of the database tablles.
+</li>
+</ul>
+<h2><img src="Images/Maps.jpg" width="16" height="15"> Create Map Data Modules</h2>
+<p>
+This function creates two modules, the Maps module which contains one object for each table and the MapData
+module which is included in the MapsT template to define the Maps object: maps.  The MapeData module is
+mainly responsible for initializing the in-memory storage for each table.
+</p>
+<h2><img src="Images/Light.jpg" width="16" height="15"> Display Record Fields</h2>
+<p>
+Display the fields of one or more tables.
+</p>
+<h2><img src="Images/Options.jpg" width="16" height="15"> Display & Printer Options</h2>
+<p>
+The options dialog allows specifying the Display and Printer Font Size Scale Factor, the printer
+orientation and the printer margins.
+</p>
+<h2><img src="Images/About.jpg" width="16" height="15"> About</h2>
+<p>
+Displays the About Box.  The about box uses text from the resource file (CodeGenII.rc) for
+the output information.  There is a standard about box dialog in the Library.
+</p>
+<h2><img src="Images/Exit.jpg" width="16" height="15"> Exit</h2>
+<p>
+Exit the application with no reservations.
+</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

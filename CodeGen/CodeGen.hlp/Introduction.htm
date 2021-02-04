@@ -1,0 +1,88 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Introduction</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Code Gen</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2>Introduction</h2>
+<p>
+The Code Generation application's purpose is to create c++ modules that allows reading and writing from/to an
+Access Database file.  It turns out that an Access database is a set of tables.  Each table contains records.
+Each record contains fields.  A field is a piece of data.  The data may be of several different types: integer, 
+real, string, date, etc.  One field usually is a key field.  A key field is usually an integer though it need not
+be.
+</p>
+<p>
+The tables are linked by having a identifier of a record in one table in another table.  Unlike c++, these links 
+require a lookup to form the links between tables.  Databases are designed so that the lookups are really 
+efficient.  The application's job is to somehow copy the data into an efficient c++ data structure.
+</p>
+<p>
+The first step is to describe how to create the the modules, one module for each table in the database.  Now the
+word module is not typically used in c++ so let me define it here:  A module is composed to two files, a 
+header file (i.e. module.h) and a body file (i.e. moodule.cpp).  The module may define one or more c++ classes
+that are intrinsically related.
+</p>
+<p>
+The Library contains the AceDao module.  It interfaces direcly with the 
+"C:\Program Files (x86)\Microsoft Office\root\Office16\ACEDAO.DLL".  
+This is an older database engine but it has sufficient functionality to allow read and write operations on an
+Access database file.  The AceDao module provides a c++ class to the ACEDAO.DLL.
+</p>
+<p>
+A database, as mentioned above, is a collection of tables.  Therefore CodeGen is able to produce a set of modules
+that act in parallel to the database.  When appropriate the actual database is updated.  So lets take a look at
+the organization of the c++ modules produced and their purpose:
+</p>
+<ul>
+<li>Maps Module -- Defines a table object for each database table needed in an application.</li>
+<li>
+MapData Module -- Primary interface between all the database c++ map modules and the Access database tables
+</li>
+<li>
+Table Modules -- One for each Database table designed for c++ interface to in memory tables.  This is the 
+primary interface to each table from the c++ code.
+</li>
+<li>
+Map Modules -- One for each Database table chiefly concerned with the interface between a database file
+table and an in-memory copy of the table
+</li>
+</ul>
+<p>
+All the modules are produced by exercising commands in CodeGen.  These modules are then integrated into 
+another program which is then used to access the database file.  
+See the <a href="Operations.htm">operations page</a> for a description of each command.  The commands that 
+that must be used to generate the modules are:
+</p>
+<ul>
+<li><img src="Images/Access.jpg" width="16" height="15"> Open Database</li>
+<li><img src="Images/Map.jpg" width="16" height="15"> Create Map Modules</li>
+<li><img src="Images/Table.jpg" width="16" height="15"> Create Table Modules</li>
+<li><img src="Images/Maps.jpg" width="16" height="15"> Create Maps and MapData Modules</li>
+</ul>
+<p>
+In addition to creating the modules for use in another application, the there is a command, 
+<img src="Images/Light.jpg" width="16" height="15">, to display the fields in one or more records and 
+a command, <img src="Images/Options.jpg" width="16" height="15">, to display on the Options for the display 
+and printer. 
+</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

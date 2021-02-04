@@ -1,0 +1,206 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Database Operations</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Database Operations</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+<h2></h2>
+<p>
+</p>
+<h2>Introduction</h2>
+<p>
+A c++ application needs access to the data in an Access Database.  CodeGen provides several modules to 
+make that happen.  How are these modules utilized in an actual applicaion?  Well, this essay will 
+attempt to explain that issue.  
+</p>
+<p>
+I have written an application using the modules from CodeGen that retrieves data from a San Jose Radio
+Amateur Civil Emergency Service (SJ RACES) database and formats it for inclusion in other applications.
+The information is reformated into comma separated value (CSV) files.  The application also retrieves
+activity information from a Google Drive source and updates the database accordingly.  The examples
+shown herein will be from that application.
+</p>
+<h2>Organization</h2>
+<p>
+The Access database is maintained in a file, which in our example is called: "db.accdb".  It is a 
+single file database.  CodeGen was originally written for creating an application for scheduling 
+a horse show using a
+database which was composed of two or three files.  At this time CodeGen is not set up to handle
+two or more file databases seamlessly although I have some thoughts about how it might be changed to
+do that more or less simply.  However, with some hand changes to MapData and Maps modules it could be
+done with this version.
+</p>
+<p>
+The data is first read into an in-memory structure called a std::map.  A map is a tree and hopefully
+implemented efficiently.  The application manipulates the records in the tree and then must call
+a function to update the database if updating is required.  This requires that each record be marked
+as "dirty" so that the update database function will actually write new data to the record in the
+database.  This organization also requires that records be marked for deletion when a record should
+be deleted and then the toDatabase function performed.
+</p>
+
+<h2>Initialization</h2>
+<p>
+The first step in any application is to initialize things.  In the case of the example application
+the choice was to store the path to the database in the "ini" file and open and initialize the in-memory
+store with the data from the database in the "InitInstance" function.  This occurs shortly
+after the application starts up.  Please note that any local initialization that takes place should
+occur after the &quot;ProcessShellCommand&quot; function call. In this case the calls are: 
+</p>
+<blockquote>
+iniFile.readString(FileSection, DBFileKey, databasePath); <br/><br/>
+maps.initializeMaps(DBFileKey, databasePath);
+</blockquote>
+<p>
+The maps.initializeMaps call may also be made as the result of an "Open Database" command and so
+the call must initialize the database interface, the in-memory maps and the list of tables.  Since we
+are not letting the application have direct access to the database, initializeMaps also loads all the
+in-memory map with data from the database.
+</p>
+
+<h2>A Typical Operation</h2>
+<p>
+The RACES application has a command to output some identifying information about all current members.
+This requires a loop to scan every member entry and collect the information and output it in a CSV 
+format.  I'll just show the loop and details of finding the information about each user.
+</p>
+<p>
+First of all every member has an entry in the Members table.  However, we also hold retired members
+information in that table also so it must be ignored.  Second, some information for each member appears 
+in another table (for efficiency reasons).  This information must be found using the record id for
+the information found in the member record.
+</p>
+<p>
+Here is the loop over the member table:
+</p>
+<blockquote>
+void MemberRpts::info() {<br/>
+MmbrIter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iter(memberTable);<br/>
+MemberRecord*             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rcd;<br/>
+Expandable&lt;MemberInfo, 2&gt; members;<br/>
+<br/>
+&nbsp; for (rcd = iter(); rcd; rcd = iter++) {<br/>
+&nbsp;&nbsp;&nbsp; MemberInfo memberInfo;<br/><br/>
+&nbsp;&nbsp;&nbsp; if (!getMemberInfo(*rcd, memberInfo)) continue;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp; memberInfo.sortKey = memberInfo.callSign;   members = memberInfo;<br/>
+&nbsp;&nbsp;&nbsp; }
+</blockquote>
+<p>
+The interator will return a pointer to each record or zero.  The last line stores the member
+information into the expandable array sorted by callsign (see MakeApp/Help/Serialize for details).
+</p>
+<h3>Searching for Records in Other Tables</h3>
+<p>
+So, the function getMemberInfo is actually going to do the searching for data.  Here it is:
+</p>
+<blockquote>
+bool MemberRpts::getMemberInfo(MemberRecord& rcd, MemberInfo& memberInfo) {<br/>
+int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statusID&nbsp;&nbsp;= rcd.StatusID;<br/>
+StatusRecord* statusRcd = statusTable.find(statusID);<br/>
+<br/>
+&nbsp;&nbsp;if (!statusRcd || statusRcd->Abbreviation == _T("Fmr")) return false;<br/>
+<br/>
+&nbsp;&nbsp;EntityRecord* mbrRcd = entityTable.find(rcd.MbrEntityID);   if (!mbrRcd) return false;<br/>
+<br/>
+&nbsp;&nbsp;memberInfo.lastName  = mbrRcd->LastName;   memberInfo.lastName.trim();<br/>
+&nbsp;&nbsp;memberInfo.firstName = mbrRcd->FirstName;  memberInfo.firstName.trim();<br/>
+<br/>
+&nbsp;&nbsp;memberInfo.callSign    = rcd.CallSign;    memberInfo.callSign.trim();<br/>
+&nbsp;&nbsp;memberInfo.badgeNumber = rcd.BadgeNumber; memberInfo.badgeNumber.trim();<br/>
+&nbsp;&nbsp;memberInfo.badgeOk     = rcd.BadgeOK;     memberInfo.badgeExpDate = rcd.BadgeExpDate;<br/>
+<br/>
+&nbsp;&nbsp;return true;<br/>
+&nbsp;&nbsp;}
+</blockquote>
+<p>
+The Member Record contains a Status ID, an Entity ID and other IDs.  To find the record associated with the member
+in question the appropriate table is searched with a find command.  If it fails the database is probably corrupted but
+we actually may or may not care about that here.  I chose to not care.
+</p>
+
+<h2>Updating the Database</h2>
+<p>
+The example for uploading deals with only one table that needs changing.  Here is the loop that makes changes to the
+in-memory map and then calls the table update function: "toDatabase".
+</p>
+<blockquote>
+rcd = iter();  if (rcd->callSign == _T("CallSign")) rcd = iter++;<br/>
+<br/>
+for ( ; rcd; rcd = iter++) if (!rcd->callSign.empty()) uploadOneStsCSV(*rcd);<br/>
+<br/>
+memberTable.toDatabase();
+</blockquote>
+<p>
+We are reading a CSV file here and the first line may be a title line and is removed from consideration.
+</p>
+<p>
+The uploadOneStsCSV function is where the changes to the in-memory map are done.  Here it is:
+</p>
+<blockquote>
+void StatusUpdate::uploadOneStsCSV(StatusRcd& csv) {<br/>
+MemberRecord* rcd&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= memberTable.get(csv.callSign);<br/>
+String&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abbr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= csv.activeStatus;<br/>
+long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stsID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= statusTable.findID(abbr);<br/>
+long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmrID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= statusTable.findID(fmr);<br/>
+long&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;orgStsID;<br/>
+bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;csvBadgeOK = csv.eligibleForBadge == _T("Yes");<br/>
+bool&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmrMbr;<br/>
+<br/>
+&nbsp;&nbsp;if (!rcd) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << _T("Call Sign: ") << csv.callSign;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << _T(" not found in database") << nCrlf;&nbsp;&nbsp;&nbsp;return;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;if (rcd->StatusID != stsID) {<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;orgStsID = rcd->StatusID;   fmrMbr = orgStsID == fmrID;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;if (!fmrMbr) {rcd->StatusID = stsID;   rcd->mark();   noUpdates++;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dspMemberName(rcd);   notePad << nTab << _T("Status");<br/>
+<br/>                                                               
+&nbsp;&nbsp;&nbsp;&nbsp;StatusRecord* stsRcd = statusTable.find(orgStsID);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << nTab << stsRcd->Abbreviation << nTab << _T("->") << nTab << abbr;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;if (fmrMbr) notePad << nTab << _T("Not Changed");<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << nCrlf;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;if (rcd->BadgeOK != csvBadgeOK) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bool orig = rcd->BadgeOK;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rcd->BadgeOK = csvBadgeOK; rcd->mark(); noUpdates++;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;dspMemberName(rcd);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << nTab << _T("Badge OK") << nTab << orig << nTab << _T("->");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;notePad << nTab << rcd->BadgeOK << nCrlf;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+</blockquote>
+<p>
+This function only has the call sign of the member and that is a unique key for the member record (the FCC ensures that 
+attribute).  So the record is found using the call sign.  The status of the member is important since former (i.e. retired) 
+members should not be updated.  Finally, when a changed is made in the record then the record must be "marked" for updating 
+the database file by using the "rcd->mark();" call.  Then the toDatabase call after all the updates have been made to the in-memory
+map are done will update the records in the database file.
+</p>
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>

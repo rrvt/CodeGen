@@ -25,7 +25,7 @@ void Debug::num(Tchar*  t, double n) {text = t; text += n; messageBox();}
 
 
 
-#if 0
+#ifdef UglyDebug
 void Debug::examine() {
 NtPdIter iter(notePad);
 Note*    note;
@@ -172,7 +172,7 @@ MemData* md;
   for (i = 0; i < n; i++) {
     md = &memData[i];
 
-    if ((md->deallocated && md->allocated) || md->beg == b) return md;;
+    if ((md->deallocated && md->allocated) || md->beg == b) return md;
     }
 
   return 0;
