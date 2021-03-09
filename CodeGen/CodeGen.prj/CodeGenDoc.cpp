@@ -48,8 +48,8 @@ END_MESSAGE_MAP()
 
 // CodeGenDoc construction/destruction
 
-CodeGenDoc::CodeGenDoc() noexcept : dataSource(NotePadSrc)
-                                        {pathDsc = {_T("Code Gen"), _T(""), _T("accdb"), dbPattern};}
+CodeGenDoc::CodeGenDoc() noexcept : dataSource(NotePadSrc),
+                                              pathDsc(_T("Code Gen"), _T(""), _T("accdb"), dbPattern) { }
 
 
 CodeGenDoc::~CodeGenDoc() { }

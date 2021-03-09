@@ -11,7 +11,7 @@ enum DataSource {NotePadSrc, DataBaseSrc};
 
 class CodeGenDoc : public CDoc {
 
-PathDesc    pathDsc;
+PathDlgDsc  pathDsc;
 
 DataSource  dataSource;
 

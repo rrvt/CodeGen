@@ -98,44 +98,30 @@ Here are some highlights of the Standard Library map class:
 Notice that a map has similar properties to Access Tables.  The modules generated with the phrase "Map"
 in the names provide an interface to a map that will contain all the records in the corresponding database
 table.  The Map modules provide a description of the Table's records and some standard methods (functions)
-for adding, modifying, finding, and deleting records.  There are also two functions for looping over all
-the records, startLoop and nextRecord.
+for finding and adding records.  When a record in-memory is changed it must be marked as dirty so
+that it may be updated in the database.  Furthermore, a record may be marked for deletion when the
+database is updated.  There are also an iterator class which is patterned
+after the IterT template in the Library.
 
 The tables are loaded by the following call:
 ```
 maps.initializeMaps(_T("Database Path"), databasePath);
 ```
-where the DBFileKey is a label for displaying the path and the databasePath is the complete path to the
+where the DBFileKey is a key for saving the path in an "ini" file and the databasePath is the complete
+path to the
 database.  initializeMaps is a function that is part of the template MapsT.  MapsT needs the MapData class
 to complete its ability to function.  There is only one maps in a program and it is global.  Once this
 function completes the database is now within the c++ program.
 
-Each "Map" file provides a "Table" class.  However it was soon discovered that the generated table
-classes were not sufficient.  So a daughter class may be created by CodeGen that serves as a template for
-additional or different functions for use with a table.  Tables serve a variety of purposes and only the
-designer knows exactly what should and could be done with a record in a table.  This led to the creation
-of the files with "Tbl" in their name.  They implement the table class that is most useful in a program
-leaving the "Map" class untouched by human hands (just in case there is an improvement that must be made
-in the "Map" module sometime in the future).
-
-## Example
-
-In the database directory there is a simple two table database.  The program TestApp.exe can access the
-database through the following Modules (.h and .cpp files) that were prepared with CodeGen:
-  - BookMap
-  - BookTbl
-  - MapData
-  - Maps
-  - PersonMap
-  - PersonTbl
-
-A person may be an author or a protagonist (books main character).  There are three commands that are
-related to the database:
-  - Display one or both tables
-  - Add a Book (Title, author and protagonist) or Add a person
-  - erase a book or person (note, simple erase only erases in the table selected)
+Each "Map" module provides a "Map" class.  A daughter class is also created by CodeGen that serves as a
+table class to be used by the c++ application.  The "Map" class methods are mostly protected leaving the
+table classes as the interface to the data in the database.
 
 ## Updates
+
+## Update 3/7/21
+
+Rename PathDsc and change the initialization method.
 
 ### Update - 2/3/21
 

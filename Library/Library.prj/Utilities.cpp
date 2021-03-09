@@ -82,3 +82,29 @@ bool    periodSeen = false;
     }
   }
 
+
+String& removeQuotes(String& s) {
+String t;
+int    i;
+int    lng;
+Tchar  ch;
+
+  t = s;   lng = t.length();   s.clear();
+
+  for (i = 0; i < lng; i++) {ch = t[i];  if (ch != _T('"') && ch != _T('\'')) s += ch;}
+
+  return s;
+  }
+
+
+bool isEmpty(String* s, ...) {
+va_list args;
+String* p;
+
+  if (s->size() != 0) return false;
+
+  for (va_start(args, s);  (p = va_arg(args, String*)) && p != 0;) if (p->size() != 0) return false;
+
+  return true;
+  }
+

@@ -1,5 +1,0 @@
-D:\Sources\CodeGen\Release\CodeGenInstaller.msi
-obj\Release\Product.wixobj
-obj\Release\Installer.wixproj.BindContentsFileListnull.txt
-obj\Release\Installer.wixproj.BindOutputsFileListnull.txt
-obj\Release\Installer.wixproj.BindBuiltOutputsFileListnull.txt

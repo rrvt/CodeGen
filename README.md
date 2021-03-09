@@ -119,6 +119,10 @@ table classes as the interface to the data in the database.
 
 ## Updates
 
+## Update 3/7/21
+
+Rename PathDsc and change the initialization method.
+
 ### Update - 2/3/21
 
 Reworked the modules extensively to hide as much as possible and make the interface as transparent as
