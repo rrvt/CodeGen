@@ -1,0 +1,81 @@
+<!doctype html>
+<html><!-- InstanceBegin template="/Templates/OneColumnPage.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta charset="utf-8">
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>Operations</title>
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<link href="App.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container">
+<div class="content">
+<!-- InstanceBeginEditable name="Title" -->
+<h1>Code Generator II Operations</h1>
+<!-- InstanceEndEditable -->
+
+<!-- InstanceBeginEditable name="Body" -->
+
+<h2>The Toolbar</h2>
+<h2><img src="Images/AccessIcon.jpg" width="16" height="15"> Open and Load Database</h2>
+<p>
+Opens the database and displays table information.
+</p>
+
+<h2><img src="Images/TablesDropDown.jpg" width="98" height="128"> Select Table To Create</h2>
+<p>
+When the database is loaded the drop down combo box is loaded with the name of each table in fhe database.
+When a table is selected the module is created and both the header (".h") and body (".cpp") file are written.
+The names are of the files are placed in the save dialog and the path is remembered from the last file that was 
+created.
+</p>
+
+<h2><img src="Images/Table.jpg" width="16" height="15"> Create DBtable Module</h2>
+<p>
+A dialog box is presented to the user with a check box for each table in the database.  The tables for which
+modules have been created in the current execution of the application are checked.
+</p>
+<p>
+The DBtable module contains an object for each table selected in the dialog box.  C++ initializes global objects
+in the order that they appear in a file.  DBtable  pointer to each replica of a database table module.  
+The pointers are installed in DBtable during initialization of the application before the main initInstances is 
+executed.  Thus this is am important file to be correct.
+</p>
+
+<h2><img src="Images/Floppy.jpg" width="16" height="15"> Save File</h2>
+<p>
+Displays a Save File Dialog.  However, it has no purpose in this application.
+</p>
+<h2><img src="Images/Printer.jpg" width="16" height="15"> Print</h2>
+<p>
+Will do all the normal things to print the currently displayed sorted list.
+</p>
+
+
+<h2><img src="Images/Options.jpg" width="16" height="15"> Options</h2>
+<p>
+The options dialog allows specifying the Display and Printer Font Size Scale Factor, the printer
+orientation and the printer margins.
+</p>
+
+
+<h2><img src="Images/About.jpg" width="16" height="15"> About</h2>
+<p>
+Displays the About Box.  The about box uses text from the resource file (TestApp.rc) for
+the output information.  There is a standard about box dialog in the Library.
+</p>
+
+<h2><img src="Images/Exit.jpg" width="16" height="15"> Exit</h2>
+<p>
+ Exit the application with no reservations.
+</p>
+
+<!-- InstanceEndEditable -->
+</div><!-- end .content -->
+</div><!-- end .container -->
+</body>
+<!-- InstanceEnd --></html>
