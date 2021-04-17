@@ -1,7 +1,19 @@
 # CodeGen II
 
-Produce a c++ Module for an MS Access Database Table.  It does this by opening an Access database,
+Produce a c++ Module (header and body file containing one or more classes or functions) for an
+MS Access Database Table.  It does this by opening an Access database,
 reading the list of tables for the db and allowing the user to pick which tables to generate code for.
+
+The c++ modules may then be copied to anotherr application, compiled into the application and used to
+load tables from a MS Access database into the application.  The records have field names which correspond
+to the field names in the database tables (Access names the fields with Capitalized names, I've
+changed the field names to uncapitalized names).  The primary key selected in CodeGen is found with
+a binary search.  The fields chosen in the linear search key dialog are found with a linear search.
+
+If a record is changed it must be "marked" as dirty and the store function called for the table in which
+the record resides.  Likewise a record may be added or deleted using the appropriate functions.  Note,
+each table class is a subclass of the DBtable class and each record is a subclass of the DBrcd class.
+Some of the relevant functionality is in these parent classes.
 
 ## What Will It Do?
 
