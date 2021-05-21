@@ -114,8 +114,8 @@
     <ClInclude Include="CodeGenII.h" />
     <ClInclude Include="CodeGenIIDoc.h" />
     <ClInclude Include="CodeGenIIView.h" />
-    <ClInclude Include="DBtbl.h" />
     <ClInclude Include="DBtables.h" />
+    <ClInclude Include="DBtbl.h" />
     <ClInclude Include="DBtblSelDlg.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="..\..\Library\Extras\ExtraResource.h" />
@@ -157,8 +157,8 @@
     <None Include="..\..\Library\Extras\About.rc2" />
     <None Include="res\CodeGenII.rc2" />
     <None Include="..\..\Library\Extras\Options.rc2" />
-    <None Include="res\Toolbar04.bmp" />
   <None Include="..\README.md" />
+    <None Include="res\Toolbar04.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\CodeGenII.ico" />

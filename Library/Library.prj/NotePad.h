@@ -85,7 +85,7 @@ private:
 
   static NotePad& doClrTabs(      NotePad& n);
   static NotePad& doTab(          NotePad& n);
-  static NotePad& doCrlf(         NotePad& n) {return n.crlf();}
+  static NotePad& doCrlf(         NotePad& n);
   static NotePad& doEndPage(      NotePad& n) {return n.endPage();}
   static NotePad& setTableName(   NotePad& n) {n.getNote().isTable   = true; return n;}
   static NotePad& doCenter(       NotePad& n);

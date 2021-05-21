@@ -205,6 +205,7 @@ int         retTab = 14;    if (lng > retTab) retTab = lng;
   notePad << _T(" operator== (TCchar* name) {return this->name == name;}") << nCrlf;
   notePad << nCrlf;
 
+  notePad << rightAdj(_T("void"), retTab) << _T(" clear() {data.clear();}") << nCrlf;
   notePad << rightAdj(_T("bool"), retTab) << _T(" load(DAOtable* daoTable);");
   notePad << _T("  // load database table into memory, does not use addNewRcd.") << nCrlf;
   notePad << nCrlf;

@@ -239,7 +239,7 @@ void Device::strikeOutFont()           {if (textOut()) {font.setStrikeOut(); set
 void Device::prevFont()                {if (textOut()) {font.pop();          setMetric();}}
 
 
-void Device::setMetric() {hz.setAvgChWidth(dc);    vert.setHeight(dc);}
+void Device::setMetric() {hz.setAvgLgChWidth(dc);    vert.setHeight(dc);}
 
 
 Device& Device::append(Wrap& w) {

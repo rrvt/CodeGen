@@ -86,7 +86,8 @@ bool         wrapEnabled;
   CDC*     getDC()     {return dc;}
   int      remaining() {return hz.remaining();}
   int      maxWidth()  {return hz.maxExtent();}
-  int      chWidth()   {return hz.chWidth();}
+  int      lgChWidth() {return hz.lgChWidth();}
+  int      flChWidth() {return hz.flChWidth();}
   int      chHeight()  {return vert.heightCh();}
   int      maxHeight() {return vert.maxY();}
 
@@ -107,8 +108,7 @@ private:
          int      maxLines()                        {return vert.getMaxLines();}
 
   static Device& doClrTabs(       Device& d) {d.hz.clrTabs(); return d;}
-  static Device& doCrlf(          Device& d)
-                                            {if (d.textOut() && d.nonBlankLine) {d.crlf();}  return d;}
+  static Device& doCrlf(          Device& d) {if (d.textOut() && d.nonBlankLine) {d.crlf();}  return d;}
   static Device& doCR(            Device& d) {if (d.textOut()) d.hz.cr(); return d;}
 
   static Device& doEndPage(       Device& d);
@@ -129,7 +129,7 @@ private:
 
   static Device& doSetTab(        Device& d, int v) {d.hz.setTab(v);  return d;}
   static Device& doSetRTab(       Device& d, int v) {d.hz.setRTab(v); return d;}
-  static Device& doSetLMargin(    Device& d, int v) {d.hz.setLeftMargin(v); return d;}
+  static Device& doSetLMargin(    Device& d, int v) {d.textOut(); d.hz.setLeftMargin(v); return d;}
   static Device& doEditBox(       Device& d, int v);
   static Device& doFFace(         Device& d, String& v) {d.setFontFace(v);  return d;}
   static Device& doFSize(         Device& d, double v)  {d.setFontSize(v);  return d;}

@@ -161,6 +161,13 @@ related to the database:
   - Add a Book (Title, author and protagonist) or Add a person
   - erase a book or person (note, simple erase only erases in the table selected)
 
+## Updates
+
+### Update 5/21/21
+
+Added a clear function to all database so that load may be performed multiple time with different
+databases.
+
 ## Authors
 
 Robert R. Van Tuyl, K6RWY
