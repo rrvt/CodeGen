@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 10/2/21
+
+Libray update only.
+
 ### Update 5/21/21
 
 Added a clear function to all database so that load may be performed multiple time with different

@@ -126,6 +126,7 @@ private:
   static Device& doPrevFont(      Device& d) {d.prevFont();      return d;}
 
   static Device& doFlushFtr(      Device& d);
+  static Device& doFlush(         Device& d);
 
   static Device& doSetTab(        Device& d, int v) {d.hz.setTab(v);  return d;}
   static Device& doSetRTab(       Device& d, int v) {d.hz.setRTab(v); return d;}
@@ -176,7 +177,8 @@ extern DspManip dClrTabs;        // add to stream to clear tabs:                
 extern DspManip dCrlf;           // add to stream to terminate a line on display:  dsp << "xyz" << dCrlf;
 extern DspManip dCR;             // add to stream to perform a carriage return (only)
 extern DspManip dEndPage;        // add to stream to terminate a page when printing or do nothing
-extern DspManip dflushFtr;       // add to stream to terminate a footer when printing
+extern DspManip dFlush;          // flush text so tht the next sequence may be setup
+extern DspManip dFlushFtr;       // add to stream to terminate a footer when printing
 extern DspManip dTab;            // add to stream to tab to next tab position:     dsp << dTab << "xyz";
 extern DspManip dCenter;         // center the string following up to the nCrlf
 extern DspManip dRight;          // right align the string following up to the nCrlf

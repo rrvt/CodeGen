@@ -125,13 +125,13 @@ void CodeGenIIDoc::saveFile() {
 String path;
 String filePath;
 
-  iniFile.readString(FileSection, GenFilePathKey, path);   path = getPath(path);
+  iniFile.readString(FileSection, GenFilePathKey, path);   path = ::getPath(path);
 
   path += pathDlgDsc.name;
 
   if (getSaveAsPathDlg(pathDlgDsc, filePath)) {
 
-    iniFile.writeString(FileSection, GenFilePathKey, getPath(filePath));
+    iniFile.writeString(FileSection, GenFilePathKey, ::getPath(filePath));
 
     dataSource = NotePadSrc;   OnSaveDocument(filePath);
     }
