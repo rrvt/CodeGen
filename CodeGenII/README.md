@@ -163,6 +163,11 @@ related to the database:
 
 ## Updates
 
+### Update 10/31/21
+
+Changed Resources (i.e. xxx.rc data) access so that it will work with a dll.  Changed the logic in the
+About Box code.  Some other library changes.  Some corresponding changes in the application.
+
 ### Update 10/2/21
 
 Libray update only.

@@ -21,9 +21,9 @@ public:
   virtual BOOL InitInstance();
   virtual int  ExitInstance();
 
-          CodeGenIIDoc*  doc()  {return (CodeGenIIDoc*)  CApp::getDoc();}
-          CodeGenIIView* view() {return (CodeGenIIView*) CApp::getView();}
-          MainFrame*       mainFrm() {return (MainFrame*) m_pMainWnd;}
+          CodeGenIIDoc*  doc()     {return (CodeGenIIDoc*)  CApp::getDoc();}
+          CodeGenIIView* view()    {return (CodeGenIIView*) CApp::getView();}
+          MainFrame*     mainFrm() {return (MainFrame*) m_pMainWnd;}
 
   DECLARE_MESSAGE_MAP()
 
@@ -35,7 +35,7 @@ public:
 
 extern CodeGenII theApp;
 
-inline void         invalidate() {theApp.invalidate();}
-inline CodeGenIIDoc*  doc()  {return theApp.doc();}
-inline CodeGenIIView* view() {return theApp.view();}
+inline void           invalidate() {theApp.invalidate();}
+inline CodeGenIIDoc*  doc()        {return theApp.doc();}
+inline CodeGenIIView* view()       {return theApp.view();}
 

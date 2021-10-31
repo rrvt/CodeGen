@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "CodeGenII.h"
-#include "About.h"
+#include "AboutDlg.h"
 #include "ExtraResource.h"
 #include "IniFile.h"
 #include "MainFrame.h"
@@ -106,5 +106,5 @@ String topic = m_pszHelpFilePath; topic += _T(">Introduction");
   }
 
 
-void CodeGenII::OnAppAbout() {CAboutDlg aboutDlg; aboutDlg.DoModal();}
+void CodeGenII::OnAppAbout() {AboutDlg aboutDlg; aboutDlg.DoModal();}
 
