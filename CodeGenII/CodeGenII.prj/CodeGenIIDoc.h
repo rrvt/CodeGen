@@ -4,8 +4,6 @@
 #pragma once
 #include "CDoc.h"
 #include "MainFrame.h"
-#include "TBComboBox.h"
-#include "TBEditBox.h"
 
 
 enum DataSource {NotePadSrc, StoreSrc, FontSrc};

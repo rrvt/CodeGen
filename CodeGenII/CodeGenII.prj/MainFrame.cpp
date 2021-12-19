@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "MainFrame.h"
+#include "TBBtnCtx.h"
 #include "resource.h"
 
 
@@ -62,12 +63,16 @@ int MainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
   }
 
 
-void MainFrame::setupToolBar() {toolBar.setCbxCtrl(ID_CB, 100, 500);   toolBar.install();}
-
-
 // MainFrame message handlers
 
 afx_msg LRESULT MainFrame::OnResetToolBar(WPARAM wParam, LPARAM lParam) {setupToolBar();  return 0;}
+
+
+void MainFrame::setupToolBar() {
+CRect winRect;   GetWindowRect(&winRect);   toolBar.initialize(winRect);
+
+  toolBar.installComboBox(ID_CB);
+  }
 
 
 // MainFrame diagnostics

@@ -38,4 +38,5 @@ extern CodeGenII theApp;
 inline void           invalidate() {theApp.invalidate();}
 inline CodeGenIIDoc*  doc()        {return theApp.doc();}
 inline CodeGenIIView* view()       {return theApp.view();}
+inline MainFrame*     mainFrm()    {return theApp.mainFrm();}
 

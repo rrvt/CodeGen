@@ -53,10 +53,10 @@ CodeGenIIDoc::~CodeGenIIDoc() { }
 
 
 void CodeGenIIDoc::OnFileOpen() {
-TBComboBox* cb = TBComboBox::get(ID_CB);      if (!cb) return;
-String      path;
-DAOiter     iter(daoTables);
-DAOtable*   doaTbl;
+ToolBar&  toolBar = mainFrm()->getToolBar();
+String    path;
+DAOiter   iter(daoTables);
+DAOtable* doaTbl;
 
   notePad.clear();
 
@@ -66,29 +66,35 @@ DAOtable*   doaTbl;
 
   dbTbl.loadTableNames();
 
-  for (doaTbl = iter(); doaTbl; doaTbl = iter++) cb->AddSortedItem(doaTbl->name);
+  for (doaTbl = iter(); doaTbl; doaTbl = iter++)
+                              {CbxItem item = {doaTbl->name, 0};   toolBar.addCbxItem(ID_CB, item);}
 
-  cb->SelectItem(-1);   dbTables.display();   display(NotePadSrc);
+  toolBar.setCbxCaption(ID_CB, _T("Database Tables"));
+
+  dbTables.display();   display(NotePadSrc);
   }
 
 
 
 void CodeGenIIDoc::OnComboBoxChng() {
-TBComboBox* cb   = TBComboBox::get(ID_CB);    if (!cb)   return;
-int         i    = cb->GetCurSel();           if (i < 0) return;
-String      name = cb->GetItem(i);
-Module      module(name);
-MdlHeader   hdr(module);
-MdlBody     body(module);
-String      tblName = name + _T("Tbl");
+ToolBar& toolBar = mainFrm()->getToolBar();
+int      i;
+String   name;
+String   tblName;
+
+  if (!toolBar.getCbxSel(ID_CB, name, i)) return;
+
+  tblName = name + _T("Tbl");
+
+  Module module(name);
 
   if (!module.getSearchFields()) return;
 
-  hdr.create();
+  MdlHeader hdr(module);   hdr.create();
 
   pathDlgDsc = PathDlgDsc(_T("Header File"), tblName, _T(".h"), HeaderPat);   saveFile();
 
-  body.create();
+  MdlBody body(module);  body.create();
 
   pathDlgDsc = PathDlgDsc(_T("Body File"), tblName, _T(".cpp"), CppPat);   saveFile();
 

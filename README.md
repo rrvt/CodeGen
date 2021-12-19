@@ -163,6 +163,28 @@ related to the database:
 
 ## Updates
 
+### Update 12/18/21
+
+While creating a template for a dialog box only application with a toolbar the Library was added to and
+changed to hopefully simplify toolbar creation.  This version of the toolbar includes buttons, edit boxes,
+combo boxes and drop down menus as well as the traditional 16x15 icons.
+
+CodeGen is a tradional App and has one combo box that is filled when the database is identified.
+
+### Update 11/13/21
+
+The changes are in the library:
+
+  - Expandable and ExpandableP -- moved the functions out of the class to make the compilation smaller,
+also fixed one bug (or feature) in the ExpandableP insert sorted function that would throw out entries
+that were already in in the array.
+  - FileIO -- Changed the type of path from "String&" to "TCchar*".  It turns out that automatic
+conversion from String to TCchar* is easy, but the reverse is is not easy.  Also added a function to
+get the length of a file given a path.
+  - FineName -- Added a function to get the directory name of from a path
+  - NewAllocator -- Corrected the debug dependency from if to ifdef
+  - ToolBar -- Added data for drop down menus
+
 ### Update 10/31/21
 
 Changed Resources (i.e. xxx.rc data) access so that it will work with a dll.  Changed the logic in the
