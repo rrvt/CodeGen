@@ -137,34 +137,3 @@ int x = FindItem(s);                                 // Test this
   return -1;
   }
 
-
-
-#if 0
-void TBBtnCtx::get(CbxItem* items, int noItems) {
-int i;
-
-  for (i = 0; i < noItems; i++) {CbxItem& item = items[i]; get(item);}
-  }
-
-
-void TBBtnCtx::get(uint idr) {
-CMenu   menu;   if (!menu.LoadMenu(idr)) return;
-uint    n = menu.GetMenuItemCount();
-uint    i;
-uint    id;
-CString name;
-
-  for (i = 0; i < n; i++) {
-    id = menu.GetMenuItemID(i);   menu.GetMenuString(i, name, MF_BYPOSITION);
-
-    CbxItem item(name, id);   get(item);
-    }
-  }
-
-
-void TBBtnCtx::get(CbxItem& item) {get(item.item);   noLines++;}
-
-
-void TBBtnCtx::get(TCchar* txt) {int lng = txt ? _tcslen(txt) : 0;  if (lng > maxChars) maxChars = lng;}
-#endif
-

@@ -83,29 +83,3 @@ void TBPopupMenu::setDim(TBBtnCtx& ctx) {
   m_iWidth = ctx.getHoriz() + 20;   m_nDropDownHeight = ctx.getVert();
   }
 
-
-
-
-
-#if 0
-bool TBPopupMenu::setSize(uint idr, int maxChars, int avgWidth, int heightLine) {
-CMenu   menu;   if (!menu.LoadMenu(idr)) return false;
-uint    n = menu.GetMenuItemCount();
-uint    i;
-CString name;
-int     lng;
-
-  for (i = 0; i < n; i++) {
-    menu.GetMenuString(i, name, MF_BYPOSITION);
-
-    lng = name.GetLength(); if (lng > maxChars) maxChars = lng;
-    }
-
-  m_iWidth = maxChars * avgWidth + 20;
-
-  SetDropDownHeight((n+1) * heightLine);
-
-  menu.DestroyMenu();  return true;
-  }
-#endif
-

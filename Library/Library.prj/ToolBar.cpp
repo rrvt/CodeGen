@@ -181,17 +181,3 @@ TBBtnCtx* ctx;
   return 0;
   }
 
-
-
-#if 0
-void ToolBar::setCbxDim(uint id, TBBtnCtx& ctx) {
-TBComboBox* cbx = TBComboBox::get(id);
-
-  getFontDim(ctx);
-
-  if (cbx) {ctx.height++;   cbx->setDim(ctx);    ctx.height--;}
-  }
-#endif
-
-
-
