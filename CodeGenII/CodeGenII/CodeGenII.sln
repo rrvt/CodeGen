@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeGenIIHelp", "..\CodeGenII.hlp\CodeGenIIHelp.vcxproj", "{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeGenII", "..\CodeGenII.prj\CodeGenII.vcxproj", "{DB711634-C370-48D5-9EF4-3FB1F9190A43}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4} = {E69015E9-384C-4E27-B09F-3DEAAC1E73B4}
@@ -16,12 +14,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Library", "..\..\Library\Li
 		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4} = {E69015E9-384C-4E27-B09F-3DEAAC1E73B4}
 	EndProjectSection
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "..\Installer\Installer.wixproj", "{481DEF2D-A0E3-4C87-9385-425BD1F1ED86}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "CodeGenIIWix", "..\CodeGenII.wix\CodeGenIIWix.wixproj", "{481DEF2D-A0E3-4C87-9385-425BD1F1ED86}"
 	ProjectSection(ProjectDependencies) = postProject
 		{DB711634-C370-48D5-9EF4-3FB1F9190A43} = {DB711634-C370-48D5-9EF4-3FB1F9190A43}
 		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4} = {E69015E9-384C-4E27-B09F-3DEAAC1E73B4}
 		{CF57F3EC-D3DB-4469-8519-3F9D73785D9B} = {CF57F3EC-D3DB-4469-8519-3F9D73785D9B}
 	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeGenIIHlp", "..\CodeGenII.hlp\CodeGenIIHlp.vcxproj", "{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,6 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Debug|Win32.ActiveCfg = Debug|Win32
-		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Debug|Win32.Build.0 = Debug|Win32
-		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Release|Win32.ActiveCfg = Release|Win32
-		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Release|Win32.Build.0 = Release|Win32
 		{DB711634-C370-48D5-9EF4-3FB1F9190A43}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DB711634-C370-48D5-9EF4-3FB1F9190A43}.Debug|Win32.Build.0 = Debug|Win32
 		{DB711634-C370-48D5-9EF4-3FB1F9190A43}.Release|Win32.ActiveCfg = Release|Win32
@@ -44,6 +40,10 @@ Global
 		{481DEF2D-A0E3-4C87-9385-425BD1F1ED86}.Debug|Win32.ActiveCfg = Debug|x86
 		{481DEF2D-A0E3-4C87-9385-425BD1F1ED86}.Release|Win32.ActiveCfg = Release|x86
 		{481DEF2D-A0E3-4C87-9385-425BD1F1ED86}.Release|Win32.Build.0 = Release|x86
+		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Debug|Win32.Build.0 = Debug|Win32
+		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Release|Win32.ActiveCfg = Release|Win32
+		{E69015E9-384C-4E27-B09F-3DEAAC1E73B4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
