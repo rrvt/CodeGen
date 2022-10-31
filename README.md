@@ -163,6 +163,11 @@ related to the database:
 
 ## Updates
 
+### Update 1030/22
+
+Start app with position and size that the app was in when it last exited.  Update the toolbar background.
+Updated the help file to reflect the changes required by moving to Win11 and VS22.
+
 ### Update 8/3/22
 
 Minor Library updates.

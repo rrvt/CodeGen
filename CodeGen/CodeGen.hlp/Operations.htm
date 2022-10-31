@@ -29,9 +29,24 @@ Opens the database and displays table information.
 <h2><img src="Images/TablesDropDown.jpg" width="98" height="128"> Select Table To Create</h2>
 <p>
 When the database is loaded the drop down combo box is loaded with the name of each table in fhe database.
-When a table is selected the module is created and both the header (".h") and body (".cpp") file are written.
-The names are of the files are placed in the save dialog and the path is remembered from the last file that was 
-created.
+A table must be selected before the Record Set Module and Database Table Module can be created.  The 
+selected table appears in the Edit box of the Combo Box.  When a table is selected a dialog box appears
+that requests an abbreviation for the table record and table prefix.  It must be unique in order for
+a compilation to succeed.
+</p>
+
+<h2><img src="Images/S.jpg" width="16" height="15"> Create Record Set Module</h2>
+<p>
+A Record Set has multiple fields each with a specified bype.  This module details the fields in
+the set and allows various operations on the set.
+</p>
+
+<h2><img src="Images/Table.jpg" width="16" height="15"> Create a Database Table Module</h2>
+<p>
+Database Tables are vectors of record sets.  This operation creates a table that will allow operations
+on an in core version of a database table.  Tables are typically loaded at the start of an application,
+maintained in core until the application is instructed to save the changes back to the database or 
+exit with making updates to the database.
 </p>
 
 <h2><img src="Images/Table.jpg" width="16" height="15"> Create DBtable Module</h2>

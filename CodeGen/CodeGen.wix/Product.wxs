@@ -58,11 +58,11 @@
       <Directory Id="CodeGen.pff" Name="CodeGen" />
     </Directory>
 
-    <Directory Id="ProgramMenuFolder" Name="StartMenu">
+    <Directory Id="ProgramMenuFolder">
       <Directory Id="CodeGen.pmf" Name="CodeGen" />
     </Directory>
 
-    <Directory Id="DesktopFolder" Name="Desktop" />
+    <Directory Id="DesktopFolder" />
   </Directory>
 
   <Property Id="ApplicationFolderName" Value="CodeGen" />
@@ -103,7 +103,7 @@
 <Fragment>
 
   <Component Id="UninstallCodeGen.cmp" 
-                                  Guid="C2F0CE81-8BB4-4DED-824D-887722AA5804" Directory="CodeGen.pmf">
+                                  Guid="6EC26DF5-FE4B-425D-9A9F-E542ACBC170F" Directory="CodeGen.pmf">
 
     <Shortcut Id               = "UninstallCodeGen.shc"
               Name             = "Uninstall CodeGen"
