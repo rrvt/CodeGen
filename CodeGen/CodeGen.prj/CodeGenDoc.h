@@ -5,7 +5,7 @@
 #include "CDoc.h"
 
 
-enum DataSource {NotePadSrc, StoreSrc, FontSrc};
+enum DataSource {NotePadSrc};
 
 
 class CodeGenDoc : public CDoc {
@@ -49,7 +49,6 @@ public:
   afx_msg void onDBtable();
   afx_msg void onDatabase();
   afx_msg void OnFileSave();
-  afx_msg void OnOptions();
 
   friend class CodeGenOps;
   };

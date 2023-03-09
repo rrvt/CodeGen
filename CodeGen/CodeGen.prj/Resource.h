@@ -15,11 +15,13 @@
 
 #define ID_File_Open                    401
 #define ID_File_Save                    402
-#define ID_Help                         403
-#define ID_CB                           404
-#define ID_RcdSet                       405
-#define ID_DBtable                      406
-#define ID_Database                     407
+#define ID_Options                      403
+#define ID_App_About                    404
+#define ID_Help                         405
+#define ID_CB                           406
+#define ID_RcdSet                       407
+#define ID_DBtable                      408
+#define ID_Database                     409
 
 
 // Next default values for new objects
@@ -27,7 +29,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        106
-#define _APS_NEXT_COMMAND_VALUE         407
+#define _APS_NEXT_COMMAND_VALUE         420
 #define _APS_NEXT_CONTROL_VALUE         203
 #define _APS_NEXT_SYMED_VALUE           300
 #endif

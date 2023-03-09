@@ -10,11 +10,10 @@
 #include "IniFile.h"
 #include "MainFrame.h"
 #include "NotePad.h"
-#include "Options.h"
 
 
 CodeGen theApp;                       // The one and only CodeGen object
-IniFile   iniFile;
+IniFile iniFile;
 
 // CodeGen
 
@@ -69,23 +68,7 @@ BOOL CodeGen::InitInstance() {
 
   view()->setFont(_T("Courier New"), 12.0);
 
-  options.load();    view()->setOrientation(options.orient);
-
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
-  }
-
-
-
-void CodeGen::OnFilePrintSetup() {
-PrtrOrient orient;
-
-  view()->setPrntrOrient(getDevMode());
-
-    CWinApp::OnFilePrintSetup();
-
-  orient = view()->getPrntrOrient(getDevMode());
-
-  options.setOrient(orient);   view()->setOrientation(options.orient);
   }
 
 

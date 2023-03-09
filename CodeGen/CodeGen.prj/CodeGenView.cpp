@@ -5,7 +5,8 @@
 #include "CodeGenView.h"
 #include "CodeGen.h"
 #include "CodeGenDoc.h"
-#include "Options.h"
+#include "OptionsDlg.h"
+#include "Resource.h"
 #include "Resources.h"
 
 
@@ -14,6 +15,7 @@
 IMPLEMENT_DYNCREATE(CodeGenView, CScrView)
 
 BEGIN_MESSAGE_MAP(CodeGenView, CScrView)
+  ON_COMMAND(ID_Options, &onOptions)
 END_MESSAGE_MAP()
 
 
@@ -30,57 +32,34 @@ BOOL CodeGenView::PreCreateWindow(CREATESTRUCT& cs) {
   }
 
 
-void CodeGenView::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo) {
-uint   x;
-double topMgn   = options.topMargin.stod(x);
-double leftMgn  = options.leftMargin.stod(x);
-double rightMgn = options.rightMargin.stod(x);
-double botMgn   = options.botMargin.stod(x);
+void CodeGenView::onOptions() {
+OptionsDlg dlg;
 
-  setMgns(leftMgn,  topMgn,  rightMgn, botMgn, pDC);   CScrView::OnPrepareDC(pDC, pInfo);
+  if (printer.name.isEmpty()) printer.load(0);
+
+  if (dlg.DoModal() == IDOK) pMgr.setFontScale(printer.scale);
   }
 
 
 // Perpare output (i.e. report) then start the output with the call to SCrView
 
-void CodeGenView::onPrepareOutput(bool printing) {
-DataSource ds = doc()->dataSrc();
-
-  if (printing)
-    switch(ds) {
-      case NotePadSrc : prtNote.print(*this);  break;
-      }
-
-  else
-    switch(ds) {
-      case NotePadSrc : dspNote.display(*this);  break;
-      }
+void CodeGenView::onBeginPrinting() {prtNote.onBeginPrinting(*this);}
 
 
-  CScrView::onPrepareOutput(printing);
-  }
+void CodeGenView::onDisplayOutput() {dspNote.display(*this);}
 
 
-void CodeGenView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) {
-
-  switch(doc()->dataSrc()) {
-    case NotePadSrc : setOrientation(options.orient); break;    // Setup separate Orientation?
-    case StoreSrc   : setOrientation(options.orient); break;
-    }
-  setPrntrOrient(theApp.getDevMode(), pDC);   CScrView::OnBeginPrinting(pDC, pInfo);
-  }
 
 
 // The footer is injected into the printed output, so the output goes directly to the device.
 // The output streaming functions are very similar to NotePad's streaming functions so it should not
 // be a great hardship to construct a footer.
 
-void CodeGenView::printFooter(Device& dev, int pageNo) {
+void CodeGenView::printFooter(DevBase& dev, int pageNo) {
   switch(doc()->dataSrc()) {
-    case NotePadSrc : prtNote.footer(dev, pageNo);  break;
+    case NotePadSrc : prtNote.prtFooter(dev, pageNo);  break;
     }
   }
-
 
 
 void CodeGenView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {
@@ -89,7 +68,6 @@ void CodeGenView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
-    case StoreSrc   : break;
     }
   }
 
@@ -100,7 +78,6 @@ void CodeGenView::OnSetFocus(CWnd* pOldWnd) {
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
-    case StoreSrc   : break;
     }
   }
 

@@ -163,6 +163,12 @@ related to the database:
 
 ## Updates
 
+### Update 3/8/23
+
+Added numbers to notepad archive output.
+
+Fixed (hopefully) Print and Print Preview.  See MakeApp for details.
+
 ### Update 1030/22
 
 Start app with position and size that the app was in when it last exited.  Update the toolbar background.

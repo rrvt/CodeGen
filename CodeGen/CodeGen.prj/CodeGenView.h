@@ -24,13 +24,11 @@ public:
 
   virtual ~CodeGenView() { }
 
+  virtual void onBeginPrinting();
+  virtual void onDisplayOutput();
+
   virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-
-  virtual void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL);
-  virtual void onPrepareOutput(bool printing);
-
-  virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
-  virtual void printFooter(Device& dev, int pageNo);
+  virtual void printFooter(DevBase& dev, int pageNo);
   virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
   CodeGenDoc* GetDocument() const;
@@ -46,6 +44,7 @@ public:
 
   DECLARE_MESSAGE_MAP()
 
+  afx_msg void onOptions();
   afx_msg void OnSetFocus(CWnd* pOldWnd);
   };
 

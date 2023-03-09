@@ -16,7 +16,6 @@
 #include "LinSrch.h"
 #include "MainFrame.h"
 #include "ModNames.h"
-#include "Options.h"
 #include "RcdSetBdy.h"
 #include "RcdSetHdr.h"
 #include "Resource.h"
@@ -46,7 +45,6 @@ BEGIN_MESSAGE_MAP(CodeGenDoc, CDoc)
   ON_COMMAND(ID_Database,      &onDatabase)
 
   ON_COMMAND(ID_File_Save,     &OnFileSave)
-  ON_COMMAND(ID_Options,       &OnOptions)
 END_MESSAGE_MAP()
 
 
@@ -60,21 +58,25 @@ CodeGenDoc::~CodeGenDoc() { }
 
 
 void CodeGenDoc::OnFileOpen() {
-DbTblIter iter(dbTblList);
-TblItem*  dsc;
+PathDlgDsc dsc;
+DbTblIter  iter(dbTblList);
+TblItem*   item;
 ToolBar&   toolBar = mainFrm()->getToolBar();
 
   notePad.clear();
 
-  if (getPathDlg(_T("Database"), 0, _T("accdb"), _T("*.accdb"), path))
-                                                       iniFile.writeString(FileSection, DBFileKey, path);
+  dsc(_T("Database"), 0, _T("accdb"), _T("*.accdb"));
+
+  if (!setOpenPath(dsc)) return;
+
+  iniFile.writeString(FileSection, DBFileKey, path);
 
   notePad << nSetTab(20);
 
   dbTblList.load(path);
 
-  for (dsc = iter(); dsc; dsc = iter++)
-                                      {CbxItem item = {dsc->name, 0};   toolBar.addCbxItem(ID_CB, item);}
+  for (item = iter(); item; item = iter++)
+                                {CbxItem cbxItem = {item->name, 0};   toolBar.addCbxItem(ID_CB, cbxItem);}
 
   toolBar.setCbxCaption(ID_CB, _T("Database Tables"));
 
@@ -157,9 +159,6 @@ DatabaseBdy bdy;
   }
 
 
-void CodeGenDoc::OnOptions() {options(view());  view()->setOrientation(options.orient);}
-
-
 void CodeGenDoc::display(DataSource ds) {dataSource = ds; invalidate();}
 
 
@@ -195,11 +194,7 @@ void CodeGenDoc::serialize(Archive& ar) {
       default         : return;
       }
 
-  else
-    switch(dataSource) {
-      case FontSrc  :
-      default       : return;
-      }
+  else return;
   }
 
 
