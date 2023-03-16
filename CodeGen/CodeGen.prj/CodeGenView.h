@@ -10,11 +10,7 @@ class CodeGenDoc;
 
 
 class CodeGenView : public CScrView {
-
-NotePadRpt dspNote;
-NotePadRpt prtNote;
-
-protected: // create from serialization only
+protected:
 
   CodeGenView() noexcept;
 

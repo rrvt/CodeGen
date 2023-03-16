@@ -19,7 +19,7 @@ BEGIN_MESSAGE_MAP(CodeGenView, CScrView)
 END_MESSAGE_MAP()
 
 
-CodeGenView::CodeGenView() noexcept : dspNote( dMgr.getNotePad()), prtNote( pMgr.getNotePad()) {
+CodeGenView::CodeGenView() noexcept {          //dspNote( dMgr.getNotePad()), prtNote( pMgr.getNotePad())
 ResourceData res;
 String       pn;
   if (res.getProductName(pn)) prtNote.setTitle(pn);
@@ -37,7 +37,13 @@ OptionsDlg dlg;
 
   if (printer.name.isEmpty()) printer.load(0);
 
-  if (dlg.DoModal() == IDOK) pMgr.setFontScale(printer.scale);
+  initNoteOrietn();   dlg.orient = printer.toStg(prtNote.prtrOrietn);
+
+  if (dlg.DoModal() == IDOK) {
+    pMgr.setFontScale(printer.scale);
+
+    prtNote.prtrOrietn = printer.toOrient(dlg.orient);   saveNoteOrietn();
+    }
   }
 
 
