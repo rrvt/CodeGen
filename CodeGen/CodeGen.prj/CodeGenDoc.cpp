@@ -10,7 +10,6 @@
 #include "DatabaseHdr.h"
 #include "DbTblList.h"
 #include "DbTblSelDlg.h"
-#include "ExtraResource.h"
 #include "filename.h"
 #include "IniFile.h"
 #include "LinSrch.h"
@@ -19,6 +18,7 @@
 #include "RcdSetBdy.h"
 #include "RcdSetHdr.h"
 #include "Resource.h"
+#include "ResourceExtra.h"
 #include "TableHdr.h"
 #include "TableBdy.h"
 

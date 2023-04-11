@@ -2,18 +2,18 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
 <Product Id="*" UpgradeCode="F1ECCC2F-953C-4978-9FE7-EBC70916AFA0" Language="1033"
-         Manufacturer="Bob -- K6RWY" Name="CodeGen"
-         Version="!(bind.fileVersion.CodeGen.cmp)"
-         >
+                  Manufacturer="Bob -- K6RWY" Name="CodeGen"
+                  Version="!(bind.fileVersion.CodeGen.cmp)"
+                  >
 
   <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
-           Manufacturer="Bob -- K6RWY" Description="Installs CodeGen"
-           Comments="Copyright (c) Bob -- K6RWY"
-           />
+                      Manufacturer="Bob -- K6RWY" Description="Installs CodeGen"
+                      Comments="Copyright (c) Bob -- K6RWY"
+                      />
 
   <MajorUpgrade Schedule="afterInstallInitialize"
-                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
-                DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+                                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
+                                DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 
   <MediaTemplate EmbedCab="yes" />
 
@@ -30,14 +30,13 @@
   <WixVariable Id="WixUIDialogBmp" Value="C:\Program Files (x86)\WixApp\dialog.bmp"/>
   <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
 
-  <Icon     Id="UICodeGen01Icon.ico"
-                                  SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\UICodeGen01.ico"/>
-  <Icon     Id="CodeGen01Icon.ico" SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\CodeGen01.ico"/>
-  <Property Id="ARPPRODUCTICON"  Value="UICodeGen01Icon.ico" />
+  <Icon     Id="UICodeGen_Icon.exe" SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\UICodeGen.ico"/>
+  <Icon     Id="CodeGen_Icon.exe" SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\CodeGen.ico"/>
+  <Property Id="ARPPRODUCTICON"  Value="UICodeGen_Icon.exe" />
 
   <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
     <ComponentGroupRef Id="CodeGen.ftr"/>
-    <ComponentGroupRef Id="UninstallCodeGen.ftr"/>
+    <ComponentGroupRef Id="Uninstall_CodeGen.ftr"/>
   </Feature>
 </Product>
 
@@ -46,8 +45,8 @@
   <ComponentRef Id="CodeGen.cmp"/>
   <ComponentRef Id="Help.cmp"/>
 </ComponentGroup>
-<ComponentGroup Id="UninstallCodeGen.ftr">
-  <ComponentRef Id="UninstallCodeGen.cmp"/>
+<ComponentGroup Id="Uninstall_CodeGen.ftr">
+  <ComponentRef Id="Uninstall_CodeGen.cmp"/>
 </ComponentGroup>
 </Fragment>
 
@@ -63,6 +62,7 @@
     </Directory>
 
     <Directory Id="DesktopFolder" />
+
   </Directory>
 
   <Property Id="ApplicationFolderName" Value="CodeGen" />
@@ -81,7 +81,7 @@
               Advertise        = "yes"
               Directory        = "CodeGen.pmf"
               WorkingDirectory = "CodeGen.pff"
-              Icon             = "CodeGen01Icon.ico"
+              Icon             = "CodeGen_Icon.exe"
               />
 
     <Shortcut Id               = "CodeGen.dsk"
@@ -90,7 +90,7 @@
               Advertise        = "yes"
               Directory        = "DesktopFolder"
               WorkingDirectory = "CodeGen.pff"
-              Icon             = "CodeGen01Icon.ico"
+              Icon             = "CodeGen_Icon.exe"
               />
   </Component>
 
@@ -102,18 +102,18 @@
 
 <Fragment>
 
-  <Component Id="UninstallCodeGen.cmp" 
-                                  Guid="6EC26DF5-FE4B-425D-9A9F-E542ACBC170F" Directory="CodeGen.pmf">
+  <Component Id="Uninstall_CodeGen.cmp" 
+                                  Guid="A09A9F6B-71DE-4848-A7BE-5E55C170E31F" Directory="CodeGen.pmf">
 
     <Shortcut Id               = "UninstallCodeGen.shc"
               Name             = "Uninstall CodeGen"
               Description      = "Uninstalls CodeGen"
               Target           = "[System64Folder]msiexec.exe"
               Arguments        = "/x [ProductCode]"
-              Icon             = "UICodeGen01Icon.ico"
+              Icon             = "UICodeGen_Icon.exe"
               />
     <RemoveFolder Id="CodeGen.uni" Directory="CodeGen.pmf" On="uninstall"/>
-    <RegistryValue Root="HKCU" Key="Software\UninstallCodeGen.cmp" Name="installed"
+    <RegistryValue Root="HKCU" Key="Software\Uninstall_CodeGen.cmp" Name="installed"
                    Type="integer" Value="1" KeyPath="yes"/>
   </Component>
 

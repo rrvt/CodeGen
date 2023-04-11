@@ -6,10 +6,10 @@
 #include "AboutDlg.h"
 #include "CodeGenDoc.h"
 #include "CodeGenView.h"
-#include "ExtraResource.h"
 #include "IniFile.h"
 #include "MainFrame.h"
 #include "NotePad.h"
+#include "ResourceExtra.h"
 
 
 CodeGen theApp;                       // The one and only CodeGen object
