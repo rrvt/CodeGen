@@ -1,7 +1,7 @@
 // CodeGenView.cpp : implementation of the CodeGenView class
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "CodeGenView.h"
 #include "CodeGen.h"
 #include "CodeGenDoc.h"

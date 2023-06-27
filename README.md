@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 6/26/23
+
+Library Update.
+
 ### Update 4/11/23
 
 Changes to the way the library handles printing are reflected in the changes to the application.

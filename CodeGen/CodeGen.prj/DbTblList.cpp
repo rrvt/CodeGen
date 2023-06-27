@@ -1,7 +1,7 @@
 // Database Table List
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "DbTblList.h"
 #include "Database.h"
 #include "IniFile.h"

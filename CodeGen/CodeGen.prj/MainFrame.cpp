@@ -1,7 +1,7 @@
 // MainFrm.cpp : implementation of the MainFrame class
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "MainFrame.h"
 #include "resource.h"
 

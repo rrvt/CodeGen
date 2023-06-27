@@ -1,7 +1,7 @@
 // AbbrDlg.cpp : implementation file
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "AbbrDlg.h"
 #include "Capitalize.h"
 #include "DbTblList.h"

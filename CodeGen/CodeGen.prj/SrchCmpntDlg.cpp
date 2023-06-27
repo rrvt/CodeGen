@@ -1,7 +1,7 @@
 // SrchCmpntDlg.cpp : implementation file
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "SrchCmpntDlg.h"
 #include "Fields.h"
 

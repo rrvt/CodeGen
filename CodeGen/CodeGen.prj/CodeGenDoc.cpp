@@ -1,7 +1,7 @@
 // CodeGenDoc.cpp : implementation of the CodeGenDoc class
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "CodeGenDoc.h"
 #include "AbbrDlg.h"
 #include "CodeGen.h"

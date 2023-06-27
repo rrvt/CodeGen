@@ -1,7 +1,7 @@
 // CodeGen.cpp : Defines the class behaviors for the application.
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "CodeGen.h"
 #include "AboutDlg.h"
 #include "CodeGenDoc.h"

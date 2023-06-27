@@ -1,7 +1,7 @@
 // Names used in the Module (class)
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "ModNames.h"
 #include "Capitalize.h"
 #include "DbTblList.h"

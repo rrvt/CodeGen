@@ -1,7 +1,7 @@
 // Create Table Header File
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "TableHdr.h"
 #include "Capitalize.h"
 #include "Declarations.h"

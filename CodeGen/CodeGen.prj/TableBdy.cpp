@@ -1,7 +1,7 @@
 // Create Table Body File
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "TableBdy.h"
 #include "Capitalize.h"
 #include "Declarations.h"
@@ -17,7 +17,7 @@ void TableBdy::create() {
   notePad << _T("// ") << modNames.accTbl << _T(" Table") << nCrlf;
   notePad << nCrlf;
   notePad << nCrlf;
-  notePad << _T("#include \"stdafx.h\"") << nCrlf;
+  notePad << _T("#include \"pch.h\"") << nCrlf;
   notePad << _T("#include \"") << modNames.tblCls << _T(".h\"") << nCrlf;
   notePad << _T("#include \"NotePad.h\"") << nCrlf;
   notePad << _T("#include \"Utilities.h\"") << nCrlf;

@@ -1,7 +1,7 @@
 // Create the local database objects body
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "DatabaseBdy.h"
 #include "DbTblList.h"
 #include "Declarations.h"
@@ -22,7 +22,7 @@ String       right;
   notePad << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("#include \"stdafx.h\"") << nCrlf;
+  notePad << _T("#include \"pch.h\"") << nCrlf;
   notePad << _T("#include \"Database.h\"") << nCrlf;
   notePad << nCrlf;
   notePad << nCrlf;

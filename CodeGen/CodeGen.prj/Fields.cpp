@@ -1,7 +1,7 @@
 // Names of each field in the table
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "Fields.h"
 #include "Database.h"
 #include "NotePad.h"

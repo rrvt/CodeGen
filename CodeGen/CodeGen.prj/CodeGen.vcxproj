@@ -24,14 +24,15 @@
     <ClInclude Include="DbTblSelDlg.h" />
     <ClInclude Include="Declarations.h" />
     <ClInclude Include="Fields.h" />
+    <ClInclude Include="framework.h" />
     <ClInclude Include="LinSrch.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="RcdSetBdy.h" />
     <ClInclude Include="RcdSetHdr.h" />
     <ClInclude Include="MainFrame.h" />
     <ClInclude Include="ModNames.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SrchCmpntDlg.h" />
-    <ClInclude Include="stdafx.h" />
     <ClInclude Include="TableBdy.h" />
     <ClInclude Include="TableHdr.h" />
     <ClInclude Include="targetver.h" />
@@ -54,12 +55,12 @@
     <ClCompile Include="Declarations.cpp" />
     <ClCompile Include="Fields.cpp" />
     <ClCompile Include="LinSrch.cpp" />
+    <ClCompile Include="pch.cpp" />
     <ClCompile Include="RcdSetBdy.cpp" />
     <ClCompile Include="RcdSetHdr.cpp" />
     <ClCompile Include="MainFrame.cpp" />
     <ClCompile Include="ModNames.cpp" />
     <ClCompile Include="SrchCmpntDlg.cpp" />
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TableBdy.cpp" />
     <ClCompile Include="TableHdr.cpp" />
     <ClCompile Include="Capitalize.cpp" />
@@ -79,8 +80,8 @@
     <None Include="..\..\Library\Extras\RptOrientOne.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\AccessDB.prj\AccessDB.vcxproj">
-      <Project>{12084586-a769-4348-b54d-336fa036a1fb}</Project>
+    <ProjectReference Include="..\..\Library\AccessDB\AccessDB.vcxproj">
+      <Project>{57279f7b-d4b9-47e3-8419-cb9b97c596fa}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Library\Library.prj\Library.vcxproj">
       <Project>{cf57f3ec-d3db-4469-8519-3f9d73785d9b}</Project>
@@ -146,13 +147,13 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\Library\AccessDB.prj\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\Library\AccessDB\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SupportJustMyCode>false</SupportJustMyCode>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <BasicRuntimeChecks/>
+      <BasicRuntimeChecks />
       <FunctionLevelLinking>false</FunctionLevelLinking>
-      <PrecompiledHeaderOutputFile/>
+      <PrecompiledHeaderOutputFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -182,11 +183,11 @@
       </PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <DebugInformationFormat/>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\Library\AccessDB.prj\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat />
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)..\..\Library\Library.prj\;$(SolutionDir)..\..\Library\Extras\;$(SolutionDir)..\..\Library\AccessDB\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <BasicRuntimeChecks/>
-      <PrecompiledHeaderOutputFile/>
+      <BasicRuntimeChecks />
+      <PrecompiledHeaderOutputFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -194,7 +195,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>Htmlhelp.lib</AdditionalDependencies>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <ProgramDatabaseFile/>
+      <ProgramDatabaseFile />
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
     </Link>
     <Midl>

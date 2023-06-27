@@ -1,7 +1,7 @@
 // DbTblSelDlg.cpp : implementation file
 //
 
-#include "stdafx.h"
+#include "pch.h"
 #include "DBTblSelDlg.h"
 
 

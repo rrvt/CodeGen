@@ -1,7 +1,7 @@
 // Module Body Creation
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "RcdSetBdy.h"
 #include "Capitalize.h"
 #include "Declarations.h"
@@ -16,7 +16,7 @@ void RcdSetBdy::create() {
   notePad << _T("// ") << modNames.setCls << _T(" Record") << nCrlf;
   notePad << nCrlf;
   notePad << nCrlf;
-  notePad << _T("#include \"stdafx.h\"") << nCrlf;
+  notePad << _T("#include \"pch.h\"") << nCrlf;
   notePad << _T("#include \"") << modNames.setCls << _T(".h\"") << nCrlf;
   notePad << _T("#include \"AccessDB.h\"") << nCrlf;
   notePad << nCrlf;

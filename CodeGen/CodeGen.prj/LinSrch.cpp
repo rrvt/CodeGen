@@ -1,7 +1,7 @@
 // Add a linear search to the table classes
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "LinSrch.h"
 #include "Capitalize.h"
 #include "ModNames.h"

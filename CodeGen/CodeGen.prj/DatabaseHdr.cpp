@@ -1,7 +1,7 @@
 // Create the local database objects
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "DatabaseHdr.h"
 #include "DbTblList.h"
 #include "ModNames.h"

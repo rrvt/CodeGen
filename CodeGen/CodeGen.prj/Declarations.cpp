@@ -1,7 +1,7 @@
 // Variable Declarations
 
 
-#include "stdafx.h"
+#include "pch.h"
 #include "Declarations.h"
 #include "NotePad.h"
 #include "Utilities.h"
