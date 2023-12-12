@@ -32,12 +32,12 @@ bool      isSelected;
 
 
 class Fields;
-typedef DatumPtrT<Field> FieldP;                      // Usually defined just before iterator
-typedef IterT<Fields, Field> FldsIter;
+typedef DatumPtrT<Field, int> FieldP;                      // Usually defined just before iterator
+typedef IterT<Fields, Field>  FldsIter;
 
 
 class Fields {
-ExpandableP<Field, FieldP, 2> data;
+ExpandableP<Field, int, FieldP, 2> data;
 
 public:
 String table;

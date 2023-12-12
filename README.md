@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 12/11/23
+
+Improve ExpandableP (modify) and associated changes.
+
 ### Update 6/26/23
 
 Library Update.

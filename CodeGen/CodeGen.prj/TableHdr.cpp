@@ -117,7 +117,7 @@ String       s;
 void TableHdr::iterator() {
 
   notePad << _T("// Record Pointer Declaration, see ExpandableP.h for details") << nCrlf;
-  notePad << _T("typedef DatumPtrT<") << modNames.rcdCls << _T("> ");
+  notePad << _T("typedef DatumPtrT<") << modNames.rcdCls << _T(", int> ");
   notePad << modNames.rcdPCls << _T(';') << nCrlf;
   notePad << nCrlf;
 
@@ -134,7 +134,7 @@ Declarations decl;
   notePad << _T("class ") << modNames.tblCls << _T(" {") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("ExpandableP<") << modNames.rcdCls << _T(", ") << modNames.rcdPCls;
+  notePad << _T("ExpandableP<") << modNames.rcdCls << _T(", int, ") << modNames.rcdPCls;
   notePad << _T(", 2> data;") << nCrlf;
   notePad << nCrlf;
 
