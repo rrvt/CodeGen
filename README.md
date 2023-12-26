@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+$$$ Update 12/25/23
+
+Modify ExpandableP and subsequent ripple.
+
 ### Update 12/11/23
 
 Improve ExpandableP (modify) and associated changes.
