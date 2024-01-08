@@ -35,6 +35,16 @@
   <ItemGroup>
     <Content Include="CodeGen.wxd" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeGen.prj\CodeGen.vcxproj">
+      <Name>CodeGen</Name>
+      <Project>{5041280f-3ae4-4a40-86d5-bc55fa49edc6}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
   <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
