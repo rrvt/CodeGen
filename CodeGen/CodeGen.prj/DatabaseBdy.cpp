@@ -58,5 +58,7 @@ String       right;
   notePad << _T("  return true;") << nCrlf;
   notePad << _T("  }") << nCrlf;
   notePad << nCrlf;
+  notePad << nCrlf;
+  notePad << _T("Database::~Database() {accessDB.close();}") << nCrlf;
   }
 

@@ -90,9 +90,6 @@ void RcdSetBdy::open() {
   notePad << _T("    }") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  AllocRowset();          // Allocate memory and cache info") << nCrlf;
-  notePad << nCrlf;
-
   notePad << _T("  return opened = true;") << nCrlf;
   notePad << _T("  }") << nCrlf;
   }
@@ -614,5 +611,10 @@ notePad << _T("") <<  << _T("") <<  << _T("") << nCrlf;
 //#include "Fields.h"
 
 
+
+#if 0
+  notePad << _T("  AllocRowset();          // Allocate memory and cache info") << nCrlf;
+  notePad << nCrlf;
+#endif
 
 

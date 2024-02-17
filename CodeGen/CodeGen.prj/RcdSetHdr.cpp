@@ -47,7 +47,7 @@ int          i;
 
   notePad << _T("  bool open(TCchar* path);") << nCrlf;
   notePad << _T("  bool isOpen() {return opened;}") << nCrlf;
-  notePad << _T("  void close() {AccRcdSet::close(); opened = false;}") << nCrlf;
+  notePad << _T("  void close() {opened = false;}") << nCrlf;
   notePad << nCrlf;
   notePad << _T("  bool edit();")   << nCrlf;
   notePad << _T("  bool addNew();") << nCrlf;
