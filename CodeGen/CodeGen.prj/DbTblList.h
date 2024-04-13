@@ -43,7 +43,7 @@ private:
   void    loadPKey();
   String& sect(String& s) {s = name + _T("Sect");   return s;}
 
-  void copy(TblItem& ti);        // {name = ti.name; selected = ti.selected;}
+  void copy(TblItem& ti);
   };
 
 
@@ -62,9 +62,11 @@ public:
   DbTblList() { }
  ~DbTblList() { }
 
-  void load(TCchar* path);
+  void     load(TCchar* path);
 
   TblItem* find(TCchar* name) {return data.bSearch(name);}
+
+  void     display();
 
 private:
 

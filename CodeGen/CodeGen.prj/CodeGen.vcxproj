@@ -26,6 +26,7 @@
     <ClInclude Include="Fields.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LinSrch.h" />
+    <ClInclude Include="MyToolBar.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RcdSetBdy.h" />
     <ClInclude Include="RcdSetHdr.h" />
@@ -55,6 +56,7 @@
     <ClCompile Include="Declarations.cpp" />
     <ClCompile Include="Fields.cpp" />
     <ClCompile Include="LinSrch.cpp" />
+    <ClCompile Include="MyToolBar.cpp" />
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="RcdSetBdy.cpp" />
     <ClCompile Include="RcdSetHdr.cpp" />

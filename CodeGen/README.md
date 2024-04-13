@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 4/12/24
+
+Changed the way Toolbara and Window Position and size are dealt with.
+
 ### Update 2/16/24
 
 Reorganized the Library so that it compiles once into Debug and Release directories under the Library

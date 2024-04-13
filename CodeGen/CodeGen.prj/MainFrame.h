@@ -3,18 +3,17 @@
 
 #pragma once
 #include "CMainFrm.h"
-#include "ToolBar.h"
+#include "MyToolBar.h"
 #include "WinPos.h"
 
 
 class MainFrame : public CMainFrm {
 
 CMFCMenuBar   menuBar;
-ToolBar       toolBar;
+MyToolBar     toolBar;
 CMFCStatusBar statusBar;
 
 bool          isInitialized;
-WinPos        winPos;                               // Position of Window
 
 protected:                                          // create from serialization only
 
@@ -26,11 +25,11 @@ public:                                             // Overrides
 
   virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-  virtual ~MainFrame();
+  virtual     ~MainFrame();
 
-  void setupToolBar();
+  void         setupToolBar();
+  MyToolBar&   getToolBar() {return toolBar;}
 
-  ToolBar& getToolBar() {return toolBar;}
 
 #ifdef _DEBUG
   virtual void AssertValid() const;
@@ -41,7 +40,7 @@ protected:                                          // Generated message map fun
 
   DECLARE_MESSAGE_MAP()
 
-  afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+  afx_msg int     OnCreate(LPCREATESTRUCT lpCreateStruct);
   afx_msg LRESULT OnResetToolBar(WPARAM wParam, LPARAM lParam);
 
   afx_msg void    OnMove(int x, int y);

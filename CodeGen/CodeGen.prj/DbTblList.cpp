@@ -5,6 +5,7 @@
 #include "DbTblList.h"
 #include "Database.h"
 #include "IniFile.h"
+#include "NotePad.h"
 
 
 static TCchar* AbbrKey   = _T("Abbr");
@@ -30,6 +31,17 @@ AccTblDsc* dsc;
 
   accTblDsc.close();
   }
+
+
+void DbTblList::display() {
+DbTblIter iter(*this);
+TblItem*  dsc;
+
+  for (dsc = iter(); dsc; dsc = iter++) {
+    notePad << dsc->name << nCrlf;
+    }
+  }
+
 
 
 void TblItem::load(TCchar* name) {this->name = name;  getAbbr(); loadPKey();}
@@ -72,6 +84,7 @@ void TblItem::copy(TblItem& ti) {
   name     = ti.name;
   abbr     = ti.abbr;
   primKey  = ti.primKey;
+  pKeyType = ti.pKeyType;
   selected = ti.selected;
   }
 

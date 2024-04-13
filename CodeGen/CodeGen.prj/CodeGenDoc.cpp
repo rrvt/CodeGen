@@ -36,15 +36,15 @@ static TCchar* CppPat    = _T("*.cpp");
 IMPLEMENT_DYNCREATE(CodeGenDoc, CDoc)
 
 BEGIN_MESSAGE_MAP(CodeGenDoc, CDoc)
-  ON_COMMAND(ID_File_Open,     &OnFileOpen)
-  ON_CBN_SELCHANGE(ID_CB,      &OnComboBoxChng)
-  ON_COMMAND(      ID_CB,      &OnComboBoxChng)
+  ON_COMMAND(      ID_File_Open, &OnFileOpen)
+  ON_CBN_SELCHANGE(ID_CB,        &OnComboBoxChng)
+  ON_COMMAND(      ID_CB,        &OnComboBoxChng)
 
-  ON_COMMAND(ID_RcdSet,        &onRcdSet)
-  ON_COMMAND(ID_DBtable,       &onDBtable)
-  ON_COMMAND(ID_Database,      &onDatabase)
+  ON_COMMAND(      ID_RcdSet,    &onRcdSet)
+  ON_COMMAND(      ID_DBtable,   &onDBtable)
+  ON_COMMAND(      ID_Database,  &onDatabase)
 
-  ON_COMMAND(ID_File_Save,     &OnFileSave)
+  ON_COMMAND(      ID_File_Save, &OnFileSave)
 END_MESSAGE_MAP()
 
 
@@ -61,7 +61,7 @@ void CodeGenDoc::OnFileOpen() {
 PathDlgDsc dsc;
 DbTblIter  iter(dbTblList);
 TblItem*   item;
-ToolBar&   toolBar = mainFrm()->getToolBar();
+MyToolBar& toolBar = mainFrm()->getToolBar();
 
   notePad.clear();
 
@@ -75,27 +75,26 @@ ToolBar&   toolBar = mainFrm()->getToolBar();
 
   dbTblList.load(path);
 
-  for (item = iter(); item; item = iter++)
-                                {CbxItem cbxItem = {item->name, 0};   toolBar.addCbxItem(ID_CB, cbxItem);}
+  for (item = iter(); item; item = iter++) toolBar.addCbxItemSorted(ID_CB, item->name);
 
-  toolBar.setCbxCaption(ID_CB, _T("Database Tables"));
+  toolBar.setCaption(ID_CB, _T("Database Tables"));   toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
 
   dbOpened = true;  display(NotePadSrc);
   }
 
 
 void CodeGenDoc::OnComboBoxChng() {
-ToolBar& toolBar = mainFrm()->getToolBar();
-String   table;
-int      i;
-AbbrDlg  dlg;
-TblItem* tblItem;
+MyToolBar& toolBar = mainFrm()->getToolBar();
+String     table;
+int        i;
+AbbrDlg    dlg;
+TblItem*   tblItem;
 
   if (!dbOpened) return;
 
   tableSelected = false;
 
-  if (!toolBar.getCbxSel(ID_CB, table, i)) return;
+  if (!toolBar.getCurSel(ID_CB, table, i)) return;
 
   if (!fields.load(path, table)) return;
 

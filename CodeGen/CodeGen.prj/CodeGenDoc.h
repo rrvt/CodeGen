@@ -27,7 +27,7 @@ public:
   virtual ~CodeGenDoc();
 
   DataSource   dataSrc() {return dataSource;}
-  void         display(DataSource ds);
+  void         display(DataSource ds = NotePadSrc);
 
   void         saveFile();
   virtual void serialize(Archive& ar);
@@ -44,6 +44,7 @@ protected:
 public:
 
   afx_msg void OnFileOpen();
+
   afx_msg void OnComboBoxChng();
   afx_msg void onRcdSet();
   afx_msg void onDBtable();
