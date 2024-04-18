@@ -163,9 +163,9 @@ related to the database:
 
 ## Updates
 
-### Update 4/12/24
+### Update 4/12/24 & 4/18/24
 
-Changed the way Toolbara and Window Position and size are dealt with.
+Improved the way Toolbars and Window Position and size are handled.
 
 ### Update 2/16/24
 

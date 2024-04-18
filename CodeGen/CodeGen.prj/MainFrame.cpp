@@ -26,7 +26,6 @@ static UINT indicators[] = {
   ID_INDICATOR_SCRL,
   };
 
-// MainFrame construction/destruction
 
 MainFrame::MainFrame() noexcept : isInitialized(false) { }
 
@@ -50,7 +49,7 @@ CRect winRect;
 
   CMFCPopupMenu::SetForceMenuFocus(FALSE);
 
-  if (!toolBar.create(this, IDR_MAINFRAME)) {TRACE0("Failed to create status bar\n"); return -1;}
+  if (!toolBar.create(this, IDR_MAINFRAME)) {TRACE0("Failed to create toolbar\n"); return -1;}
 
   if (!statusBar.Create(this)) {TRACE0("Failed to create status bar\n"); return -1;}
 
@@ -71,8 +70,11 @@ void MainFrame::OnMove(int x, int y)
 
 
 void MainFrame::OnSize(UINT nType, int cx, int cy) {
+CRect r;
 
-  if (!isInitialized) return;
+  GetWindowRect(&r);
+
+  if (!isInitialized) {winPos.setInvBdrs(r, cx, cy);   return;}
 
   winPos.set(cx, cy);   CFrameWndEx::OnSize(nType, cx, cy);
   }
@@ -80,7 +82,7 @@ void MainFrame::OnSize(UINT nType, int cx, int cy) {
 
 // MainFrame message handlers
 
-afx_msg LRESULT MainFrame::OnResetToolBar(WPARAM wParam, LPARAM lParam) {setupToolBar();  return 0;}
+LRESULT MainFrame::OnResetToolBar(WPARAM wParam, LPARAM lParam) {setupToolBar();  return 0;}
 
 
 void MainFrame::setupToolBar() {
