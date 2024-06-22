@@ -70,14 +70,13 @@ Field*   fld;
 
 
 void TblItem::setAbbr(TCchar* abbr)
-                          {String s;   this->abbr = abbr;   iniFile.writeString(sect(s), AbbrKey, abbr);}
+          {String s;   this->abbr = abbr;         iniFile.writeString(sect(s), AbbrKey, abbr);}
 void TblItem::setPKey(TCchar* primKey)
-                  {String s;  this->primKey = primKey;   iniFile.writeString(sect(s), PrimKey, primKey);}
+          {String s;  this->primKey = primKey;    iniFile.writeString(sect(s), PrimKey, primKey);}
 void TblItem::setPKType(FieldType pKeyType)
-                {String s;  this->pKeyType = pKeyType;   iniFile.writeInt(sect(s), PKTypeKey, pKeyType);}
+          {String s;  this->pKeyType = pKeyType;  iniFile.writeInt(sect(s), PKTypeKey, pKeyType);}
 
 void TblItem::getAbbr() {String s; iniFile.readString(sect(s), AbbrKey, abbr);}
-//void TblItem::getPKey() {String s; iniFile.readString(sect(s), PrimKey, primKey);}
 
 
 void TblItem::copy(TblItem& ti) {
@@ -89,11 +88,4 @@ void TblItem::copy(TblItem& ti) {
   }
 
 
-
-#if 1
-#else
-DAOiter     iter(daoTables);
-DAOtable* daoTbl;
-  for (daoTbl = iter(); daoTbl; daoTbl = iter++) {Table tbl;   tbl.name = daoTbl->name;   data = tbl;}
-#endif
 

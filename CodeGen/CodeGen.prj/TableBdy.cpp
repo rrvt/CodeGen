@@ -119,12 +119,12 @@ String       right;
   notePad << _T("  if (!open(path)) return false;") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  for (rcd = iter(), set = setIter(); rcd; rcd = iter++) if (rcd->dirty) {") << nCrlf;
-  notePad << nCrlf;
+  notePad << _T("  for (rcd = iter(), set = setIter(); rcd; rcd = iter++) if (rcd->dirty) {");
+  notePad << nCrlf << nCrlf;
   notePad << _T("    set = setIter.find(rcd->id);   rcd->dirty = false;") << nCrlf;
   notePad << nCrlf;
-  notePad << _T("    if (!set)        {rcd->add(") << modNames.setObj << _T("); continue;}") << nCrlf;
-  notePad << nCrlf;
+  notePad << _T("    if (!set)        {rcd->add(") << modNames.setObj << _T("); continue;}");
+  notePad << nCrlf << nCrlf;
   notePad << _T("    if (rcd->remove) {set->remove(); iter.remove();  continue;}") << nCrlf;
   notePad << nCrlf;
   notePad << _T("    rcd->store(*set);") << nCrlf;
@@ -217,7 +217,7 @@ int      i;
 
   for (i = 1, fld = iter(); fld; i++, fld = iter++) {
     if (fld->type == StgFld)
-                     {notePad << _T("  notePad << nTab << ") << notCaped(fld->name) << _T(';') << nCrlf;}
+               {notePad << _T("  notePad << nTab << ") << notCaped(fld->name) << _T(';') << nCrlf;}
     if (i % 6 == 0) notePad << nCrlf;
     }
 
@@ -250,8 +250,9 @@ int          nStgs;
 
   notePad << _T("  for (max = 0, rcd = iter(); rcd; rcd = iter++) {") << nCrlf;
   decl.clear();
-  for (nStgs = 0, fld = iter(); fld; fld = iter++) if (fld->type == StgFld)
-       {nStgs++, s = _T("    maxLng(rcd->") + notCaped(fld->name) + _T(',');   decl.add(s, _T("max)"));}
+  for (nStgs = 0, fld = iter(); fld; fld = iter++) if (fld->type == StgFld) {
+    nStgs++, s = _T("    maxLng(rcd->") + notCaped(fld->name) + _T(',');   decl.add(s, _T("max)"));
+    }
   decl.output();
   notePad << _T("    }") << nCrlf;
   notePad << nCrlf;
@@ -285,14 +286,4 @@ int          nStgs;
   notePad << _T("  }") << nCrlf;
   }
 
-
-
-
-#if 0
-  notePad << _T("") << nCrlf;
-  notePad << _T("") << nCrlf;
-  notePad << _T("") << nCrlf;
-  notePad << _T("") << nCrlf;
-  notePad << _T("") << nCrlf;
-#endif
 

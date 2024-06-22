@@ -44,6 +44,7 @@ CString MyToolBar::getText(uint id) {
   return 0;
   }
 
+
 #ifdef DocViewTB
 
 bool MyToolBar::addMenu(uint id, int idr, TCchar* caption) {

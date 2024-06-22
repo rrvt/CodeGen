@@ -10,7 +10,7 @@
 IMPLEMENT_DYNAMIC(DbTblSelDlg, CDialogEx)
 
 DbTblSelDlg::DbTblSelDlg(DbTblList& tblList, CWnd* pParent) :
-                                                    CDialogEx(IDD_DBselect, pParent), tables(tblList) { }
+                                              CDialogEx(IDD_DBselect, pParent), tables(tblList) { }
 
 
 BOOL DbTblSelDlg::OnInitDialog() {
@@ -25,7 +25,7 @@ int       i;
   nameCtrl.SetExtendedStyle(nameCtrl.GetExtendedStyle() | LVS_EX_CHECKBOXES);
 
   for (i = 0, dsc = iter(); dsc; i++, dsc = iter++)
-                              {nameCtrl.InsertItem(i, dsc->name);   nameCtrl.SetCheck(i, dsc->selected);}
+                        {nameCtrl.InsertItem(i, dsc->name);   nameCtrl.SetCheck(i, dsc->selected);}
   return TRUE;
   }
 
@@ -47,7 +47,6 @@ END_MESSAGE_MAP()
 
 
 // DbTblSelDlg message handlers
-
 
 void DbTblSelDlg::OnBnClickedOk() {
 DbTblIter iter(tables);

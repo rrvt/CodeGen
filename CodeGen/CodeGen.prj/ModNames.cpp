@@ -35,16 +35,3 @@ TblItem* tblItem = dbTblList.find(table);   if (!tblItem) return false;
   }
 
 
-
-#if 1
-#else
-AbbrDlg dlg;
-
-  dlg.table = table;
-
-  if (dlg.DoModal() != IDOK) return false;
-
-  abbr      = capitalize(dlg.abbr);
-
-#endif
-

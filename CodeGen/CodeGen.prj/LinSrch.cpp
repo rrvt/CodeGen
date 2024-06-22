@@ -30,6 +30,7 @@ Field*       fld;
   n = nData();
   }
 
+
 void LinSrch::addRcdHdrFn() {
 LSrchIter iter(*this);
 SrchFld*  fld;
@@ -88,19 +89,6 @@ int       i;
 
   notePad << _T(");") << nCrlf;
   }
-
-#if 0
-CityStateRcd* CityStateTbl::find(TCchar* city, TCchar* zip) {
-CtyIter       iter(*this);
-CityStateRcd* rcd;
-
-  for (rcd = iter(); rcd; rcd = iter++) if (rcd->isInRcd(city, zip)) return rcd;
-
-  return 0;
-  }
-#endif
-
-
 
 
 void LinSrch::addTblBdyFn() {

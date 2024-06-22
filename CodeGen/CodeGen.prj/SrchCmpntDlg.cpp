@@ -43,7 +43,7 @@ FldsIter iter(fields);
 Field*   fldDsc;
 int      i;
 
-  for (i = 0, fldDsc = iter(); fldDsc;  i++, fldDsc = iter++) fldDsc->isSelected = listCtrl.GetCheck(i);
-
+  for (i = 0, fldDsc = iter(); fldDsc;  i++, fldDsc = iter++)
+                                                         fldDsc->isSelected = listCtrl.GetCheck(i);
   CDialogEx::OnOK();
   }

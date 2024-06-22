@@ -77,7 +77,9 @@ MyToolBar& toolBar = mainFrm()->getToolBar();
 
   for (item = iter(); item; item = iter++) toolBar.addCbxItemSorted(ID_CB, item->name);
 
-  toolBar.setCaption(ID_CB, _T("Database Tables"));   toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
+  toolBar.setCaption(ID_CB, _T("Database Tables"));
+
+  toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
 
   dbOpened = true;  display(NotePadSrc);
   }
@@ -153,8 +155,13 @@ DatabaseBdy bdy;
 
   if (dlg.DoModal() != IDOK) return;
 
-  hdr.create();  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".h"),   HeaderPat);   saveFile();
-  bdy.create();  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".cpp"), CppPat);      saveFile();
+  hdr.create();
+    pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".h"),   HeaderPat);
+  saveFile();
+
+  bdy.create();
+    pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".cpp"), CppPat);
+  saveFile();
   }
 
 
@@ -200,29 +207,9 @@ void CodeGenDoc::serialize(Archive& ar) {
 // CodeGenDoc diagnostics
 
 #ifdef _DEBUG
-void CodeGenDoc::AssertValid() const
-{
-  CDocument::AssertValid();
-}
-
-void CodeGenDoc::Dump(CDumpContext& dc) const
-{
-  CDocument::Dump(dc);
-}
+void CodeGenDoc::AssertValid() const          {CDocument::AssertValid();}
+void CodeGenDoc::Dump(CDumpContext& dc) const {CDocument::Dump(dc);}
 #endif //_DEBUG
 
 
-
-
-
-
-
-#if 0
-#include "Database.h"
-#include "GetPathDlg.h"
-#include "MessageBox.h"
-#include "NotePad.h"
-#include "ToolBar.h"
-//#include "Fields.h"
-#endif
 

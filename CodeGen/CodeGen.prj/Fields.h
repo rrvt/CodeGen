@@ -32,7 +32,7 @@ bool      isSelected;
 
 
 class Fields;
-typedef DatumPtrT<Field, int> FieldP;                      // Usually defined just before iterator
+typedef DatumPtrT<Field, int> FieldP;                     // Usually defined just before iterator
 typedef IterT<Fields, Field>  FldsIter;
 
 
@@ -47,7 +47,7 @@ String table;
 
   bool load(TCchar* path, TCchar* table);
 
-  int    nData()      {return data.end();}                       // returns number of data items in array
+  int    nData()      {return data.end();}                // returns number of data items in array
 
   String getArgList(int& n);
   String getArgsComp();

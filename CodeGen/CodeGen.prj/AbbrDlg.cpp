@@ -48,21 +48,3 @@ TblItem* tblItem = dbTblList.find(table);
   }
 
 
-
-
-#if 1
-#else
-String section = className + _T("Sect");
-
-  iniFile.writeString(section, AbbrKey, abbr);
-#endif
-#if 1
-#else
-String section = className + _T("Sect");
-
-  iniFile.readString(section, AbbrKey, abbr, className.substr(0, 3));
-
-
-static TCchar* AbbrKey = _T("Abbr");
-#endif
-

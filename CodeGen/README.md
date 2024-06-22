@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 6/22/24
+
+Add MIT License to the installation.
+
 ### Update 4/12/24 & 4/18/24
 
 Improved the way Toolbars and Window Position and size are handled.

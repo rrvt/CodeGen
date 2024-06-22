@@ -60,7 +60,6 @@ String   s;
       if (n) s += _T(", ");
 
       if (fld->type == StgFld) s += _T("TCchar* ");
-//    else                     s += fld->type + _T(" ");
 
       s += fld->name; n++;
       }

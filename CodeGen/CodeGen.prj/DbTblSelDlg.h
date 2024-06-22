@@ -17,7 +17,7 @@ public:
 CString   title;
 CListCtrl nameCtrl;
 
-  DbTblSelDlg(DbTblList& tblList, CWnd* pParent = nullptr);                       // standard constructor
+  DbTblSelDlg(DbTblList& tblList, CWnd* pParent = nullptr);           // standard constructor
   virtual ~DbTblSelDlg();
 
   virtual BOOL OnInitDialog();
@@ -30,16 +30,9 @@ CListCtrl nameCtrl;
 
 protected:
 
-  virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+  virtual void DoDataExchange(CDataExchange* pDX);
 
   DECLARE_MESSAGE_MAP()
-public:
-};
+  };
 
-
-
-
-
-
-//#include "Database.h"
 

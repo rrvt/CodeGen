@@ -166,7 +166,8 @@ Declarations decl;
   notePad << _T("  bool store(TCchar* path);     // Store/Del entities marked") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  ") << modNames.rcdCls << _T("* find(int id) {return data.bSearch(id);}") << nCrlf;
+  notePad << _T("  ") << modNames.rcdCls << _T("* find(int id) {return data.bSearch(id);}");
+  notePad << nCrlf;
 
   linSrch.addTblHdrFn();   notePad << nCrlf;
 
@@ -176,13 +177,15 @@ Declarations decl;
   notePad << _T("private:") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  bool open(TCchar* path) {return ") << modNames.setObj << _T(".open(path);}") << nCrlf;
+  notePad << _T("  bool open(TCchar* path) {return ") << modNames.setObj << _T(".open(path);}");
+  notePad << nCrlf;
   notePad << _T("  void close() {") << modNames.setObj << _T(".close();}") << nCrlf;
   notePad << nCrlf;
   notePad << _T("  void setTabs();") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  // returns either a pointer to data (or datum) at index i in array or zero") << nCrlf;
+  notePad << _T("  // returns either a pointer to data (or datum) at index i in array or zero");
+  notePad << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("  ") << modNames.rcdCls;
@@ -200,52 +203,4 @@ Declarations decl;
   notePad << _T("  };") << nCrlf;
   }
 
-
-
-#if 1
-#else
-  notePad << _T("  ") << modNames.rcdCls << _T("* find(");
-  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
-    if (fld->isSelected) {
-      if (i) notePad << _T(", ");
-      switch (fld->type) {
-        case IdxFld     :
-        case IntFld     : notePad << _T("int "); break;
-        case StgFld     :
-        case LongStgFld : notePad << _T("TCchar* "); break;
-        case BoolFld    : notePad << _T("bool "); break;
-        }
-      notePad << notCaped(fld->name);
-      }
-    }
-
-  notePad << nCrlf;
-#endif
-#if 1
-#else
-  notePad << _T("  // Needed for Linear Search with one or more arguments") << nCrlf;
-  notePad << _T("  bool operator== (");
-  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
-    if (fld->isSelected) {
-      if (i) notePad << _T(", ");
-      switch (fld->type) {
-        case IdxFld     :
-        case IntFld     : notePad << _T("int "); break;
-        case StgFld     :
-        case LongStgFld : notePad << _T("TCchar* "); break;
-        case BoolFld    : notePad << _T("bool "); break;
-        }
-      notePad << notCaped(fld->name);
-      }
-    }
-  notePad << _T(") {return ") << nCrlf;
-
-  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
-    if (fld->isSelected) {
-      if (i)  notePad << _T(" && ");
-      s = notCaped(fld->name);
-      notePad << _T("this->") << s << _T(" == ") << s << _T(";}") << nCrlf;
-      }
-    }
-#endif
 

@@ -21,7 +21,7 @@ BEGIN_MESSAGE_MAP(CodeGenView, CScrView)
 END_MESSAGE_MAP()
 
 
-CodeGenView::CodeGenView() noexcept {          //dspNote( dMgr.getNotePad()), prtNote( pMgr.getNotePad())
+CodeGenView::CodeGenView() noexcept {
 ResourceData res;
 String       pn;
   if (res.getProductName(pn)) prtNote.setTitle(pn);
@@ -61,8 +61,6 @@ void CodeGenView::onBeginPrinting() {prtNote.onBeginPrinting(*this);}
 
 
 void CodeGenView::onDisplayOutput() {dspNote.display(*this);}
-
-
 
 
 // The footer is injected into the printed output, so the output goes directly to the device.

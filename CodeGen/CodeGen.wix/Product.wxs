@@ -2,59 +2,63 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
 <Product Id="*" UpgradeCode="F1ECCC2F-953C-4978-9FE7-EBC70916AFA0" Language="1033"
-                  Manufacturer="Bob -- K6RWY" Name="CodeGen"
-                  Version="!(bind.fileVersion.CodeGen.cmp)"
-                  >
+                Manufacturer="Bob -- K6RWY" Name="CodeGen"
+                Version="!(bind.fileVersion.CodeGen.cmp)"
+                >
 
   <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine"
-                      Manufacturer="Bob -- K6RWY" Description="Installs CodeGen"
-                      Comments="Copyright (c) Bob -- K6RWY"
-                      />
+                Manufacturer="Bob -- K6RWY" Description="Installs CodeGen"
+                Comments="Copyright (c) Bob -- K6RWY"
+                />
 
   <MajorUpgrade Schedule="afterInstallInitialize"
-                                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
-                                DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+                AllowDowngrades="no"   IgnoreRemoveFailure="no"   AllowSameVersionUpgrades="no"
+                DowngradeErrorMessage="A newer version of [ProductName] is already installed."
+                />
 
   <MediaTemplate EmbedCab="yes" />
 
-  <UI Id="My_InstallDir.ui">
-    <UIRef Id="WixUI_InstallDir" />
-    <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg">
-      NOT Installed
-    </Publish>
-    <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">
-      1
-    </Publish>
-  </UI>
+  <WixVariable Id="WixUILicenseRtf"
+                              Value="$(var.SolutionDir)..\..\Library\License\MITLicenseFile.rtf" />
+  <UI Id="My_InstallDir.ui"><UIRef Id="WixUI_InstallDir" /></UI>
 
   <WixVariable Id="WixUIDialogBmp" Value="C:\Program Files (x86)\WixApp\dialog.bmp"/>
   <WixVariable Id="WixUIBannerBmp" Value="C:\Program Files (x86)\WixApp\banner.bmp"/>
 
-  <Icon     Id="UICodeGen_Icon.exe" SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\UICodeGen.ico"/>
+  <Icon     Id="UICodeGen_Icon.exe"
+                                  SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\UICodeGen.ico"/>
   <Icon     Id="CodeGen_Icon.exe" SourceFile="$(var.SolutionDir)..\CodeGen.prj\res\CodeGen.ico"/>
+  <Icon     Id="MITLicense_Icon.exe"
+                              SourceFile="$(var.SolutionDir)..\..\Library\License\MITLicense.ico"/>
   <Property Id="ARPPRODUCTICON"  Value="UICodeGen_Icon.exe" />
 
   <Feature Id="ProductFeatures" Title="Main Product" Level="1" >
     <ComponentGroupRef Id="CodeGen.ftr"/>
+    <ComponentGroupRef Id="License.ftr"/>
     <ComponentGroupRef Id="Uninstall_CodeGen.ftr"/>
   </Feature>
 </Product>
 
 <Fragment>
-<ComponentGroup Id="CodeGen.ftr">
-  <ComponentRef Id="CodeGen.cmp"/>
-  <ComponentRef Id="Help.cmp"/>
-</ComponentGroup>
-<ComponentGroup Id="Uninstall_CodeGen.ftr">
-  <ComponentRef Id="Uninstall_CodeGen.cmp"/>
-</ComponentGroup>
+  <ComponentGroup Id="CodeGen.ftr">
+    <ComponentRef Id="CodeGen.cmp"/>
+    <ComponentRef Id="Help.cmp"/>
+  </ComponentGroup>
+  <ComponentGroup Id="License.ftr">
+    <ComponentRef Id="MIT_License.cmp"/>
+  </ComponentGroup>
+  <ComponentGroup Id="Uninstall_CodeGen.ftr">
+    <ComponentRef Id="Uninstall_CodeGen.cmp"/>
+  </ComponentGroup>
 </Fragment>
 
 <!--Directory structure-->
 <Fragment>
   <Directory Id="TARGETDIR" Name="SourceDir">
     <Directory Id="ProgramFilesFolder">
-      <Directory Id="CodeGen.pff" Name="CodeGen" />
+      <Directory Id="CODEGEN.PFF" Name="CodeGen">
+        <Directory Id="CodeGen_License.pff" Name="License" />
+      </Directory>
     </Directory>
 
     <Directory Id="ProgramMenuFolder">
@@ -62,17 +66,15 @@
     </Directory>
 
     <Directory Id="DesktopFolder" />
-
   </Directory>
 
   <Property Id="ApplicationFolderName" Value="CodeGen" />
-  <Property Id="WIXUI_INSTALLDIR"      Value="CodeGen.pff"/>
+  <Property Id="WIXUI_INSTALLDIR"      Value="CODEGEN.PFF"/>
   <Property Id="WixAppFolder"          Value="WixPerMachineFolder" />
 </Fragment>
 
 <Fragment>
-
-  <Component Id="CodeGen.cmp"  Guid="F187915D-73E5-4230-BF31-F9BA967AC094" Directory="CodeGen.pff">
+  <Component Id="CodeGen.cmp" Guid="F187915D-73E5-4230-BF31-F9BA967AC094" Directory="CODEGEN.PFF">
     <File Id="CodeGen.cmp" Source="$(var.SolutionDir)..\Release\CodeGen.exe" KeyPath="yes"/>
 
     <Shortcut Id               = "CodeGen.shc"
@@ -80,7 +82,7 @@
               Description      = "Creates c++ classes that interfaces with MS Access"
               Advertise        = "yes"
               Directory        = "CodeGen.pmf"
-              WorkingDirectory = "CodeGen.pff"
+              WorkingDirectory = "CODEGEN.PFF"
               Icon             = "CodeGen_Icon.exe"
               />
 
@@ -89,21 +91,35 @@
               Description      = "Creates c++ classes that interfaces with MS Access"
               Advertise        = "yes"
               Directory        = "DesktopFolder"
-              WorkingDirectory = "CodeGen.pff"
+              WorkingDirectory = "CODEGEN.PFF"
               Icon             = "CodeGen_Icon.exe"
               />
   </Component>
 
-  <Component Id="Help.cmp"  Guid="A09E0918-2D16-4DB8-9FE2-05ED64E8025B" Directory="CodeGen.pff">
+  <Component Id="Help.cmp" Guid="A09E0918-2D16-4DB8-9FE2-05ED64E8025B" Directory="CODEGEN.PFF">
     <File Id="Help.cmp" Source="$(var.SolutionDir)..\Release\CodeGen.chm" KeyPath="yes"/>
   </Component>
-
 </Fragment>
 
 <Fragment>
+  <Component Id="MIT_License.cmp" Guid="6E8D0EC6-AF93-498C-A473-CD6954FB95B9"
+                                                                   Directory="CodeGen_License.pff">
+    <File Id="MIT_License.cmp"
+                Source="$(var.SolutionDir)..\..\Library\License\MITLicenseFile.rtf" KeyPath="yes"/>
 
-  <Component Id="Uninstall_CodeGen.cmp" 
-                                  Guid="A09A9F6B-71DE-4848-A7BE-5E55C170E31F" Directory="CodeGen.pmf">
+    <Shortcut Id               = "MITLicense.shc"
+              Name             = "MIT License"
+              Advertise        = "yes"
+              Directory        = "CodeGen.pmf"
+              WorkingDirectory = "CodeGen_License.pff"
+              Icon             = "MITLicense_Icon.exe"
+              />
+  </Component>
+</Fragment>
+
+<Fragment>
+  <Component Id="Uninstall_CodeGen.cmp" Guid="26CFE110-0F9C-460D-A24B-98D5B418112B"
+                                                                           Directory="CodeGen.pmf">
 
     <Shortcut Id               = "UninstallCodeGen.shc"
               Name             = "Uninstall CodeGen"
@@ -113,10 +129,8 @@
               Icon             = "UICodeGen_Icon.exe"
               />
     <RemoveFolder Id="CodeGen.uni" Directory="CodeGen.pmf" On="uninstall"/>
-    <RegistryValue Root="HKCU" Key="Software\Uninstall_CodeGen.cmp" Name="installed"
-                   Type="integer" Value="1" KeyPath="yes"/>
+    <RegistryValue Root="HKCU" Key="Software\Uninstall_CodeGen.cmp"
+                                          Name="installed" Type="integer" Value="1" KeyPath="yes"/>
   </Component>
-
 </Fragment>
-
 </Wix>
