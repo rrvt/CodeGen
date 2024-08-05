@@ -34,7 +34,7 @@ MainFrame::~MainFrame() {winPos.~WinPos();}
 
 BOOL MainFrame::PreCreateWindow(CREATESTRUCT& cs) {
 
-  cs.style &= ~FWS_ADDTOTITLE;  cs.lpszName = _T("AddProj");         // Sets the default title left part
+  cs.style &= ~FWS_ADDTOTITLE;  cs.lpszName = _T("AddProj");    // Sets the default title left part
 
   return CFrameWndEx::PreCreateWindow(cs);
   }
@@ -53,20 +53,20 @@ CRect winRect;
 
   if (!statusBar.Create(this)) {TRACE0("Failed to create status bar\n"); return -1;}
 
-  statusBar.SetIndicators(indicators, noElements(indicators));  //sizeof(indicators)/sizeof(UINT)
+  statusBar.SetIndicators(indicators, noElements(indicators));    //sizeof(indicators)/sizeof(UINT)
 
   GetWindowRect(&winRect);   winPos.initialPos(this, winRect);
 
   DockPane(&menuBar);   DockPane(&toolBar);
 
   CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows7));
-                                                                         // Affects look of toolbar, etc.
+                                                                  // Affects look of toolbar, etc.
   isInitialized = true;   return 0;
   }
 
 
 void MainFrame::OnMove(int x, int y)
-           {CRect winRect;   GetWindowRect(&winRect);   winPos.set(winRect);   CFrameWndEx::OnMove(x, y);}
+    {CRect winRect;   GetWindowRect(&winRect);   winPos.set(winRect);   CFrameWndEx::OnMove(x, y);}
 
 
 void MainFrame::OnSize(UINT nType, int cx, int cy) {

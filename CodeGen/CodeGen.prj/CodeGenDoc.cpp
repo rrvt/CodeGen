@@ -122,9 +122,11 @@ RcdSetBdy bdy;
 
   if (!tableSelected) return;
 
-  hdr.create();   pathDlgDsc(_T("RcdSetHdr File"), modNames.setCls, _T(".h"), HeaderPat);    saveFile();
+  hdr.create();
+  pathDlgDsc(_T("RcdSetHdr File"), modNames.setCls, _T(".h"), HeaderPat);    saveFile();
 
-  bdy.create();   pathDlgDsc(_T("RcdSetBdy File"), modNames.setCls, _T(".cpp"), CppPat);     saveFile();
+  bdy.create();
+  pathDlgDsc(_T("RcdSetBdy File"), modNames.setCls, _T(".cpp"), CppPat);     saveFile();
 
   display(NotePadSrc);
   }
@@ -138,9 +140,11 @@ TableBdy bdy;
 
   linSrch.getFields();
 
-  hdr.create();   pathDlgDsc(_T("Table hdr File"), modNames.tblCls, _T(".h"), HeaderPat);   saveFile();
+  hdr.create();
+  pathDlgDsc(_T("Table hdr File"), modNames.tblCls, _T(".h"), HeaderPat);   saveFile();
 
-  bdy.create();   pathDlgDsc(_T("Table cpp File"), modNames.tblCls, _T(".cpp"), CppPat);    saveFile();
+  bdy.create();
+  pathDlgDsc(_T("Table cpp File"), modNames.tblCls, _T(".cpp"), CppPat);    saveFile();
 
   display(NotePadSrc);
   }
@@ -156,12 +160,10 @@ DatabaseBdy bdy;
   if (dlg.DoModal() != IDOK) return;
 
   hdr.create();
-    pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".h"),   HeaderPat);
-  saveFile();
+  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".h"),   HeaderPat);   saveFile();
 
   bdy.create();
-    pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".cpp"), CppPat);
-  saveFile();
+  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".cpp"), CppPat);      saveFile();
   }
 
 

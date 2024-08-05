@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 8/4/24
+
+Library Update
+
 ### Update 6/22/24
 
 Add MIT License to the installation.

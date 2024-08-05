@@ -91,9 +91,10 @@ String       s;
   notePad << nCrlf;
 
   notePad << _T("  // Needed for Insertion Sort of Primary Key") << nCrlf;
-  notePad << _T("  bool operator== (") << modNames.rcdCls << _T("& r) {return id == r.id;}") << nCrlf;
-  notePad << _T("  bool operator>= (") << modNames.rcdCls << _T("& r) {return id >= r.id;}") << nCrlf;
+  notePad << _T("  bool operator== (") << modNames.rcdCls << _T("& r) {return id == r.id;}");
   notePad << nCrlf;
+  notePad << _T("  bool operator>= (") << modNames.rcdCls << _T("& r) {return id >= r.id;}");
+  notePad << nCrlf << nCrlf;
 
   notePad << _T("  // Needed for Binary Search of Primary Key") << nCrlf;
   notePad << _T("  bool operator== (long id) {return this->id == id;}") << nCrlf;

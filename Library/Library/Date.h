@@ -18,6 +18,7 @@ static const int MinDate;           // Minimum No of Seconds allowed by MFC, Dat
   Date(int yr, int mon, int day, int hr, int min, int sec) : dt(yr, mon, day, hr, min, sec) {}
   Date(time_t sec) : dt(sec) { }
   Date(String& s)         {*this = s;}
+  Date(TCchar* tc)        {String s = tc; *this = s;}
   Date(CString& cs)       {String s = cs; *this = s;}
   Date(COleDateTime& ole) {*this = ole;}
   Date(Date& date)        {copy(date);}
@@ -65,6 +66,7 @@ static const int MinDate;           // Minimum No of Seconds allowed by MFC, Dat
 
   CTimeSpan operator -  (Date& t) {return dt - t.dt;};
   Date&     operator += (CTimeSpan n) {dt += n; return *this;}
+  Date&     operator -= (CTimeSpan n) {dt -= n; return *this;}
   Date      operator +  (CTimeSpan n) {Date d; d.dt = dt; d.dt += n; return d;}
 
   bool      operator == (Date& d) {return dt == d.dt;}

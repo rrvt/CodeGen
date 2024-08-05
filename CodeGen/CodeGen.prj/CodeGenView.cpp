@@ -64,8 +64,8 @@ void CodeGenView::onDisplayOutput() {dspNote.display(*this);}
 
 
 // The footer is injected into the printed output, so the output goes directly to the device.
-// The output streaming functions are very similar to NotePad's streaming functions so it should not
-// be a great hardship to construct a footer.
+// The output streaming functions are very similar to NotePad's streaming functions so it should
+// not be a great hardship to construct a footer.
 
 void CodeGenView::printFooter(DevBase& dev, int pageNo) {
   switch(doc()->dataSrc()) {
@@ -98,8 +98,7 @@ void CodeGenView::OnSetFocus(CWnd* pOldWnd) {
 
 #ifdef _DEBUG
 
-void CodeGenView::AssertValid() const {CScrollView::AssertValid();}
-
+void CodeGenView::AssertValid() const          {CScrollView::AssertValid();}
 void CodeGenView::Dump(CDumpContext& dc) const {CScrollView::Dump(dc);}
                                              // non-debug version is inline
 CodeGenDoc* CodeGenView::GetDocument() const

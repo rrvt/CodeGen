@@ -251,8 +251,8 @@ String       rfx;
 String       arg;
 Declarations decl;
 
-  notePad << _T("void ") << modNames.setCls << _T("::DoFieldExchange(CFieldExchange* pFX) {") << nCrlf;
-  notePad << nCrlf;
+  notePad << _T("void ") << modNames.setCls << _T("::DoFieldExchange(CFieldExchange* pFX) {");
+  notePad << nCrlf << nCrlf;
   notePad << _T("  pFX->SetFieldType(CFieldExchange::outputColumn);") << nCrlf;
   notePad << nCrlf;
 
@@ -311,8 +311,8 @@ void RcdSetBdy::movePrev() {
   notePad << modNames.setCls << _T("* ") << modNames.setCls << _T("::movePrev() {") << nCrlf;
   notePad << _T("  if (!opened || IsBOF()) return 0;") << nCrlf;
   notePad << nCrlf;
-  notePad << _T("  try {Move(-1);} catch (...) {try {Move(-1);} catch (...) {return 0;}}") << nCrlf;
-  notePad << nCrlf;
+  notePad << _T("  try {Move(-1);} catch (...) {try {Move(-1);} catch (...) {return 0;}}");
+  notePad << nCrlf << nCrlf;
   notePad << _T("  return IsBOF() ? 0 : this;") << nCrlf;
   notePad << _T("  }") << nCrlf;
   }
