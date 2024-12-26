@@ -163,6 +163,11 @@ related to the database:
 
 ## Updates
 
+### Update 12/25/24
+
+Split the library into DocLib and Library where DocLib supports the MFC Document/Library App
+projects and Library has support classes and supports the Dialog Apps with only one class.
+
 ### Update 8/4/24
 
 Library Update

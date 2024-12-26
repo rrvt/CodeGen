@@ -7,7 +7,7 @@
 #include "CodeGenDoc.h"
 #include "OptionsDlg.h"
 #include "Resource.h"
-#include "Resources.h"
+#include "ResourceData.h"
 #include "RptOrientDlgOne.h"
 
 
@@ -67,7 +67,7 @@ void CodeGenView::onDisplayOutput() {dspNote.display(*this);}
 // The output streaming functions are very similar to NotePad's streaming functions so it should
 // not be a great hardship to construct a footer.
 
-void CodeGenView::printFooter(DevBase& dev, int pageNo) {
+void CodeGenView::printFooter(DevStream& dev, int pageNo) {
   switch(doc()->dataSrc()) {
     case NotePadSrc : prtNote.prtFooter(dev, pageNo);  break;
     }

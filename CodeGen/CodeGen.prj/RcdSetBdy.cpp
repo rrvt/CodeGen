@@ -155,7 +155,7 @@ void RcdSetBdy::open() {
 
   notePad << _T("bool ") << modNames.setCls << _T("::open(TCchar* path) {") << nCrlf;
   notePad << nCrlf;
-  notePad << _T("  opened = false;") << nCrlf;
+  notePad << _T("  if (opened) close();") << nCrlf;
   notePad << nCrlf;
   notePad << _T("  if (!accessDB.isOpen() && !accessDB.open(path)) return false;") << nCrlf;
   notePad << nCrlf;

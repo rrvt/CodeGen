@@ -3,7 +3,7 @@
 
 #pragma once
 #include "CScrView.h"
-#include "NotePadRpt.h"
+#include "ReportNtPd.h"
 
 
 class CodeGenDoc;
@@ -20,15 +20,22 @@ public:
 
   virtual ~CodeGenView() { }
 
-  virtual void onPreparePrinting(CPrintInfo* info) {prtNote.onPreparePrinting(info);}
-  virtual void onBeginPrinting();
-  virtual void onDisplayOutput();
+  virtual void       initNoteOrietn() { }
+  virtual void       saveNoteOrietn() { }
+  virtual void       initRptOrietn()  { }
+  virtual void       saveRptOrietn()  { }
+  virtual PrtrOrient getOrientation() {return prtNote.prtrOrietn;}
 
-  virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-  virtual void printFooter(DevBase& dev, int pageNo);
-  virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
+  virtual BOOL       PreCreateWindow(CREATESTRUCT& cs);
 
-  CodeGenDoc* GetDocument() const;
+  virtual void       onDisplayOutput();
+  virtual void       onPreparePrinting(CPrintInfo* info) {prtNote.onPreparePrinting(info);}
+  virtual void       onBeginPrinting();
+
+  virtual void       printFooter(DevStream& dev, int pageNo);
+  virtual void       OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
+
+  CodeGenDoc*        GetDocument() const;
 
 public:
 

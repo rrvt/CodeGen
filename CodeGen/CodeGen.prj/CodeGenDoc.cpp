@@ -110,7 +110,7 @@ TblItem*   tblItem;
 
   modNames.noFields = fields.nData();
 
-  fields.display();    tableSelected = true;
+  notePad.clear();   fields.display();    tableSelected = true;
 
   display(NotePadSrc);
   }
@@ -198,7 +198,7 @@ void CodeGenDoc::serialize(Archive& ar) {
 
   if (ar.isStoring())
     switch(dataSource) {
-      case NotePadSrc : notePad.archive(ar); return;
+      case NotePadSrc : ar << notePad; return;
       default         : return;
       }
 
