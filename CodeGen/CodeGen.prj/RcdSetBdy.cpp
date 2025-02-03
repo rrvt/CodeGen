@@ -47,7 +47,6 @@ Field*   fld;
 String   s;
 
   data.clear();
-#if 1
 
   for (fld = iter(); fld; fld = iter++) {
 
@@ -62,31 +61,6 @@ String   s;
 
     data += s;
     }
-
-#else
-int      i;
-int      n = 3;
-  notePad << modNames.setCls << _T("::") << modNames.setCls << _T("() : AccRcdSet(accessDB.db())");
-
-  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
-
-    if (i < n) notePad << _T(", ");
-    else {notePad << _T(",") << nCrlf << _T("          ");   n = 5;}
-
-    switch (fld->type) {
-      case IdxFld     :
-      case IntFld     : s = notCaped(fld->name) + _T("(0)");     break;
-      case StgFld     :
-      case LongStgFld : s = notCaped(fld->name) + _T("()");      break;
-      case BoolFld    : s = notCaped(fld->name) + _T("(false)"); break;
-      default         : s = notCaped(fld->name) + _T("()");      break;
-      }
-
-    notePad << s;   data += s;
-    }
-
-  notePad << _T(" { }")<< nCrlf;
-#endif
 
   newCnstrctr();
   }
@@ -217,30 +191,44 @@ bool flag = true;
 
 
 void RcdSetBdy::edit() {
-  notePad << _T("bool ") << modNames.setCls << _T("::edit()") << nCrlf;
-  notePad << _T("  {if (!opened) return false;  ");
-  notePad << _T("try {Edit(); return true;} catch(...) {return false;}}") << nCrlf;
+  notePad << _T("bool ") << modNames.setCls << _T("::edit() {") << nCrlf;
+  notePad << _T("  if (!opened) return false;") << nCrlf << nCrlf;
+  notePad << _T("  try {Edit(); return true;}") << nCrlf;
+  notePad << _T("  catch(CException* e) {e->ReportError();   e->Delete();   return false;}");
+  notePad << nCrlf;
+  notePad << _T("  }") << nCrlf;
   }
 
 
 void RcdSetBdy::addNew() {
-  notePad << _T("bool ") << modNames.setCls << _T("::addNew()") << nCrlf;
-  notePad << _T("  {if (!opened) return false;  ");
-  notePad << _T("try {AddNew(); return true;} catch(...) {return false;}}") << nCrlf;
+  notePad << _T("bool ") << modNames.setCls << _T("::addNew() {") << nCrlf;
+  notePad << _T("  if (!opened) return false;") << nCrlf << nCrlf;
+  notePad << _T("  try {AddNew(); return true;}") << nCrlf;
+  notePad << _T("  catch(CException* e) {e->ReportError();   e->Delete();   return false;}");
+  notePad << nCrlf;
+  notePad << _T("  }") << nCrlf;
   }
 
 
 void RcdSetBdy::update() {
-  notePad << _T("bool ") << modNames.setCls << _T("::update()") << nCrlf;
-  notePad << _T("  {if (!opened) return false;  ");
-  notePad << _T("try {Update(); movePrev(); return true;} catch(...) {return false;}}") << nCrlf;
+  notePad << _T("bool ") << modNames.setCls << _T("::update() {") << nCrlf << nCrlf;
+  notePad << _T("  if (!opened) return false;") << nCrlf << nCrlf;
+
+  notePad << _T("  try {if (!Update()) return false;   movePrev();}") << nCrlf;
+  notePad << _T("  catch(CException* e) {e->ReportError();   e->Delete();   return false;}");
+  notePad << nCrlf << nCrlf;
+  notePad << _T("  return true;") << nCrlf;
+  notePad << _T("  }") << nCrlf;
   }
 
 
 void RcdSetBdy::remove() {
   notePad << _T("bool ") << modNames.setCls << _T("::remove()") << nCrlf;
-  notePad << _T("  {if (!opened) return false;  ");
-  notePad << _T("try {Delete(); movePrev(); return true;} catch(...) {return false;}}") << nCrlf;
+  notePad << _T("  {if (!opened) return false;") << nCrlf << nCrlf;
+  notePad << _T("  try {Delete(); movePrev(); return true;}") << nCrlf;
+  notePad << _T("  catch(CException* e) {e->ReportError();   e->Delete();   return false;}");
+  notePad << nCrlf;
+  notePad << _T("  }") << nCrlf;
   }
 
 
@@ -317,4 +305,52 @@ void RcdSetBdy::movePrev() {
   notePad << _T("  }") << nCrlf;
   }
 
+
+
+
+///----------------
+
+#if 1
+#else
+int      i;
+int      n = 3;
+  notePad << modNames.setCls << _T("::") << modNames.setCls << _T("() : AccRcdSet(accessDB.db())");
+
+  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
+
+    if (i < n) notePad << _T(", ");
+    else {notePad << _T(",") << nCrlf << _T("          ");   n = 5;}
+
+    switch (fld->type) {
+      case IdxFld     :
+      case IntFld     : s = notCaped(fld->name) + _T("(0)");     break;
+      case StgFld     :
+      case LongStgFld : s = notCaped(fld->name) + _T("()");      break;
+      case BoolFld    : s = notCaped(fld->name) + _T("(false)"); break;
+      default         : s = notCaped(fld->name) + _T("()");      break;
+      }
+
+    notePad << s;   data += s;
+    }
+
+  notePad << _T(" { }")<< nCrlf;
+#endif
+#if 0
+bool MbrSet::update() {
+
+  if (!opened) return false;
+
+  try {if (!Update()) return false;   movePrev();}
+  catch(CException* e) {e->ReportError();   e->Delete();   return false;}
+
+  return true;
+  }
+#endif
+#if 1
+#else
+  notePad << _T("bool ") << modNames.setCls << _T("::update()") << nCrlf;
+  notePad << _T("  {if (!opened) return false;  ");
+
+  notePad << _T("try {Update(); movePrev(); return true;} catch(...) {return false;}}") << nCrlf;
+#endif
 

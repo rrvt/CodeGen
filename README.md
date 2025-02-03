@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 2/2/25
+
+Add isRemoved function to the record class.
+
 ### Update 12/25/24
 
 Split the library into DocLib and Library where DocLib supports the MFC Document/Library App

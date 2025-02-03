@@ -218,6 +218,8 @@ typedef tstring::reverse_iterator reverseIterator;
                                     {tstring& s = *this; return (int) s.find(stg,  offset, count);}
   int find(const String& stg, int offset=0)
                                     {tstring& s = *this; return (int) s.find(stg, offset);}
+  int findOneOf(TCchar* tc, int offset=0);    // Returns pos of one of the characters in tc,
+                                              // priority left to right otherwise returns -1
 
   // Find last character in the string given a single character or a group of characters
   // offset -- Index at which the search is to finish
@@ -230,6 +232,7 @@ typedef tstring::reverse_iterator reverseIterator;
                             {tstring& s = *this; return (int) s.find_last_of(stg,  offset, count);}
   int findLastOf(const String& stg, int offset=npos)
                             {tstring& s = *this; return (int) s.find_last_of(stg, offset);}
+
 
 // Conversion to numbers, integer, unsigned long integer and double
 // returns the value, i contains the index of the first unconverted character
@@ -333,7 +336,6 @@ typedef tstring::reverse_iterator reverseIterator;
   bool operator<= (variant_t&     t) {return compare(String(t)) <= 0;}
   bool operator<= (      String&  t) {return compare(t)         <= 0;}
   bool operator<= (const String&  t) {return compare(t)         <= 0;}
-
 
 private:
 

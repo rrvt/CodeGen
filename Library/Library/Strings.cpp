@@ -177,6 +177,20 @@ size_t j = i;
   }
 
 
+
+// Returns pos of one of the characters in tc, priority left to right otherwise returns -1
+
+int String::findOneOf(TCchar* tc, int offset) {
+int i;
+int pos;
+
+  for (i = 0; tc[i]; i++) {pos = find(tc[i], offset);   if (pos >= 0) return pos;}
+
+  return -1;
+  }
+
+
+
 //%[flags][width][.precision][size]type
 
 String dblToString(double v, int width, int precision) {

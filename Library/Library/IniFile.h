@@ -37,6 +37,8 @@ public:
   bool    write(      TCchar* section, TCchar* key, CString& val);
   bool    write(      TCchar* section, TCchar* key, int      val)
                                                               {return writeInt(section, key, val);}
+  bool    write(      TCchar* section, TCchar* key, bool     val);
+
   bool    writeInt(   TCchar* section, TCchar* key, int      val);
   bool    write(      TCchar* section, TCchar* key, double   val);
   bool    writePwd(   TCchar* section, TCchar* key, String&  val);
@@ -55,6 +57,7 @@ public:
   bool    read(       TCchar* section, TCchar* key, String&  val, TCchar* dflt);
   bool    read(       TCchar* section, TCchar* key, Cstring& val, TCchar* dflt);
   bool    read(       TCchar* section, TCchar* key, int&     val, int     dflt);
+  bool    read(       TCchar* section, TCchar* key, bool&    val, bool    dflt);
   int     readInt(    TCchar* section, TCchar* key, int      def);
   bool    readPwd(    TCchar* section, TCchar* key, String&  val);
 

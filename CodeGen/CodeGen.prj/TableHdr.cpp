@@ -69,9 +69,13 @@ String       s;
   decl.output();
   notePad << nCrlf;
 
-  notePad << _T("  ") << modNames.rcdCls << _T("() : id(0), dirty(false), remove(false) { }") << nCrlf;
+  notePad << _T("  ") << modNames.rcdCls << _T("();") << nCrlf;
+  notePad << _T("  ") << modNames.rcdCls << _T('(') << modNames.rcdCls << _T("& r) ");
+  notePad << _T("{copy(r);}") << nCrlf;
   notePad << _T(" ~") << modNames.rcdCls << _T("() { }") << nCrlf;
   notePad << nCrlf;
+
+  notePad << _T("  void clear();") << nCrlf << nCrlf;
 
   notePad << _T("  void load(") << modNames.setCls << _T("* set);") << nCrlf;
   notePad << nCrlf;
@@ -81,6 +85,7 @@ String       s;
 
   notePad << _T("  void setDirty()  {dirty = true;}") << nCrlf;
   notePad << _T("  void setRemove() {dirty = true; remove = true;}") << nCrlf;
+  notePad << _T("  bool isRemoved() {return remove;}") << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("  void store(") << modNames.setCls << _T("& set);") << nCrlf;
@@ -89,6 +94,9 @@ String       s;
 
   notePad << _T("  void display();") << nCrlf;
   notePad << nCrlf;
+
+  notePad << _T("  ") << modNames.rcdCls << _T("& operator= (") << modNames.rcdCls << _T("& r) ");
+  notePad << _T("{copy(r); return *this;}") << nCrlf << nCrlf;
 
   notePad << _T("  // Needed for Insertion Sort of Primary Key") << nCrlf;
   notePad << _T("  bool operator== (") << modNames.rcdCls << _T("& r) {return id == r.id;}");
@@ -108,6 +116,7 @@ String       s;
   notePad << nCrlf;
 
   notePad << _T("  void copy(") << modNames.setCls << _T("& set);") << nCrlf;
+  notePad << _T("  void copy(") << modNames.rcdCls << _T("& r);")   << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("  friend class ") << modNames.tblCls << _T(';') << nCrlf;
@@ -167,8 +176,8 @@ Declarations decl;
   notePad << _T("  bool store(TCchar* path);     // Store/Del entities marked") << nCrlf;
   notePad << nCrlf;
 
-  notePad << _T("  ") << modNames.rcdCls << _T("* find(int id) {return data.bSearch(id);}");
-  notePad << nCrlf;
+  notePad << _T("  ") << modNames.rcdCls << _T("* find(int id) ");
+  notePad << _T("{return id ? data.bSearch(id) : 0;}") << nCrlf;
 
   linSrch.addTblHdrFn();   notePad << nCrlf;
 

@@ -37,7 +37,7 @@ String s = tc;
   }
 
 
-String tabStg(int n) {return blks.substr(0, n);}
+String tabStg(int n) {return n >= 0 ? blks.substr(0, n) : String(_T(""));}
 
 
 String nextTok(String& s, int& pos) {

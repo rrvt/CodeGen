@@ -23,6 +23,7 @@
     <ClCompile Include="CryptDe.cpp" />
     <ClCompile Include="CryptEn.cpp" />
     <ClCompile Include="CryptInit.cpp" />
+    <ClCompile Include="CSVOut.cpp" />
     <ClCompile Include="Currency.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="ComboBox.h" />
     <ClInclude Include="CopyFile.h" />
     <ClInclude Include="Crypt.h" />
+    <ClInclude Include="CSVOut.h" />
     <ClInclude Include="CSVRcdsT.h" />
     <ClInclude Include="Currency.h" />
     <ClInclude Include="Date.h" />

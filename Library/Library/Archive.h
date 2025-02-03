@@ -105,6 +105,9 @@ ArchLine arLine;
 NoteNmbr nmbr;
 
 public:
+
+enum Mode {Read=1, Write=2, Create=4};
+
            Archive(String& fileName, int mode);
            Archive(void*   arbObj,   int mode) : ArchPos(arbObj, mode) { }
           ~Archive() { }
@@ -113,7 +116,7 @@ public:
   bool     isStoring() {return ArchFile::isStoring();}
   void     seekEnd()   {ArchFile::seekEnd();}
 
-  Archive& operator << (NotePad& np);                      // Archive the content of specified notepad
+  Archive& operator << (NotePad& np);                   // Archive the content of specified notepad
 
   Archive& operator << (TCchar*        tc) {return append(tc);}
   Archive& operator << (String&         s) {return append(s);}

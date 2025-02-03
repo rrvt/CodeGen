@@ -114,6 +114,11 @@ bool IniFile::write(TCchar* section, TCchar* key, TCchar*  val) {
   }
 
 
+bool IniFile::write(TCchar* section, TCchar* key, bool val) {
+int v = val;   return writeInt(section, key, v);
+}
+
+
 bool IniFile::writeInt(TCchar* section, TCchar* key, int val) {
   return WritePrivateProfileString(section, key, toString(val), iniFilePath) != 0;
   }
@@ -197,6 +202,15 @@ bool IniFile::read(TCchar* section, TCchar* key, int& val, int dflt) {
   if (val == -1) {val = 0; return false;}
 
   return true;
+  }
+
+
+bool IniFile::read(TCchar* section, TCchar* key, bool& val, bool dflt) {
+int v;
+
+  if (!read(section, key, v, dflt)) return false;
+
+  val = v != 0;   return true;
   }
 
 

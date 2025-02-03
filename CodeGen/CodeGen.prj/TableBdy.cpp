@@ -8,6 +8,7 @@
 #include "LinSrch.h"
 #include "ModNames.h"
 #include "NotePad.h"
+#include "Utilities.h"
 
 
 void TableBdy::create() {
@@ -23,17 +24,85 @@ void TableBdy::create() {
   notePad << _T("#include \"Utilities.h\"") << nCrlf;
   notePad << nCrlf << nCrlf;
 
+  constructor();           notePad << nCrlf << nCrlf;
+  clear();                 notePad << nCrlf << nCrlf;
   load();                  notePad << nCrlf << nCrlf;
   loadRcd();               notePad << nCrlf << nCrlf;
   store();                 notePad << nCrlf << nCrlf;
   storeRcd();
   addRcd();                notePad << nCrlf << nCrlf;
+  copySet();               notePad << nCrlf << nCrlf;
   copyRcd();               notePad << nCrlf << nCrlf;
   add();                   notePad << nCrlf << nCrlf;
   linSrch.addTblBdyFn();   notePad << nCrlf << nCrlf;
   display();               notePad << nCrlf << nCrlf;
   dispRcd();               notePad << nCrlf << nCrlf;
   setTabs();               notePad << nCrlf << nCrlf;
+  }
+
+
+void TableBdy::constructor() {
+FldsIter iter(fields);
+Field*   fld;
+int      i;
+String   iniVal;
+int      lng = 2 * modNames.rcdCls.length() + 7;
+
+  notePad << modNames.rcdCls << _T("::") << modNames.rcdCls;
+  notePad << _T("() : id(0), dirty(false), remove(false)");
+
+  for (i = 0, fld = iter(); fld; i++, fld = iter++) {
+
+    if (!i) continue;
+
+    switch (fld->type) {
+      case IdxFld     :
+      case IntFld     : iniVal = _T("0");       break;
+      case StgFld     :
+      case LongStgFld :                         continue;
+      case BoolFld    : iniVal = _T("false");   break;
+      default         : iniVal = _T("0");       break;
+      }
+
+    if (i % 3 == 1) {String spcs = tabStg(lng);   notePad << _T(",") << nCrlf << spcs;}
+    else             notePad << _T(", ");
+
+    notePad << notCaped(fld->name) << _T('(') << iniVal << _T(')');
+    }
+  notePad << _T(" { }") << nCrlf;
+  }
+
+
+void TableBdy::clear() {
+FldsIter iter(fields);
+Field*   fld;
+int      i;
+String   iniVal;
+
+  notePad << _T("void ") << modNames.rcdCls << _T("::clear() {") << nCrlf;
+
+  notePad << _T("  id = 0;   dirty = false;   remove = false;");
+
+  for (i = 3, fld = iter(); fld; i++, fld = iter++) {
+
+    if (i <= 3) continue;
+
+    switch (fld->type) {
+      case IdxFld     :
+      case IntFld     : iniVal = _T(" = 0;");       break;
+      case StgFld     :
+      case LongStgFld : iniVal = _T(".clear();");   break;
+      case BoolFld    : iniVal = _T(" = false;");   break;
+      default         : iniVal = _T(" = 0;");       break;
+      }
+
+    if (i % 4 == 0) {notePad << nCrlf << _T("  ");}
+    else             notePad << _T("   ");
+
+    notePad << notCaped(fld->name) << iniVal;
+    }
+
+  notePad << nCrlf << _T("  }") << nCrlf;
   }
 
 
@@ -148,7 +217,7 @@ void TableBdy::addRcd() {
   }
 
 
-void TableBdy::copyRcd() {
+void TableBdy::copySet() {
 FldsIter     iter(fields);
 Field*       fld;
 bool         idx;
@@ -176,6 +245,37 @@ String       right;
   decl.output();
   notePad << _T("  }") << nCrlf;
   }
+
+
+void TableBdy::copyRcd() {
+FldsIter iter(fields);
+Field*   fld;
+int      i;
+int      lng;
+int      max = 6;
+
+  notePad << _T("void ") << modNames.rcdCls << _T("::copy(") << modNames.rcdCls << _T("& r) {");
+  notePad << nCrlf;
+
+  for (i = 0, fld = iter(); fld; i++, fld = iter++)
+                                    {lng = fld->name.length(); if (i != 0 && lng > max) max = lng;}
+
+  copyFld(_T("id"), max);   copyFld(_T("dirty"), max);   copyFld(_T("remove"), max);
+
+  for (i = 0, fld = iter(); fld; i++, fld = iter++) if (i) copyFld(fld->name, max);
+
+  notePad << _T("  }") << nCrlf;
+  }
+
+
+void TableBdy::copyFld(TCchar* fld, int max) {
+String s   = notCaped(fld);
+int    lng = s.length();
+
+
+  notePad << _T("  ") << s << tabStg(max - lng) << _T(" = r.") << s << _T(';') << nCrlf;
+  }
+
 
 
 void TableBdy::add() {
