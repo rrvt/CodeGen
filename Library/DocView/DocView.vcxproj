@@ -245,6 +245,11 @@
     <ClCompile Include="Xmlparser.cpp" />
     <ClCompile Include="XmlStore.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Library.vcxproj">
+      <Project>{cf57f3ec-d3db-4469-8519-3f9d73785d9b}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

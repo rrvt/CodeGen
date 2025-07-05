@@ -12,9 +12,9 @@ void Declaration::init(FieldType varType, TCchar* varName, TCchar* asgn) {
     case IdxFld     :
     case IntFld     : typ = _T("int");     break;
     case StgFld     :
-    case LongStgFld : typ = _T("CString"); break;
+    case LongStgFld : typ = _T("Cstring"); break;
     case BoolFld    : typ = _T("BOOL");    break;
-    default         : typ = _T("CString"); break;
+    default         : typ = _T("Cstring"); break;
     }
 
   name   = varName;

@@ -37,7 +37,7 @@ TblItem*     tblItem;
   notePad << nCrlf;
 
   notePad << _T("  Database() { }") << nCrlf;
-  notePad << _T(" ~Database();")    << nCrlf;
+  notePad << _T(" ~Database() { }") << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("  bool load(TCchar* path);") << nCrlf;

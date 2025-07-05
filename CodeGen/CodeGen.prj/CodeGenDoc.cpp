@@ -11,7 +11,7 @@
 #include "DbTblList.h"
 #include "DbTblSelDlg.h"
 #include "filename.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "LinSrch.h"
 #include "MainFrame.h"
 #include "ModNames.h"
@@ -27,8 +27,8 @@ static TCchar* FileSection      = _T("DataBase File Names");
 static TCchar* DBFileKey        = _T("DataBase File");
 static TCchar* GenFilePathKey   = _T("GenFilePath");
 
-static TCchar* HeaderPat = _T("*.h");
-static TCchar* CppPat    = _T("*.cpp");
+static TCchar* HeaderPat        = _T("*.h");
+static TCchar* CppPat           = _T("*.cpp");
 
 
 // CodeGenDoc
@@ -79,7 +79,7 @@ MyToolBar& toolBar = mainFrm()->getToolBar();
 
   toolBar.setCaption(ID_CB, _T("Database Tables"));
 
-  toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
+  toolBar.setWthPercent(ID_CB, 80);   toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
 
   dbOpened = true;  display(NotePadSrc);
   }
@@ -88,7 +88,7 @@ MyToolBar& toolBar = mainFrm()->getToolBar();
 void CodeGenDoc::OnComboBoxChng() {
 MyToolBar& toolBar = mainFrm()->getToolBar();
 String     table;
-int        i;
+void*      x;
 AbbrDlg    dlg;
 TblItem*   tblItem;
 
@@ -96,7 +96,7 @@ TblItem*   tblItem;
 
   tableSelected = false;
 
-  if (!toolBar.getCurSel(ID_CB, table, i)) return;
+  if (!toolBar.getCurSel(ID_CB, table, x)) return;
 
   if (!fields.load(path, table)) return;
 

@@ -6,14 +6,14 @@
 #include "AboutDlg.h"
 #include "CodeGenDoc.h"
 #include "CodeGenView.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "MainFrame.h"
 #include "NotePad.h"
 #include "ResourceExtra.h"
 
 
-CodeGen theApp;                       // The one and only CodeGen object
-IniFile iniFile;
+CodeGen   theApp;                       // The one and only CodeGen object
+IniFileEx iniFile(theApp);
 
 // CodeGen
 
@@ -30,7 +30,7 @@ BOOL CodeGen::InitInstance() {
 
   CWinAppEx::InitInstance();
 
-  iniFile.setAppDataPath(m_pszHelpFilePath, *this);
+  iniFile.setAppDataPath(m_pszHelpFilePath);
 
   notePad.clear();
 
@@ -72,14 +72,7 @@ BOOL CodeGen::InitInstance() {
   }
 
 
-int CodeGen::ExitInstance() {
-
-#ifdef DebugMemoryLeaks
-  _CrtDumpMemoryLeaks();
-#endif
-
-  return CApp::ExitInstance();
-  }
+int CodeGen::ExitInstance() {return CApp::ExitInstance();}
 
 
 void CodeGen::OnHelp() {

@@ -2,21 +2,6 @@
 
 
 #pragma once
-
-#define MyButtonDefs
-#define DocViewTB
-
-
-#ifdef ButtonDefs
-#include "TBButton.h"
-#include "TBEditBox.h"
-#ifdef DocViewTB
-#include "TBMenu.h"
-#else
-#include "TBCbxMenu.h"
-#endif
-#include "TBCboBx.h"
-#endif
 #include "ToolBarBase.h"
 
 
@@ -36,33 +21,33 @@ public:
   bool    addEditBox(uint id, int     noChars);
   CString getText(uint id);
 
-#ifdef DocViewTB
+// Tool Bar ComboBox Functions
 
-  bool    addMenu(   uint id, int     idr, TCchar* caption);
-  bool    addMenu(   uint id, int     idr, int     index);
-  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
-
-#else
-
-  bool    addMenu(   uint id, int     idr, TCchar* caption);
-  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
-  void    dispatch(uint id);
-
-#endif
-
+  void    clearCbx(  uint id);
   bool    addCBx(    uint id);
   bool    addCBx(    uint id, int     idr, TCchar* caption);
   bool    addCbxItem(uint id, TCchar* txt, int data = 0);
   bool    addCBx(    uint id, CbxItem cbxItem[], int n, TCchar* caption);
   bool    addCbxItemSorted(uint id, TCchar* txt, int data = 0);
-  void    setCaption(uint id, TCchar* caption);
-  void    setWidth(  uint id);
-  void    setHeight( uint id);
-  bool    getCurSel( uint id, String& s, int& data);
+
+  void*   getCbxData(uint cbxId, int index);
+  int     getCurSel( uint cbxId);
+  bool    getCurSel( uint cbxId, String& s, void*& data);
+
+  bool    setCurSel( uint cbxId, int index);
+  bool    setCurSel( uint cbxId, TCchar* tc);
+
+  uint    getCbxCount(uint id);
+  void    setCaption( uint id, TCchar* caption);
+
+  void    setWthPercent(uint id, int prcnt);            // good for Menus and ComboBoxes
+  void    setWidth(     uint id);
+  void    setHeight(    uint id);
   };
 
 
 
+///--------------------
 
 #ifdef ButtonDefs
 
@@ -95,5 +80,27 @@ TBCboBx   cboBx1;
 
 #endif
 #endif
+#endif
+#ifdef DocViewTB
+#include "TBCbxMenu.h"
+#endif
+#ifdef DocViewTB
+
+  bool    addMenu(   uint id, int     idr, TCchar* caption);
+  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
+  void    dispatch(uint id);
+
+#endif
+//#define MyButtonDefs
+//#define DocViewTB
+//#include "TBButton.h"
+//#include "TBEditBox.h"
+//#include "TBMenu.h"
+//#include "TBCboBx.h"
+
+#if 0
+  bool    addMenu(   uint id, int     idr, TCchar* caption);
+  bool    addMenu(   uint id, int     idr, int     index);
+  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
 #endif
 

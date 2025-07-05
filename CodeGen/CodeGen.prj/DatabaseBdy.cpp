@@ -38,7 +38,11 @@ String       right;
 
     decl.add(modNames.tblCls, modNames.tblObj);
     }
+
+  notePad << _T("#if 0                 // Add the following definitions to App Module") << nCrlf;
   decl.output();
+  notePad << _T("#endif") << nCrlf;
+
   notePad << nCrlf;
   notePad << nCrlf;
 
@@ -56,9 +60,11 @@ String       right;
   notePad << nCrlf;
 
   notePad << _T("  return true;") << nCrlf;
-  notePad << _T("  }") << nCrlf;
+  notePad << _T("  }") << nCrlf << nCrlf;
+#if 0
   notePad << nCrlf;
   notePad << nCrlf;
   notePad << _T("Database::~Database() {accessDB.close();}") << nCrlf;
+#endif
   }
 

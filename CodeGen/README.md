@@ -163,6 +163,13 @@ related to the database:
 
 ## Updates
 
+### Update 7/5/25
+
+Improved memory leak debugging.  Factored IniFile into three classes.  Improved toolbar combo box
+handling.  Enouraged the movement of Database Declarations to the main app module (improves memory
+leak detection by taking those declarations out of the search).  Changed CString declarations in
+Database classes to Cstring.
+
 ### Update 2/2/25
 
 Add isRemoved function to the record class.

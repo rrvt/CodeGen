@@ -7,7 +7,7 @@ CodeGen.chm : *.htm CodeGen.hhp CodeGen.hhc App.css
 Clean.cln    :
   @echo "Cleaning"
   cd $(MAKEDIR)
-  del /F CodeGen.chm
+  if exist CodeGen.chm del /F CodeGen.chm
 
 
 Release/CodeGen.chm : CodeGen.chm
@@ -16,7 +16,7 @@ Release/CodeGen.chm : CodeGen.chm
 
 Release/Clean.cln    : Clean.cln
   cd $(MAKEDIR)\..\Release
-  del CodeGen.chm
+  if exist CodeGen.chm del /F CodeGen.chm
   cd $(MAKEDIR)
 
 
@@ -26,7 +26,7 @@ Debug/CodeGen.chm : CodeGen.chm
 
 Debug/Clean.cln    : Clean.cln
   cd $(MAKEDIR)\..\Debug
-  del CodeGen.chm
+  if exist CodeGen.chm del /F CodeGen.chm
   cd $(MAKEDIR)
 
 

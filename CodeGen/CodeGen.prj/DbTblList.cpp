@@ -4,7 +4,7 @@
 #include "pch.h"
 #include "DbTblList.h"
 #include "Database.h"
-#include "IniFile.h"
+#include "IniFileEx.h"
 #include "NotePad.h"
 
 
