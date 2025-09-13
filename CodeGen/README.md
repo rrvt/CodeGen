@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 9/13/25
+
+Update to match changes in ExpandableP.
+
 ### Update 7/5/25
 
 Improved memory leak debugging.  Factored IniFile into three classes.  Improved toolbar combo box
