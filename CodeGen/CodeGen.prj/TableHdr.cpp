@@ -181,7 +181,7 @@ Declarations decl;
 
   linSrch.addTblHdrFn();   notePad << nCrlf;
 
-  notePad << _T("  virtual void display();") << nCrlf;
+  notePad << _T("  virtual void display() { }") << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("private:") << nCrlf;
@@ -199,7 +199,8 @@ Declarations decl;
   notePad << nCrlf;
 
   notePad << _T("  ") << modNames.rcdCls;
-  notePad << _T("* datum(int i) {return 0 <= i && i < nData() ? data[i].p : 0;}") << nCrlf;
+  notePad << _T("* datum(int i) {return 0 <= i && i < nData() ? data[i]"
+                " : 0;}") << nCrlf;
   notePad << nCrlf;
 
   notePad << _T("  int   nData()      {return data.end();}   ");

@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 10/22/25
+
+Factored library into three parts, Library, Dialog, DocView.
+
 ### Update 9/13/25
 
 Update to match changes in ExpandableP.

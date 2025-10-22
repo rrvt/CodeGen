@@ -135,6 +135,7 @@ RcdSetBdy bdy;
 void CodeGenDoc::onDBtable() {
 TableHdr hdr;
 TableBdy bdy;
+String   s;
 
   if (!tableSelected) return;
 
@@ -145,6 +146,10 @@ TableBdy bdy;
 
   bdy.create();
   pathDlgDsc(_T("Table cpp File"), modNames.tblCls, _T(".cpp"), CppPat);    saveFile();
+
+  bdy.createDsp();   s = modNames.tblCls + _T("Dsp");
+  pathDlgDsc(_T("Table Display cpp File"), s, _T(".cpp"), CppPat);          saveFile();
+
 
   display(NotePadSrc);
   }

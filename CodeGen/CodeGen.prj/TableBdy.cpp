@@ -20,8 +20,8 @@ void TableBdy::create() {
   notePad << nCrlf;
   notePad << _T("#include \"pch.h\"") << nCrlf;
   notePad << _T("#include \"") << modNames.tblCls << _T(".h\"") << nCrlf;
-  notePad << _T("#include \"NotePad.h\"") << nCrlf;
-  notePad << _T("#include \"Utilities.h\"") << nCrlf;
+//  notePad << _T("#include \"NotePad.h\"") << nCrlf;
+//  notePad << _T("#include \"Utilities.h\"") << nCrlf;
   notePad << nCrlf << nCrlf;
 
   constructor();           notePad << nCrlf << nCrlf;
@@ -35,9 +35,6 @@ void TableBdy::create() {
   copyRcd();               notePad << nCrlf << nCrlf;
   add();                   notePad << nCrlf << nCrlf;
   linSrch.addTblBdyFn();   notePad << nCrlf << nCrlf;
-  display();               notePad << nCrlf << nCrlf;
-  dispRcd();               notePad << nCrlf << nCrlf;
-  setTabs();               notePad << nCrlf << nCrlf;
   }
 
 
@@ -282,6 +279,25 @@ void TableBdy::add() {
 
   notePad << modNames.rcdCls << _T("* ") << modNames.tblCls << _T("::add(") << modNames.rcdCls;
   notePad << _T("& rcd) {rcd.id = ++maxID;  rcd.dirty = true;  return data = rcd;}") << nCrlf;
+  }
+
+
+void TableBdy::createDsp() {
+
+  notePad.clear();
+
+  notePad << _T("// ") << modNames.accTbl << _T(" Table Display Functions (Doc/View)") << nCrlf;
+  notePad << nCrlf;
+  notePad << nCrlf;
+  notePad << _T("#include \"pch.h\"") << nCrlf;
+  notePad << _T("#include \"") << modNames.tblCls << _T(".h\"") << nCrlf;
+  notePad << _T("#include \"NotePad.h\"") << nCrlf;
+  notePad << _T("#include \"Utilities.h\"") << nCrlf;
+  notePad << nCrlf << nCrlf;
+
+  display();               notePad << nCrlf << nCrlf;
+  dispRcd();               notePad << nCrlf << nCrlf;
+  setTabs();               notePad << nCrlf << nCrlf;
   }
 
 

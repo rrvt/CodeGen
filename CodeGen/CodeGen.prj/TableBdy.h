@@ -11,6 +11,7 @@ public:
   TableBdy() { }
 
   void create();
+  void createDsp();
 
 private:
 
@@ -25,6 +26,7 @@ private:
   void copyRcd();
   void copyFld(TCchar* fld, int max);
   void add();
+
   void display();
   void dispRcd();
   void setTabs();
