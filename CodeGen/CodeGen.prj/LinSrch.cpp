@@ -13,13 +13,13 @@ LinSrch linSrch;
 
 
 void LinSrch::getFields() {
-SrchCmpntDlg scDlg;    scDlg.title = _T("Select Linear Search Fields");
+SrchCmpntDlg dlg;    dlg.title = _T("Select Linear Search Fields");
 FldsIter     iter(fields);
 Field*       fld;
 
-  scDlg.DoModal();
+  if (dlg.DoModal() != IDOK) return;
 
-  data.clear();
+  data.clear();   isFnName.clear();   abbrKey.clear();
 
   for (fld = iter(); fld; fld = iter++) if (fld->isSelected) {
     SrchFld& rcd = data.nextData();
@@ -28,6 +28,8 @@ Field*       fld;
     }
 
   n = nData();
+
+  isFnName = dlg.fnName;   abbrKey = dlg.abbrKey;
   }
 
 
@@ -132,4 +134,27 @@ int       i;
   }
 
 
+/*
+  bool    isNonResp(int id);
+*/
+
+bool LinSrch::addIsAbbrHdrFn() {
+  if (!isAbbrKeyFn()) return false;
+
+  notePad << _T("  bool ") << isFnName << _T("(int id);") << nCrlf;   return true;
+  }
+
+
+/*
+bool AsnTbl::isNonResp(int id) {AsnRcd* rcd = find(id);   return rcd && rcd->aPKey == _T("N");}
+*/
+
+bool LinSrch::addIsAbbrBdyFn() {
+  if (!isAbbrKeyFn()) return false;
+
+  notePad << _T("bool ") << modNames.tblCls << _T("::") << isFnName << _T("(int id) {");
+  notePad << modNames.rcdCls << _T("* rcd = find(id);   ");
+  notePad << _T("return rcd && rcd->") << notCaped(data[0].name);
+  notePad << _T(" == _T(\"") << abbrKey << _T("\");}") << nCrlf;   return true;
+  }
 

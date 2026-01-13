@@ -3,6 +3,7 @@
 
 #pragma once
 #include "CDoc.h"
+#include "PathDlgDsc.h"
 
 
 enum DataSource {NotePadSrc};

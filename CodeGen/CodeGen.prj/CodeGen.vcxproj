@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\CodeGen.ico" />
+    <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar05.bmp" />
     <Image Include="res\UICodeGen.ico" />
   </ItemGroup>

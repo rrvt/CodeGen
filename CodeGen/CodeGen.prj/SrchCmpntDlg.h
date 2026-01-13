@@ -13,6 +13,8 @@ public:
 
 CString   title;
 CListCtrl listCtrl;
+Cstring   fnName;
+Cstring   abbrKey;
 
            SrchCmpntDlg(CWnd* pParent = nullptr);
   virtual ~SrchCmpntDlg() { }

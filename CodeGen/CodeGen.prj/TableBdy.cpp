@@ -24,17 +24,18 @@ void TableBdy::create() {
 //  notePad << _T("#include \"Utilities.h\"") << nCrlf;
   notePad << nCrlf << nCrlf;
 
-  constructor();           notePad << nCrlf << nCrlf;
-  clear();                 notePad << nCrlf << nCrlf;
-  load();                  notePad << nCrlf << nCrlf;
-  loadRcd();               notePad << nCrlf << nCrlf;
-  store();                 notePad << nCrlf << nCrlf;
+  constructor();                notePad << nCrlf << nCrlf;
+  clear();                      notePad << nCrlf << nCrlf;
+  load();                       notePad << nCrlf << nCrlf;
+  loadRcd();                    notePad << nCrlf << nCrlf;
+  store();                      notePad << nCrlf << nCrlf;
   storeRcd();
-  addRcd();                notePad << nCrlf << nCrlf;
-  copySet();               notePad << nCrlf << nCrlf;
-  copyRcd();               notePad << nCrlf << nCrlf;
-  add();                   notePad << nCrlf << nCrlf;
-  linSrch.addTblBdyFn();   notePad << nCrlf << nCrlf;
+  addRcd();                     notePad << nCrlf << nCrlf;
+  copySet();                    notePad << nCrlf << nCrlf;
+  copyRcd();                    notePad << nCrlf << nCrlf;
+  add();                        notePad << nCrlf << nCrlf;
+  if (linSrch.addIsAbbrBdyFn()) notePad << nCrlf << nCrlf;
+  linSrch.addTblBdyFn();        notePad << nCrlf << nCrlf;
   }
 
 

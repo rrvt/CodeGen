@@ -32,6 +32,9 @@ class LinSrch {
 Expandable<SrchFld, 2> data;
 int                    n;
 
+String                 isFnName;
+String                 abbrKey;
+
 public:
 
   LinSrch() : n(0) { }
@@ -43,7 +46,12 @@ public:
   void addTblHdrFn();
   void addTblBdyFn();
 
+  bool addIsAbbrHdrFn();
+  bool addIsAbbrBdyFn();
+
 private:
+
+  bool isAbbrKeyFn() {return !isFnName.isEmpty() && !abbrKey.isEmpty();}
 
   // returns either a pointer to data (or datum) at index i in array or zero
 

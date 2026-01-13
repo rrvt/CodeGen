@@ -20,7 +20,7 @@ IniFileEx iniFile(theApp);
 BEGIN_MESSAGE_MAP(CodeGen, CWinAppEx)
   ON_COMMAND(ID_FILE_PRINT_SETUP, &OnFilePrintSetup)
   ON_COMMAND(ID_Help,             &OnHelp)
-  ON_COMMAND(ID_App_About,        &OnAppAbout)
+  ON_COMMAND(ID_About,            &OnAppAbout)
 END_MESSAGE_MAP()
 
 

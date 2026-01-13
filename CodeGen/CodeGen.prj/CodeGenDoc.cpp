@@ -36,7 +36,7 @@ static TCchar* CppPat           = _T("*.cpp");
 IMPLEMENT_DYNCREATE(CodeGenDoc, CDoc)
 
 BEGIN_MESSAGE_MAP(CodeGenDoc, CDoc)
-  ON_COMMAND(      ID_File_Open, &OnFileOpen)
+  ON_COMMAND(      ID_Open, &OnFileOpen)
   ON_CBN_SELCHANGE(ID_CB,        &OnComboBoxChng)
   ON_COMMAND(      ID_CB,        &OnComboBoxChng)
 
@@ -44,7 +44,7 @@ BEGIN_MESSAGE_MAP(CodeGenDoc, CDoc)
   ON_COMMAND(      ID_DBtable,   &onDBtable)
   ON_COMMAND(      ID_Database,  &onDatabase)
 
-  ON_COMMAND(      ID_File_Save, &OnFileSave)
+  ON_COMMAND(      ID_Save,      &OnFileSave)
 END_MESSAGE_MAP()
 
 

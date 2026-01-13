@@ -35,6 +35,8 @@ int      i;
 void SrchCmpntDlg::DoDataExchange(CDataExchange* pDX) {
   CDialogEx::DoDataExchange(pDX);
   DDX_Control(pDX, IDC_List,    listCtrl);
+  DDX_Text(   pDX, IDC_FnName,  fnName);
+  DDX_Text(   pDX, IDC_AbbrKey, abbrKey);
   }
 
 

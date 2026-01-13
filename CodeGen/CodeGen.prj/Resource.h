@@ -12,11 +12,14 @@
 #define IDC_CB                          200
 #define IDC_Abbr                        201
 #define IDC_List                        202
+#define IDC_FnName                      203
+#define IDC_EDIT2                       204
+#define IDC_AbbrKey                     204
 
-#define ID_File_Open                    401
-#define ID_File_Save                    402
+#define ID_Open                         401
+#define ID_Save                         402
 #define ID_Options                      403
-#define ID_App_About                    404
+#define ID_About                        404
 #define ID_Help                         405
 #define ID_CB                           406
 #define ID_RcdSet                       407
@@ -30,7 +33,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        106
 #define _APS_NEXT_COMMAND_VALUE         420
-#define _APS_NEXT_CONTROL_VALUE         203
+#define _APS_NEXT_CONTROL_VALUE         205
 #define _APS_NEXT_SYMED_VALUE           300
 #endif
 #endif

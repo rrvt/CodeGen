@@ -176,6 +176,8 @@ Declarations decl;
   notePad << _T("  bool store(TCchar* path);     // Store/Del entities marked") << nCrlf;
   notePad << nCrlf;
 
+  if (linSrch.addIsAbbrHdrFn()) notePad << nCrlf;
+
   notePad << _T("  ") << modNames.rcdCls << _T("* find(int id) ");
   notePad << _T("{return id ? data.bSearch(id) : 0;}") << nCrlf;
 

@@ -163,6 +163,10 @@ related to the database:
 
 ## Updates
 
+### Update 1/12/26
+
+Added a boolean function for determining the record of a table's ID, eg. "isNonResp()".
+
 ### Update 10/22/25
 
 Factored library into three parts, Library, Dialog, DocView.
