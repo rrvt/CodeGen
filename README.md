@@ -24,22 +24,34 @@ Some of the relevant functionality is in these parent classes.
 
 ## Getting Started
 
-CodeGen is composed of three projects and compiled with Visual Studio 2017.  The three projects are:
-  - CodeGenII -- Solution File is in the ...\CodeGenII\CodeGenII\ folder.  It references the other
-    three projects (Library and Installer)
-  - CodeGenIIHelp -- Help file for the application.  Use the Help Workshop.
-  - Library -- This project produces a static library of which some object files are loaded into
-    the executable (installer file)
-  - Installer -- A Wix Toolset Installer.  Currently this file (Product.wxs) contains references to
-    CodeGenII.exe and the CodeGenII.chm.  If you wish to change the installer then I suggest you look
-    at WixApp.
+The application is built with Visual Studio 2022 (VS22).  It was compiled with the following
+properties:
+
+  o Windows Latest SDK Version
+  o Platfor Toolset: visual Studio 2022
+  o MFC: Use MFC in a Shared DLL
+  o Character Set:  Use Unicode Character Set
+  o Additional Include Directories:
+    * $(ProjectDir)
+    * $(SolutionDir)..\..\Library\Library.prj\
+    * $(SolutionDir)..\..\Library\DocView\
+  o  Precompiled Header:  Not Using Precompiled Headers
+  o  Linker/Additional Dependencies:  Htmlhelp.lib
+
+The HTML Help Workshop (HHW), Version 4.74.8702.0 was used to prepare the help file (WixApp.chm).  It is
+copied into the Release directory.  I used Dreamweaver (DW) to do most of the content production of the
+help files that the HTML Help Workshop produces (i.e. HHW is used to produce the pages/files needed
+and DW is used to fill in the content).
+
+The Installer requires the Wix, HeatWave and NuGet-Tools Extensions to VS22.  WixApp (one of my
+applications, see git) was used to produce the product.wxs file.
 
 ### Prerequisites
 
-Of course this all depends on having an Access database, a Visual Studio 2017 +/- and the ability to
-debug if things don't go right.  The Extension "Wix Toolset visual Studio 2017 Extension" is also
-required.  It can be found in "Tools/Extensions and Updates".  If you wish to changed the installer then
-look at the WixApp.
+Of course this all depends on having an Access database, a Visual Studio 2022 and the ability to
+debug if things don't go right.
+
+The WiX, HeatWave, NuGet-Tools Toolsets must be installed in Visual Studio.
 
 Microsoft HTML Help Workshop (last version).  This is the link to the last version:
 ```
@@ -162,6 +174,10 @@ related to the database:
   - erase a book or person (note, simple erase only erases in the table selected)
 
 ## Updates
+
+### Update 2/10/26
+
+Added ability to build in 64 bit mode.  Upgraded Wix to HeatWave version 4.
 
 ### Update 1/12/26
 

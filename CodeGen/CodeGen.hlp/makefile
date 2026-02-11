@@ -10,29 +10,16 @@ Clean.cln    :
   if exist CodeGen.chm del /F CodeGen.chm
 
 
-Release/CodeGen.chm : CodeGen.chm
-  copy $(MAKEDIR)\CodeGen.chm  $(MAKEDIR)\..\Release\CodeGen.chm
+$(TgtFolder)/CodeGen.chm : CodeGen.chm
+  copy $(MAKEDIR)\CodeGen.chm  $(MAKEDIR)\..\$(TgtFolder)\CodeGen.chm
 
 
-Release/Clean.cln    : Clean.cln
-  cd $(MAKEDIR)\..\Release
+$(TgtFolder)/Clean.cln    : Clean.cln
+  cd $(MAKEDIR)\..\$(TgtFolder)
   if exist CodeGen.chm del /F CodeGen.chm
   cd $(MAKEDIR)
 
 
-Debug/CodeGen.chm : CodeGen.chm
-  copy $(MAKEDIR)\CodeGen.chm  $(MAKEDIR)\..\Debug\CodeGen.chm
-
-
-Debug/Clean.cln    : Clean.cln
-  cd $(MAKEDIR)\..\Debug
-  if exist CodeGen.chm del /F CodeGen.chm
-  cd $(MAKEDIR)
-
-
-Release/Rebuild.rbd : Release/Clean.cln Release/CodeGen.chm
-
-
-Debug/Rebuild.rbd   : Debug/Clean.cln Debug/CodeGen.chm
+$(TgtFolder)/Rebuild.rbd : $(TgtFolder)/Clean.cln $(TgtFolder)/CodeGen.chm
 
 
