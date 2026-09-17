@@ -1,0 +1,14 @@
+BuiltPdbOutput	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.wixpdb
+BuiltTargetOutput	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.msi
+Input	C:\Program Files (x86)\WixApp\banner.bmp
+Input	C:\Program Files (x86)\WixApp\dialog.bmp
+Input	C:\Source2\CodeGen\CodeGen\..\CodeGen.prj\res\CodeGen.ico
+Input	C:\Source2\CodeGen\Release.x64\\..\..\Library\License\MITLicenseFile.rtf
+Input	C:\Source2\CodeGen\Release.x64\\..\Release.x64\CodeGen.chm
+Input	C:\Source2\CodeGen\Release.x64\\..\Release.x64\CodeGen.exe
+Input	C:\Users\rrvt\.nuget\packages\wixtoolset.ui.wixext\6.0.0\wixext6\WixToolset.UI.wixext.dll
+Intermediate	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\#cab1.cab
+Intermediate	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\WixToolset.UI.wixext_WyZmZLx44RyG7B9htbi22VFYFjI\wix-ir\exclamic.ico
+Intermediate	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\WixToolset.UI.wixext_WyZmZLx44RyG7B9htbi22VFYFjI\wix-ir\info.ico
+Intermediate	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\WixToolset.UI.wixext_WyZmZLx44RyG7B9htbi22VFYFjI\wix-ir\new.ico
+Intermediate	C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\WixToolset.UI.wixext_WyZmZLx44RyG7B9htbi22VFYFjI\wix-ir\up.ico

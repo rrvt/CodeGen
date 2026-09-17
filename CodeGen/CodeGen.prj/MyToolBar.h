@@ -10,7 +10,7 @@ struct CbxItem;
 
 class MyToolBar : public ToolBarBase {
 
-TBCboBx cboBx;
+TBCboBox&   cboBox;
 
 public:
 
@@ -18,89 +18,43 @@ public:
  ~MyToolBar() { }
 
   bool    addButton( uint id, TCchar* caption);
+
   bool    addEditBox(uint id, int     noChars);
   CString getText(uint id);
 
-// Tool Bar ComboBox Functions
-
-  void    clearCbx(  uint id);
-  bool    addCBx(    uint id);
-  bool    addCBx(    uint id, int     idr, TCchar* caption);
-  bool    addCbxItem(uint id, TCchar* txt, int data = 0);
-  bool    addCBx(    uint id, CbxItem cbxItem[], int n, TCchar* caption);
-  bool    addCbxItemSorted(uint id, TCchar* txt, int data = 0);
-
-  void*   getCbxData(uint cbxId, int index);
-  int     getCurSel( uint cbxId);
-  bool    getCurSel( uint cbxId, String& s, void*& data);
-
-  bool    setCurSel( uint cbxId, int index);
-  bool    setCurSel( uint cbxId, TCchar* tc);
-
-  uint    getCbxCount(uint id);
-  void    setCaption( uint id, TCchar* caption);
-
-  void    setWthPercent(uint id, int prcnt);            // good for Menus and ComboBoxes
-  void    setWidth(     uint id);
-  void    setHeight(    uint id);
-  };
-
-
-
-///--------------------
-
-#ifdef ButtonDefs
-
-#if 0
-TBButton  button;
-TBEditBox editBox;
-
-#ifdef DocViewTB
-
-TBMenu    menu;
-TBMenu    menu1;
-
-#else
-
-TBCbxMenu cbxMenu;
-TBCbxMenu cbxMenu1;
-
-#endif
+#ifdef DocView
+  bool    addMenu(uint id, int idr, TCchar* caption);         // uses icon at index on toolbar
+  bool    addMenu(uint id, int idr, int index);               // uses icon at index on toolbar
+  bool    addMenu(uint id, CCbxItem cbxItem[], int n, TCchar* caption);
 #endif
 
-
-#if 0
-#ifdef DocViewTB
-
-TBMenu    saveMenu;
-
-#else
-
-TBCboBx   cboBx1;
-
-#endif
-#endif
-#endif
-#ifdef DocViewTB
-#include "TBCbxMenu.h"
-#endif
-#ifdef DocViewTB
-
-  bool    addMenu(   uint id, int     idr, TCchar* caption);
-  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
+  void    clearCbo(      uint id)              {ToolBarBase::clearCbo(id);}
+  bool    addCboBox(     uint id)              {return ToolBarBase::addCboBox(id, 12);}
+  bool    setCboItems(   uint id, uint    idr) {return ToolBarBase::setCboItems(id, idr);}
+  bool    setCboItems(   uint id, CCbxItem cbxItem[], int n)
+                                               {return ToolBarBase::setCboItems(id, cbxItem, n);}
+  void    setCboCaption( uint id, TCchar* txt);
+  void    setImage(      uint id, int toolBarIndex);
+  void    setCboWthPrct( uint id, int percent);
+  void    setCboHeight(  uint id);
   void    dispatch(uint id);
 
-#endif
-//#define MyButtonDefs
-//#define DocViewTB
-//#include "TBButton.h"
-//#include "TBEditBox.h"
-//#include "TBMenu.h"
-//#include "TBCboBx.h"
+  // Manipulate tuple in the ComboBox
 
-#if 0
-  bool    addMenu(   uint id, int     idr, TCchar* caption);
-  bool    addMenu(   uint id, int     idr, int     index);
-  bool    addMenu(   uint id, CbxItem cbxItem[], int n, TCchar* caption);
-#endif
+  bool    addCboItem(    uint id, TCchar* txt, ulongP data = 0);
+  bool    addCboItemSrtd(uint id, TCchar* txt, ulongP data = 0);
+
+  bool    setCurSel(uint id, int index);
+
+  bool    setCurSel(uint id, TCchar* tc);
+
+  int     getCurSel(uint id);
+  bool    getCurSel(uint id, String& s, ulongP& data);
+  ulongP  getData(uint id, int index);
+
+  int     find(uint id, TCchar* tc);
+
+  void    adjustLayout() {ToolBarBase::adjustLayout();}
+  };
+
 

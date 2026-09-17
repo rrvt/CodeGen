@@ -7,11 +7,12 @@
   AssociatedFile="CodeGen.hlp.vcxproj"
   AssociatedFileType="microsoft visual studio visual c++">
   <Config
-    Name="Debug|Win32"
+    Name="Release|x64"
     Type="vcproj"
     DebugCallbackName="windbg"
     OutputFile=""
-    CompilerConfigName="Visual Studio 2010">
+    CompilerConfigName="Visual Studio 2010"
+    ObjectDir="Release">
     <Includes>
       <Include Dir="%(INCLUDE)"/>
     </Includes>
@@ -102,11 +103,12 @@
     </Menu>
   </Config>
   <Config
-    Name="Release|Win32"
+    Name="Debug|x64"
     Type="vcproj"
     DebugCallbackName="windbg"
     OutputFile=""
-    CompilerConfigName="Visual Studio 2010">
+    CompilerConfigName="Visual Studio 2010"
+    ObjectDir="Debug">
     <Includes>
       <Include Dir="%(INCLUDE)"/>
     </Includes>

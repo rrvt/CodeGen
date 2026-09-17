@@ -66,7 +66,7 @@ BOOL CodeGen::InitInstance() {
 
   setAppName(_T("Code Generator II")); setTitle(_T("Working Screen"));
 
-  view()->setFont(_T("Courier New"), 12.0);
+  view()->setFont(_T("Courier New"), 120);
 
   m_pMainWnd->ShowWindow(SW_SHOW);   m_pMainWnd->UpdateWindow();   return TRUE;
   }

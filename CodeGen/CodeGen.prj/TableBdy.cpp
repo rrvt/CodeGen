@@ -20,8 +20,6 @@ void TableBdy::create() {
   notePad << nCrlf;
   notePad << _T("#include \"pch.h\"") << nCrlf;
   notePad << _T("#include \"") << modNames.tblCls << _T(".h\"") << nCrlf;
-//  notePad << _T("#include \"NotePad.h\"") << nCrlf;
-//  notePad << _T("#include \"Utilities.h\"") << nCrlf;
   notePad << nCrlf << nCrlf;
 
   constructor();                notePad << nCrlf << nCrlf;

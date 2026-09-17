@@ -9,7 +9,7 @@
 #include "NotePad.h"
 
 
-enum {PageWidth = 106};
+enum {PageWidth = 100};
 
 
 void RcdSetHdr::create() {

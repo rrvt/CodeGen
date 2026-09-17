@@ -1,0 +1,6 @@
+D:\Sources\CodeGen\CodeGen.wix\obj\x64\Release\CodeGen.wix.wixproj.CoreCompileInputs.cache
+D:\Sources\CodeGen\Release.x64\CodeGen.msi
+D:\Sources\CodeGen\Release.x64\CodeGen.wixpdb
+D:\Sources\CodeGen\CodeGen.wix\obj\x64\Release\CodeGen.msi
+D:\Sources\CodeGen\CodeGen.wix\obj\x64\Release\CodeGen.wixpdb
+D:\Sources\CodeGen\CodeGen.wix\obj\x64\Release\CodeGen.wix.wixproj.BindTracking-neutral.txt

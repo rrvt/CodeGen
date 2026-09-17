@@ -175,6 +175,10 @@ related to the database:
 
 ## Updates
 
+### Update 9/16/26
+
+Library rewrite for Printer and ScrollView.
+
 ### Update 2/10/26
 
 Added ability to build in 64 bit mode.  Upgraded Wix to HeatWave version 4.

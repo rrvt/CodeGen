@@ -5,35 +5,64 @@
 #include "CodeGenView.h"
 #include "CodeGen.h"
 #include "CodeGenDoc.h"
-#include "OptionsDlg.h"
 #include "Resource.h"
 #include "ResourceData.h"
-#include "RptOrientDlgOne.h"
 
 
 // CodeGenView
 
-IMPLEMENT_DYNCREATE(CodeGenView, CScrView)
+IMPLEMENT_DYNCREATE(CodeGenView, ScrollView)
 
-BEGIN_MESSAGE_MAP(CodeGenView, CScrView)
-  ON_COMMAND(ID_Options,     &onOptions)
-  ON_COMMAND(ID_Orientation, &onRptOrietn)
+BEGIN_MESSAGE_MAP(CodeGenView, ScrollView)
+  ON_COMMAND(ID_PrintFile,         &onFilePrint)
+  ON_COMMAND(ID_PrintFilePreview,  &onFilePrintPreview)
+  ON_COMMAND(ID_PrintSetup,        &onSetupPrinter)
 END_MESSAGE_MAP()
 
 
-CodeGenView::CodeGenView() noexcept {
+CodeGenView::CodeGenView() noexcept : ScrollView(theApp.name) {
 ResourceData res;
 String       pn;
-  if (res.getProductName(pn)) prtNote.setTitle(pn);
+  if (res.getProductName(pn)) doc()->setProductName(pn);
   }
 
 
-BOOL CodeGenView::PreCreateWindow(CREATESTRUCT& cs) {
+bool CodeGenView::onPreparePrinter(PrinterInfo& info)
+                                                {info.docName = doc()->productName;   return true;}
 
-  return CScrView::PreCreateWindow(cs);
+
+void CodeGenView::onFilePrint()        {printFile(true);}
+void CodeGenView::onFilePrintPreview() {printFilePreview(true);}
+void CodeGenView::onSetupPrinter()     {printerSetup();}
+
+
+
+void CodeGenView::OnSetFocus(CWnd* pOldWnd) {
+
+  ScrollView::OnSetFocus(pOldWnd);
+
+  switch(doc()->dataSrc()) {
+    case NotePadSrc : break;
+    }
   }
 
 
+// CodeGenView diagnostics
+
+#ifdef _DEBUG
+
+void CodeGenView::AssertValid() const          {CScrollView::AssertValid();}
+void CodeGenView::Dump(CDumpContext& dc) const {CScrollView::Dump(dc);}
+                                             // non-debug version is inline
+CodeGenDoc* CodeGenView::GetDocument() const
+  {ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CodeGenDoc))); return (CodeGenDoc*)m_pDocument;}
+
+#endif //_DEBUG
+
+
+
+/////////////----------------------
+#if 0
 void CodeGenView::onOptions() {
 OptionsDlg dlg;
 
@@ -76,32 +105,11 @@ void CodeGenView::printFooter(DevStream& dev, int pageNo) {
 
 void CodeGenView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo) {
 
-  CScrView::OnEndPrinting(pDC, pInfo);
+  ScrollView::OnEndPrinting(pDC, pInfo);
 
   switch(doc()->dataSrc()) {
     case NotePadSrc : break;
     }
   }
+#endif
 
-
-void CodeGenView::OnSetFocus(CWnd* pOldWnd) {
-
-  CScrView::OnSetFocus(pOldWnd);
-
-  switch(doc()->dataSrc()) {
-    case NotePadSrc : break;
-    }
-  }
-
-
-// CodeGenView diagnostics
-
-#ifdef _DEBUG
-
-void CodeGenView::AssertValid() const          {CScrollView::AssertValid();}
-void CodeGenView::Dump(CDumpContext& dc) const {CScrollView::Dump(dc);}
-                                             // non-debug version is inline
-CodeGenDoc* CodeGenView::GetDocument() const
-  {ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CodeGenDoc))); return (CodeGenDoc*)m_pDocument;}
-
-#endif //_DEBUG

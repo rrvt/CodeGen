@@ -1,0 +1,12 @@
+D:\Sources\CodeGen\Release.x64\CodeGen.msi
+D:\Sources\CodeGen\Release.x64\CodeGen.wixpdb
+D:\Sources\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.x64.wix.wixproj.CoreCompileInputs.cache
+D:\Sources\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.msi
+D:\Sources\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.wixpdb
+D:\Sources\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.x64.wix.wixproj.BindTracking-neutral.txt
+C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.msi
+C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.x64.wix.wixproj.CoreCompileInputs.cache
+C:\Source2\CodeGen\Release.x64\CodeGen.msi
+C:\Source2\CodeGen\Release.x64\CodeGen.wixpdb
+C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.wixpdb
+C:\Source2\CodeGen\CodeGen.x64.wix\obj\x64\Release\CodeGen.x64.wix.wixproj.BindTracking-neutral.txt

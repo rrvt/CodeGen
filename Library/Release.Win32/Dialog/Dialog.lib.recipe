@@ -5,7 +5,13 @@
   <SatelliteDlls />
   <NonRecipeFileRefs>
     <NonRecipeFileRef>
-      <FullPath>D:\Sources\WixApp\WixApp.hlp\WixApp.hlp.vcxproj</FullPath>
+      <FullPath>C:\Source2\MakeApp\Dialog4pp.hlp\Dialog4pp.hlp.vcxproj</FullPath>
+    </NonRecipeFileRef>
+    <NonRecipeFileRef>
+      <FullPath>C:\Source2\MakeApp\MakeApp.hlp\MakeApp.hlp.vcxproj</FullPath>
+    </NonRecipeFileRef>
+    <NonRecipeFileRef>
+      <FullPath>C:\Source2\MakeApp\AppT3mplate.hlp\AppT3mplate.hlp.vcxproj</FullPath>
     </NonRecipeFileRef>
   </NonRecipeFileRefs>
 </Project>

@@ -17,14 +17,16 @@
 #define IDC_AbbrKey                     204
 
 #define ID_Open                         401
-#define ID_Save                         402
-#define ID_Options                      403
-#define ID_About                        404
-#define ID_Help                         405
-#define ID_CB                           406
-#define ID_RcdSet                       407
-#define ID_DBtable                      408
-#define ID_Database                     409
+#define ID_CB                           402
+#define ID_RcdSet                       403
+#define ID_DBtable                      404
+#define ID_Database                     405
+#define ID_PrintFile                    411
+#define ID_PrintFilePreview             412
+#define ID_PrintSetup                   413
+#define ID_Save                         414
+#define ID_About                        415
+#define ID_Help                         416
 
 
 // Next default values for new objects

@@ -1,0 +1,2 @@
+D:\Sources\CodeGen\CodeGen\..\Release\CodeGen.exe
+D:\Sources\CodeGen\CodeGen\..\Release\CodeGen.chm

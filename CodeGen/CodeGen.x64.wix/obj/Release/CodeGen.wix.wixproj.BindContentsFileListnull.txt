@@ -1,0 +1,3 @@
+D:\Sources\CodeGen\CodeGen\..\Release\CodeGen.exe
+D:\Sources\CodeGen\CodeGen\..\Release\CodeGen.chm
+D:\Sources\CodeGen\CodeGen\..\..\Library\License\MITLicenseFile.rtf

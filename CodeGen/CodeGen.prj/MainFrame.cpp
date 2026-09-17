@@ -88,7 +88,7 @@ LRESULT MainFrame::OnResetToolBar(WPARAM wParam, LPARAM lParam) {setupToolBar();
 void MainFrame::setupToolBar() {
 CRect winRect;   GetWindowRect(&winRect);   toolBar.set(winRect);
 
-  toolBar.addCBx(ID_CB);
+  toolBar.addCboBox(ID_CB);
   }
 
 

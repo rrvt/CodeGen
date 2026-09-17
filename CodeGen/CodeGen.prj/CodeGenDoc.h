@@ -3,34 +3,43 @@
 
 #pragma once
 #include "CDoc.h"
-#include "PathDlgDsc.h"
+#include "NotePad.h"
+#include "PathDlg.h"
 
 
-enum DataSource {NotePadSrc};
+enum DataSource {NilSrc, NotePadSrc};
 
 
 class CodeGenDoc : public CDoc {
 
-DataSource  dataSource;
+DataSource dataSource;
 
-bool        dbOpened;
-bool        tableSelected;
+bool       dbOpened;
+bool       tableSelected;
 
-PathDlgDsc  pathDlgDsc;
+PathDlg    dlg;
 
 protected: // create from serialization only
 
   CodeGenDoc() noexcept;
+
   DECLARE_DYNCREATE(CodeGenDoc)
 
 public:
+String productName;
 
-  virtual ~CodeGenDoc();
+  virtual     ~CodeGenDoc();
+
+  void         setProductName(TCchar* pn) {productName = pn;}
 
   DataSource   dataSrc() {return dataSource;}
   void         display(DataSource ds = NotePadSrc);
+  NotePad&     getData() {return notePad;}
 
   void         saveFile();
+  void         getHeader(NotePad& np, int pageNo, int noPages);
+  void         getFooter(NotePad& np, int pageNo, int noPages);
+
   virtual void serialize(Archive& ar);
 
 #ifdef _DEBUG

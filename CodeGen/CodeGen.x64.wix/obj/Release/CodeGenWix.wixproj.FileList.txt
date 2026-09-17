@@ -1,0 +1,5 @@
+D:\Sources\CodeGen\Release\CodeGen.msi
+obj\Release\Product.wixobj
+obj\Release\CodeGenWix.wixproj.BindContentsFileListnull.txt
+obj\Release\CodeGenWix.wixproj.BindOutputsFileListnull.txt
+obj\Release\CodeGenWix.wixproj.BindBuiltOutputsFileListnull.txt

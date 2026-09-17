@@ -4,20 +4,17 @@
 #include "pch.h"
 #include "History.h"
 #include "FileIO.h"
-#include "GetPathDlg.h"
-#include "PathDlgDsc.h"
-
-#include "MessageBox.h"
+#include "PathDlg.h"
 
 
 void History::saveData() {
-PathDlgDsc dsc;
-String     path;
-FileIO     file;
-HistIter   iter(*this);
-HistData*  h;
+PathDlg   dlg(_T("History"), _T("History"), _T("txt"), _T("Text"), _T("*.txt"));
+String    path;
+FileIO    file;
+HistIter  iter(*this);
+HistData* h;
 
-  if (!getSaveAsPathDlg(dsc(_T("History"), _T("History"), _T("txt"), _T("*.txt")), path)) return;
+  if (!dlg.saveFileAs(path)) return;
 
   if (!file.open(path, FileIO::Write | FileIO::Create)) return;
 

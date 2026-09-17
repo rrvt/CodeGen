@@ -51,6 +51,8 @@
 using namespace std;
 
 typedef basic_string<Tchar> tstring;
+typedef CMFCToolBarComboBoxButton MfcTBCboBtn;    // Just a short version, tidier
+typedef CMFCToolBarButton         MfcTBBtn;
 
 #include "Strings.h"
 #include "Variant.h"

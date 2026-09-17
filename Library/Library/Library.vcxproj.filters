@@ -48,9 +48,6 @@
     <ClCompile Include="FilePaths.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GetPathDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Guid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,25 +105,16 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Printer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NoteNmbr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RegExpr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TBMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NoteUndrLn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tabs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CDialogApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ArchFile.cpp">
@@ -159,12 +147,6 @@
     <ClCompile Include="IniFileEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TBCboBx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TBCbxMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TBEditBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -180,7 +162,40 @@
     <ClCompile Include="StatusBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PathDlgDsc.cpp">
+    <ClCompile Include="TBCboBoxes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TBMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinAppEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NotePad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnderlineText.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FontStack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceCtx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceBfr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CDCex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PathDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -213,9 +228,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FilePaths.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GetPathDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Guid.h">
@@ -258,9 +270,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SrchFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="std.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StringInput.h">
@@ -317,9 +326,6 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Printer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NoteNmbr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -338,9 +344,6 @@
     <ClInclude Include="RegExpr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TBMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NoteUndrLn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -348,9 +351,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NoteTab.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CDialogApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArchFile.h">
@@ -386,12 +386,6 @@
     <ClInclude Include="IniFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TBCboBx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TBCbxMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TBEditBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -407,7 +401,46 @@
     <ClInclude Include="StatusBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PathDlgDsc.h">
+    <ClInclude Include="TBCboBoxes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TBMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="std.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAppEx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NotePad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TabList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnderlineText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FontStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceCtx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceBfr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDCex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PathDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

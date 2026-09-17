@@ -12,6 +12,7 @@
 #include "DbTblSelDlg.h"
 #include "filename.h"
 #include "IniFileEx.h"
+#include "Invalidate.h"
 #include "LinSrch.h"
 #include "MainFrame.h"
 #include "ModNames.h"
@@ -36,7 +37,7 @@ static TCchar* CppPat           = _T("*.cpp");
 IMPLEMENT_DYNCREATE(CodeGenDoc, CDoc)
 
 BEGIN_MESSAGE_MAP(CodeGenDoc, CDoc)
-  ON_COMMAND(      ID_Open, &OnFileOpen)
+  ON_COMMAND(      ID_Open,      &OnFileOpen)
   ON_CBN_SELCHANGE(ID_CB,        &OnComboBoxChng)
   ON_COMMAND(      ID_CB,        &OnComboBoxChng)
 
@@ -51,23 +52,22 @@ END_MESSAGE_MAP()
 // CodeGenDoc construction/destruction
 
 CodeGenDoc::CodeGenDoc() noexcept : dataSource(NotePadSrc), dbOpened(false), tableSelected(false) {
-  pathDlgDsc(_T("Ugly Example"), _T(""), _T("txt"), _T("*.txt"));
   }
 
 CodeGenDoc::~CodeGenDoc() { }
 
 
 void CodeGenDoc::OnFileOpen() {
-PathDlgDsc dsc;
+PathDlg    dlg(_T("Database"), 0, _T("accdb"), _T("Database"), _T("*.accdb"));
 DbTblIter  iter(dbTblList);
 TblItem*   item;
 MyToolBar& toolBar = mainFrm()->getToolBar();
 
   notePad.clear();
 
-  dsc(_T("Database"), 0, _T("accdb"), _T("*.accdb"));
+  iniFile.read(FileSection, DBFileKey, dlg.iPath);
 
-  if (!setOpenPath(dsc)) return;
+  if (!dlg.openFile(path)) return;
 
   iniFile.writeString(FileSection, DBFileKey, path);
 
@@ -75,11 +75,11 @@ MyToolBar& toolBar = mainFrm()->getToolBar();
 
   dbTblList.load(path);
 
-  for (item = iter(); item; item = iter++) toolBar.addCbxItemSorted(ID_CB, item->name);
+  for (item = iter(); item; item = iter++) toolBar.addCboItemSrtd(ID_CB, item->name);
 
-  toolBar.setCaption(ID_CB, _T("Database Tables"));
+  toolBar.setCboCaption(ID_CB, _T("Database Tables"));
 
-  toolBar.setWthPercent(ID_CB, 80);   toolBar.setWidth(ID_CB);   toolBar.setHeight(ID_CB);
+  toolBar.setCboWthPrct(ID_CB, 80);   toolBar.setCboHeight(ID_CB);
 
   dbOpened = true;  display(NotePadSrc);
   }
@@ -88,7 +88,7 @@ MyToolBar& toolBar = mainFrm()->getToolBar();
 void CodeGenDoc::OnComboBoxChng() {
 MyToolBar& toolBar = mainFrm()->getToolBar();
 String     table;
-void*      x;
+ulongP     x;
 AbbrDlg    dlg;
 TblItem*   tblItem;
 
@@ -123,10 +123,10 @@ RcdSetBdy bdy;
   if (!tableSelected) return;
 
   hdr.create();
-  pathDlgDsc(_T("RcdSetHdr File"), modNames.setCls, _T(".h"), HeaderPat);    saveFile();
+  dlg(_T("RcdSetHdr File"), modNames.setCls, _T("h"), _T("Header File"), HeaderPat);    saveFile();
 
   bdy.create();
-  pathDlgDsc(_T("RcdSetBdy File"), modNames.setCls, _T(".cpp"), CppPat);     saveFile();
+  dlg(_T("RcdSetBdy File"), modNames.setCls, _T("cpp"), _T("Body File"), CppPat);     saveFile();
 
   display(NotePadSrc);
   }
@@ -142,13 +142,13 @@ String   s;
   linSrch.getFields();
 
   hdr.create();
-  pathDlgDsc(_T("Table hdr File"), modNames.tblCls, _T(".h"), HeaderPat);   saveFile();
+  dlg(_T("Table hdr File"), modNames.tblCls, _T("h"), _T("Header File"), HeaderPat);   saveFile();
 
   bdy.create();
-  pathDlgDsc(_T("Table cpp File"), modNames.tblCls, _T(".cpp"), CppPat);    saveFile();
+  dlg(_T("Table cpp File"), modNames.tblCls, _T("cpp"), _T("Body File"), CppPat);      saveFile();
 
   bdy.createDsp();   s = modNames.tblCls + _T("Dsp");
-  pathDlgDsc(_T("Table Display cpp File"), s, _T(".cpp"), CppPat);          saveFile();
+  dlg(_T("Table Display cpp File"), s, _T("cpp"), _T("Display cpp"), CppPat);          saveFile();
 
 
   display(NotePadSrc);
@@ -156,26 +156,34 @@ String   s;
 
 
 void CodeGenDoc::onDatabase() {
-DbTblSelDlg dlg(dbTblList);
+DbTblSelDlg tblDlg(dbTblList);
 DatabaseHdr hdr;
 DatabaseBdy bdy;
 
   if (!dbOpened) return;
 
-  if (dlg.DoModal() != IDOK) return;
+  if (tblDlg.DoModal() != IDOK) return;
 
   hdr.create();
-  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".h"),   HeaderPat);   saveFile();
+  dlg(_T("Table hdr File"), _T("Database"), _T("h"), _T("Header File"), HeaderPat);   saveFile();
 
   bdy.create();
-  pathDlgDsc(_T("Table hdr File"), _T("Database"), _T(".cpp"), CppPat);      saveFile();
+  dlg(_T("Table hdr File"), _T("Database"), _T("cpp"), _T("Body File"), CppPat);      saveFile();
   }
 
 
 void CodeGenDoc::display(DataSource ds) {dataSource = ds; invalidate();}
 
 
-void CodeGenDoc::OnFileSave() {if (setSaveAsPath(pathDlgDsc)) OnSaveDocument(path);}
+void CodeGenDoc::OnFileSave() {if (dlg.saveFileAs(path)) OnSaveDocument(path);}
+
+
+void CodeGenDoc::getHeader(NotePad& np, int pageNo, int noPages)
+  {np << _T("Header") << nRight << theApp.name;}
+
+
+void CodeGenDoc::getFooter(NotePad& np, int pageNo, int noPages)
+  {np << nCenter << _T("Page ") << pageNo << _T(" of ") << noPages;}
 
 
 void CodeGenDoc::saveFile() {
@@ -184,9 +192,9 @@ String filePath;
 
   iniFile.readString(FileSection, GenFilePathKey, path);   path = ::getPath(path);
 
-  path += pathDlgDsc.name;
+  path += dlg.iPath;
 
-  if (getSaveAsPathDlg(pathDlgDsc, filePath)) {
+  if (dlg.saveFileAs(filePath)) {
 
     String pth = ::getPath(filePath);
 
